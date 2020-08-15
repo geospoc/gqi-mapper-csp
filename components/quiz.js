@@ -33,6 +33,11 @@ class Quiz extends Component {
   			this.setState(state => ({result: false}))
   		}
   		this.setState(state => ({next: true}));
+
+		window.scrollTo({
+			bottom: 0,
+			behavior: "smooth"
+		});
   	}
 
   	handleNext(){
