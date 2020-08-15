@@ -53,11 +53,17 @@ a:hover {
 
 html,
 body {
-  height: 100%;
   background-color: #FFFFFF;
 }
 
+html {
+  min-height: -webkit-fill-available; 
+}
+
 body {
+  min-height: 100vh;
+  /* mobile viewport bug fix */
+  min-height: -webkit-fill-available;
   display: -ms-flexbox;
   display: flex;
   color: black;
@@ -153,8 +159,7 @@ footer {
 /* Next main div */
 #__next {
   width: 100%;
-  min-height: 100vh;
-  min-height: -webkit-fill-available;
+  min-height: 100%;
 }
 
 .main {
