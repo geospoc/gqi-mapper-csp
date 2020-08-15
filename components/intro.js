@@ -23,8 +23,10 @@ export default function Intro(props) {
 			<p>With just one minute you can help us map 5 schools.</p>
 		</div>
 
-		<Button variant="primary" onClick={props.callback}><span>Start Mapping Schools<img className="white" src="/white.svg"/></span></Button>{' '}
-
+		<div>
+			<Button variant="primary" onClick={props.callback}><span>Start Mapping Schools<img className="white" src="/white.svg"/></span></Button>{' '}
+		</div>
+		
 		<div>
 			<p>&nbsp;</p>
 			<p style= {{textAlign: 'center'}}>There will be some <br/>interesting content<br/> here in the future 🤞</p>
