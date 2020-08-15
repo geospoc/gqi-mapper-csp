@@ -200,7 +200,7 @@ main {
 .mytest {
   width:100%;
   height: calc(100% - 8em);
-  background-color: yellow;
+  background-color: white;
   background-image: url('/map.png');
   background-position: center center
 }
