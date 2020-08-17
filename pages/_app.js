@@ -43,6 +43,15 @@ class App extends Component {
 	    return a;
 	}
 
+	componentDidMount() {
+		// fix 100vh in Safari on iOS as well as Chrome 84+
+		// see https://www.bram.us/2020/05/06/100vh-in-safari-on-ios/
+		const script = document.createElement("script");
+		script.src = "const setVh = () => {const vh = window.innerHeight * 0.01;document.documentElement.style.setProperty('--vh', `${vh}px`);};window.addEventListener('load', setVh);window.addEventListener('resize', setVh);";
+		script.async = true;
+		document.body.appendChild(script);
+	}
+
 	startQuiz() {
 		let Qs = this.shuffle(quizQuestions) 
 	  	this.setState({

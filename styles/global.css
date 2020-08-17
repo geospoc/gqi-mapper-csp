@@ -56,14 +56,9 @@ body {
   background-color: #FFFFFF;
 }
 
-html {
-  min-height: -webkit-fill-available; 
-}
-
 body {
-  min-height: 100vh;
-  /* mobile viewport bug fix */
-  min-height: -webkit-fill-available;
+  height: 100vh;
+  height: calc(var(--vh, 1vh) * 100);
   display: -ms-flexbox;
   display: flex;
   color: black;
