@@ -2,6 +2,8 @@
  * Globals
  */
 
+@import url('https://unpkg.com/leaflet@1.6.0/dist/leaflet.css');
+
 /* Links */
 a,
 a:focus,
@@ -198,12 +200,9 @@ main {
   height: 100%;
 }
 
-.mytest {
-  width:100%;
+.mapdiv {
+  width: 100%;
   height: calc(100% - 8em);
-  background-color: white;
-  background-image: url('/map.png');
-  background-position: center center
 }
 
 .marker {

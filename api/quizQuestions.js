@@ -1,54 +1,54 @@
 var quizQuestions = [
 	{
-		answer: false,
-		image: 'map2.png'
-	},
-	{
 		answer: true,
-		image: 'map1.png'
-	},
-	{
-		answer: true,
-		image: 'map3.png'
+		lat: 39.980380,
+		lon: -105.263125
 	},
 	{
 		answer: false,
-		image: 'map4.png'
+		lat: 40.011902957303775,
+		lon: -105.33491019997747
 	},
 	{
 		answer: true,
-		image: 'map5.png'
+		lat: -1.86333,
+		lon: 29.65858
 	},
 	{
 		answer: false,
-		image: 'map6.png'
+		lat: -1.8693518206251314,
+		lon: 29.649011282203645
 	},
 	{
 		answer: true,
-		image: 'map7.png'
+		lat: 47.3523,
+		lon: 59.23018
 	},
 	{
 		answer: false,
-		image: 'map8.png'
+		lat: 47.090887,
+		lon: 59.062444
 	},
 	{
 		answer: true,
-		image: 'map9.png'
+		lat: 17.05417,
+		lon: -61.7286
 	},
 	{
 		answer: false,
-		image: 'map10.png'
+		lat: 17.055617362661135,
+		lon: -61.73305833429694
 	},
 	{
 		answer: true,
-		image: 'map11.png'
+		lat: 13.93226,
+		lon: -88.34478
 	},
 	{
 		answer: false,
-		image: 'map12.png'
+		lat: 13.937616962455118,
+		lon: -88.31876483566941
 	}
-
-
 ]
 
 export default quizQuestions;

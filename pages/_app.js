@@ -21,6 +21,8 @@ class App extends Component {
 	      questionId: 1,
 	      question: '',
 	      image: '',
+	      lat: 0,
+	      lon: 0,
 		  answer: '',
 	      answersCount: 0,
 	      stage: 0,
@@ -62,6 +64,8 @@ class App extends Component {
 	  	this.setState({
 	      answer: Qs[0].answer,
 	      image: Qs[0].image,
+	      lat: Qs[0].lat,
+	      lon: Qs[0].lon,
 	      quizQs: Qs,
 	      stage: 1
 	    });
@@ -92,7 +96,9 @@ class App extends Component {
 		  counter: counter,
 		  questionId: questionId,
 		  answer: this.state.quizQs[counter].answer,
-		  image: this.state.quizQs[counter].image
+		  image: this.state.quizQs[counter].image,
+		  lat: this.state.quizQs[counter].lat,
+		  lon: this.state.quizQs[counter].lon,
 		});
 	}
 
@@ -101,6 +107,8 @@ class App extends Component {
 	      <Quiz
 	        answer={this.state.answer}
 	        image={this.state.image}
+	        lat={this.state.lat}
+	        lon={this.state.lon}
 	        questionId={this.state.questionId}
 	        questionTotal={numQuestions}
 	        onAnswerSelected={this.handleAnswerSelected}

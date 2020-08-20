@@ -1,8 +1,14 @@
 import React, { Component } from 'react';
-import QuestionCount from '../components/questionCount';
+import Head from 'next/head';
+import dynamic from 'next/dynamic'
 import {Row, Col, Button} from 'react-bootstrap';
+
+import QuestionCount from '../components/questionCount';
 import Layout from '../components/layout'
 
+const MapComponent = dynamic(import('../components/mapComponent'),{
+	ssr: false
+})
 
 class Quiz extends Component {
 
@@ -43,16 +49,19 @@ class Quiz extends Component {
 
 	render() {
 		let backgroundImg = this.props.image;
+
+		const latlon = [this.props.lat, this.props.lon]
 		return (
 			<Layout myClass="quiz">
+				<Head>
+					<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+				</Head>
 				<main>
 					<QuestionCount counter={this.props.questionId} total={this.props.questionTotal} />
-					<p>Is this a school location?</p>
+					<p>Does this look like a school location?</p>
 
-					<div className="row no-gutters align-items-center mytest" style={{backgroundImage: `url(${backgroundImg})` }}>
-						<div className="col-12 marker text-center">
-							<img src="/marker.svg"/>
-						</div>
+					<div className="row no-gutters align-items-center mapdiv">
+						<MapComponent lat={this.props.lat} lon={this.props.lon} />
 					</div>
 
 					<div>
