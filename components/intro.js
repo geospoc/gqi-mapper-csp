@@ -49,9 +49,12 @@ export default function Intro(props) {
 		<div>
 			<Button variant="primary" onClick={props.callback}><span>Start Mapping Schools<img className="white" src="/white.svg"/></span></Button>{' '}
 		</div>
+
+		<div>
+			<p className="blueText">Want to know what a school looks like on a map? <Link href="#">View school map tips</Link></p>
+		</div>
 		
 		<div>
-			<p>&nbsp;</p>
 			<p style= {{textAlign: 'center'}}>
 				<b>Frequently asked questions</b><br/>
 				<img src="/blue.svg" />

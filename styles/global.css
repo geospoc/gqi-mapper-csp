@@ -222,8 +222,17 @@ main {
   height: calc(100% - 8em);
 }
 
-.marker {
-  margin-top: auto;
-  margin-bottom: auto;
+.blueText, .blueText a {
+  color: #0068ea;
 }
+
+.blueText a {
+  text-decoration: underline;
+}
+
+.blueText {
+  font-size: 1.2em;
+  padding: 2em 2em;
+}
+
 
