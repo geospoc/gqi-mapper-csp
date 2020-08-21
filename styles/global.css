@@ -11,7 +11,10 @@ a:hover {
   color: #1BAAE2;
 }
 
-/* Custom default button */
+/*
+ * Bootstrap overrides
+ */
+
 .btn-secondary,
 .btn-secondary:hover,
 .btn-secondary:focus {
@@ -47,6 +50,20 @@ a:hover {
   width: 100%;
   text-transform: uppercase;
   font-size: 0.7em;
+}
+
+.card {
+  border-radius: 0;
+}
+
+.card-header {
+  background-color: white;
+  font-family: 'Roboto', sans-serif;
+}
+
+.card-body {
+  color: #90949c;
+  font-family: 'Roboto', sans-serif;
 }
 
 /*
