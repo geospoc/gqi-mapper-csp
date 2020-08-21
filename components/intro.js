@@ -51,7 +51,10 @@ export default function Intro(props) {
 		</div>
 
 		<div>
-			<p className="blueText">Want to know what a school looks like on a map? <Link href="#">View school map tips</Link></p>
+			<p className="blueText">
+				Want to know what a school looks like on a map? <Link href="#">
+			    <a>View school map tips</a></Link>
+			</p>
 		</div>
 		
 		<div>
