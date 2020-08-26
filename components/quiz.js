@@ -39,7 +39,6 @@ class Quiz extends Component {
   			this.setState(state => ({result: false}))
   		}
   		this.setState(state => ({next: true}));
-
   	}
 
   	handleNext(){
@@ -48,7 +47,6 @@ class Quiz extends Component {
   	}
 
 	render() {
-		let backgroundImg = this.props.image;
 
 		const latlon = [this.props.lat, this.props.lon]
 		return (
