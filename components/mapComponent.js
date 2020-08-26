@@ -6,7 +6,7 @@ const zoomDefault = 17;
 const Map = ReactMapboxGl({
   accessToken: process.env.NEXT_PUBLIC_ACCESS_TOKEN,
   maxZoom: 19,
-  minZoom: 16
+  minZoom: 15
 });
 
 class mapComponent extends Component {
