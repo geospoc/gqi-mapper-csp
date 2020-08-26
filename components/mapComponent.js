@@ -15,7 +15,7 @@ function mapComponent(props) {
 			style="mapbox://styles/mapbox/satellite-v9"
 			center={lonlat}
 			zoom={[17]}
-			containerStyle={{ width: '100%', height: '100%'}}
+			containerStyle={{ width: '100%', height: '100%' }}
 		>
 			<Marker
 				coordinates={lonlat}
