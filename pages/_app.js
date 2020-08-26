@@ -20,7 +20,6 @@ class App extends Component {
 	      counter: 0,
 	      questionId: 1,
 	      question: '',
-	      image: '',
 	      lat: 0,
 	      lon: 0,
 		  answer: '',
@@ -63,7 +62,6 @@ class App extends Component {
 		let Qs = this.shuffle(quizQuestions) 
 	  	this.setState({
 	      answer: Qs[0].answer,
-	      image: Qs[0].image,
 	      lat: Qs[0].lat,
 	      lon: Qs[0].lon,
 	      quizQs: Qs,
@@ -96,7 +94,6 @@ class App extends Component {
 		  counter: counter,
 		  questionId: questionId,
 		  answer: this.state.quizQs[counter].answer,
-		  image: this.state.quizQs[counter].image,
 		  lat: this.state.quizQs[counter].lat,
 		  lon: this.state.quizQs[counter].lon,
 		});
@@ -106,7 +103,6 @@ class App extends Component {
 	    return (
 	      <Quiz
 	        answer={this.state.answer}
-	        image={this.state.image}
 	        lat={this.state.lat}
 	        lon={this.state.lon}
 	        questionId={this.state.questionId}
