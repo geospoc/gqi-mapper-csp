@@ -1,25 +1,30 @@
 import React from 'react';
-import {Map, TileLayer, Marker, Popup } from 'react-leaflet';
-
+import ReactMapboxGl, { Layer, Feature, Marker, ZoomControl } from 'react-mapbox-gl';
 
 function mapComponent(props) {
-	const url = 'https://api.mapbox.com/v4/mapbox.satellite/{z}/{x}/{y}.jpg90?access_token=' + process.env.NEXT_PUBLIC_ACCESS_TOKEN
+	const Map = ReactMapboxGl({
+	  accessToken: process.env.NEXT_PUBLIC_ACCESS_TOKEN,
+	  maxZoom: 19,
+	  minZoom: 16
+	});
 
-	const latlon = [props.lat, props.lon]
-	const attribution ="<a href=\"https://www.mapbox.com/about/maps/\" target=\"_blank\">&copy; Mapbox</a> <a href=\"http://www.openstreetmap.org/about/\" target=\"_blank\">&copy; OpenStreetMap</a> <a class=\"mapbox-improve-map\" href=\"https://www.mapbox.com/map-feedback/\" target=\"_blank\">Improve this map</a> <a href=\"https://www.maxar.com/\" target=\"_blank\">&copy; Maxar</a>";
+	const lonlat = [props.lon, props.lat]
 
 	return (
-		<Map center={latlon} zoom={17} style={{ width: '100%', height: '100%'}}>
-			<TileLayer
-				url={url}
-				attribution={attribution}
-				maxZoom={19}
-				minZoom={16}
-			/>
-			<Marker position={latlon}></Marker>
+		<Map
+			style="mapbox://styles/mapbox/satellite-v9"
+			center={lonlat}
+			zoom={[17]}
+			containerStyle={{ width: '100%', height: '100%'}}
+		>
+			<Marker
+				coordinates={lonlat}
+				anchor="bottom">
+				<img src='/marker.svg'/>
+			</Marker>
+			<ZoomControl/>
 		</Map>
 	);
 }
 
 export default mapComponent;
-
