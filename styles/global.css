@@ -191,7 +191,7 @@ footer {
   font-weight: lighter;
 }
 
-.result {
+.tips, .result {
   width: 100%;
   background-color: white;
   padding: 3em 2em;
@@ -222,17 +222,48 @@ main {
   height: calc(100% - 8em);
 }
 
-.blueText, .blueText a {
+a, .blueText {
   color: #0068ea;
 }
 
-.blueText a {
+a {
   text-decoration: underline;
 }
 
-.blueText {
+.stdpar {
   font-size: 1.2em;
   padding: 2em 2em;
 }
 
+.tips img {
+  padding: .5em 0;
+}
 
+.tips h5 {
+  margin-top: 1.5rem;
+}
+
+.answer {
+  margin: -8rem auto 0 auto;
+  background-color: #ff615b;
+  z-index: 10;
+  border-radius: 5px;
+  width: 60%;
+  padding: .5rem;
+  color: #FFF;
+  text-align: center;
+}
+
+.answerHidden {
+  visibility: hidden;
+}
+
+.answerCorrect {
+  visibility: visible;
+  background-color: #76C688;
+}
+
+.answerIncorrect {
+  visibility: visible;
+  background-color: #E97D88;
+}

@@ -4,6 +4,7 @@
 import React, { Component } from 'react';
 import Intro from '../components/intro';
 import Quiz from '../components/quiz';
+import Tips from '../components/tips';
 import quizQuestions from '../api/quizQuestions';
 import Result from '../components/result';
 
@@ -30,6 +31,8 @@ class App extends Component {
 
 	    this.handleAnswerSelected = this.handleAnswerSelected.bind(this);
 	    this.startQuiz = this.startQuiz.bind(this);
+	    this.returnToIntro = this.returnToIntro.bind(this);
+	    this.goToTips = this.goToTips.bind(this);
 	}
 
 	/**
@@ -72,12 +75,20 @@ class App extends Component {
 	startQuiz() {
 		let Qs = this.shuffle(quizQuestions) 
 	  	this.setState({
-	      answer: Qs[0].answer,
-	      lat: Qs[0].lat,
-	      lon: Qs[0].lon,
-	      quizQs: Qs,
-	      stage: 1
+			answer: Qs[0].answer,
+			lat: Qs[0].lat,
+			lon: Qs[0].lon,
+			quizQs: Qs,
+			stage: 1
 	    });
+	}
+
+	returnToIntro() {
+		this.setState({ stage: 0 });
+	}
+
+	goToTips() {
+		this.setState({ stage: 3 });
 	}
 
 	handleAnswerSelected(answer) {
@@ -128,7 +139,11 @@ class App extends Component {
   	}
 
   	renderIntro() {
-  		return <Intro callback={this.startQuiz}/>;
+  		return <Intro callback={this.startQuiz} callbackTips={this.goToTips} />;
+  	}
+
+  	renderTips() {
+  		return <Tips callback={this.returnToIntro}/>;
   	}
 
 	render() {
@@ -138,6 +153,9 @@ class App extends Component {
 				break;
 			case 2:
 				return this.renderResult();
+				break;
+			case 3:
+				return this.renderTips();
 				break;
 			default:
 				return this.renderIntro();

@@ -51,9 +51,9 @@ export default function Intro(props) {
 		</div>
 
 		<div>
-			<p className="blueText">
+			<p className="stdpar">
 				Want to know what a school looks like on a map? <Link href="#">
-			    <a>View school map tips</a></Link>
+			    <a onClick={props.callbackTips}>View school mapping tips</a></Link>
 			</p>
 		</div>
 		

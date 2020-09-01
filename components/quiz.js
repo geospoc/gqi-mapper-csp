@@ -13,28 +13,28 @@ const MapComponent = dynamic(import('../components/mapComponent'),{
 class Quiz extends Component {
 
 	constructor(props) {
-    	super(props);
-    	this.state = {next: false, yes: 'outline-primary', no: 'outline-primary', result: false};
+		super(props);
+		this.state = {next: false, yes: 'outline-primary', no: 'outline-primary', result: false, answerClass: 'answerHidden', answer:''};
 
-    	// This binding is necessary to make `this` work in the callback
-    	this.handleClick = this.handleClick.bind(this);
-    	this.handleNext = this.handleNext.bind(this);
+		// This binding is necessary to make `this` work in the callback
+		this.handleClick = this.handleClick.bind(this);
+		this.handleNext = this.handleNext.bind(this);
   	}
 
   	handleClick(e, value) {
   		let buttonVariant = '';
   		if(value === this.props.answer) {
   			if(value === true) {
-  				this.setState(state => ({yes: 'success'}));
+  				this.setState(state => ({yes: 'success', answerClass: 'answerCorrect', answer: 'Correct answer'}));
   			} else {
-  				this.setState(state => ({no: 'success'}));
+  				this.setState(state => ({no: 'success', answerClass: 'answerCorrect', answer: 'Correct answer'}));
   			}
   			this.setState(state => ({result: true}))
   		} else {
   			if(value === true) {
-  				this.setState(state => ({yes: 'danger'}));
+  				this.setState(state => ({yes: 'danger', answerClass: 'answerIncorrect', answer: 'Incorrect answer'}));
   			} else {
-  				this.setState(state => ({no: 'danger'}));
+  				this.setState(state => ({no: 'danger', answerClass: 'answerIncorrect', answer: 'Incorrect answer'}));
   			}
   			this.setState(state => ({result: false}))
   		}
@@ -42,13 +42,14 @@ class Quiz extends Component {
   	}
 
   	handleNext(){
-  		this.setState(state => ({next: false, yes: 'outline-primary', no: 'outline-primary'}));
-  		this.props.onAnswerSelected(this.state.result)
+		this.setState(state => ({next: false, yes: 'outline-primary', no: 'outline-primary', answerClass: 'answerHidden', answer: ''}));
+		this.props.onAnswerSelected(this.state.result)
   	}
 
 	render() {
 
 		const latlon = [this.props.lat, this.props.lon]
+		const answerClass = "answer " + this.state.answerClass
 		return (
 			<Layout myClass="quiz">
 				<Head>
@@ -60,6 +61,9 @@ class Quiz extends Component {
 
 					<div className="row no-gutters align-items-center mapdiv">
 						<MapComponent lat={this.props.lat} lon={this.props.lon} />
+						<div className={answerClass}>
+							{this.state.answer}
+						</div>
 					</div>
 
 					<div>
