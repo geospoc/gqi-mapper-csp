@@ -1,4 +1,7 @@
 import React, { useState, useEffect } from 'react';
+import { useCookies } from 'react-cookie';
+import { v4 as uuidv4 } from 'uuid';
+
 import Intro from '../components/intro';
 import Quiz from '../components/quiz';
 import quizQuestions from '../api/quizQuestions';
@@ -14,6 +17,8 @@ export default function mapping() {
 	const [counter, setCounter] = useState(0);
 	const [question, setQuestion] = useState({ lat: 0, lon: 0, answer: ''});
 
+	const [cookies, setCookie] = useCookies(['uuid']);
+
 	/**
 	 * Shuffles array in place. ES6 version
 	 * @param {Array} a items An array containing the items.
@@ -28,7 +33,13 @@ export default function mapping() {
 
 	useEffect(() => {
 
+		// Initialize the set of questions
 		setQuestions(shuffle(quizQuestions));
+
+		// Initialize cookie if not present
+		if(!cookies.uuid){
+			setCookie('uuid', uuidv4(), { path: '/' });
+		}
 
 		var scriptFound = false;
 		let allsuspects=document.getElementsByTagName("script");

@@ -1,6 +1,13 @@
+import { CookiesProvider } from "react-cookie";
+
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../styles/global.css';
 
+
 export default function MyApp({ Component, pageProps }) {
-  return <Component {...pageProps} />
+	return  (
+		<CookiesProvider>
+			<Component {...pageProps} />
+		</CookiesProvider>
+	);
 }
