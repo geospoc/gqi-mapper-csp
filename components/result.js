@@ -31,9 +31,9 @@ export default function Result(props) {
 				<h1>Thank you for your contribution to Project Connect!</h1>
 				<p>You correctly identified {props.correctAnswers} location{ (props.correctAnswers!=1)?'s':null }. Your contribution will help us connect these schools to the Internet 🚀</p>
 				<p style={{paddingTop: '.5em'}}>
-					Make sure to follow <Link href="https://twitter.com/procoworld" target="_blank">
-				    <a>@ProCoWorld</a></Link> and <Link href="https://twitter.com/gigaconnect" target="_blank">
-					<a>@GigaConnect</a></Link> for the latest news, 
+					Make sure to follow <a href="https://twitter.com/procoworld" target="_blank">
+				    @ProCoWorld</a> and <a href="https://twitter.com/gigaconnect" target="_blank">
+					@GigaConnect</a> for the latest news,
 					and look for the launch of our new mapping platform, coming soon in 2020!</p>
 				<p>See how many schools we have mapped so far:</p>
 				<Button variant="primary" href="https://projectconnect.world">Visit Project Connect</Button>{' '}

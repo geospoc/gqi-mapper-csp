@@ -47,13 +47,15 @@ export default function Intro(props) {
 		</div>
 
 		<div>
-			<Button variant="primary" onClick={props.callback}><span>Start Mapping Schools<img className="white" src="/white.svg"/></span></Button>{' '}
+			<Link href="/mapping" passHref>
+				<Button variant="primary"><span>Start Mapping Schools<img className="white" src="/white.svg"/></span></Button>
+			</Link>
 		</div>
 
 		<div>
 			<p className="stdpar">
-				Want to know what a school looks like on a map? <Link href="#">
-			    <a onClick={props.callbackTips}>View school mapping tips</a></Link>
+				Want to know what a school looks like on a map? <Link href="/tips">
+			    <a>View school mapping tips</a></Link>
 			</p>
 		</div>
 		

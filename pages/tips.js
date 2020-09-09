@@ -1,7 +1,7 @@
 import Head from 'next/head';
 import Link from 'next/link';
 import Layout from '../components/layout';
-import {Accordion, AccordionContext, Button, useAccordionToggle, Card} from 'react-bootstrap';
+import { Accordion, AccordionContext, Button, useAccordionToggle } from 'react-bootstrap';
 
 
 export default function Tips(props) {
@@ -24,7 +24,7 @@ export default function Tips(props) {
 			<p>This section provides some useful information on how to identify a school on a map. 
 			Despite their varied structures, many schools have features that can help you identify a building as a school. 
 			When looking at an image, keep an eye out for the following patterns.
-</p>
+			</p>
 
 			<h5 className="blueText">Pattern 1: Buildings with U-shape</h5>
 			<img src="/tips/u_shape_1.png" width="100%" />
@@ -59,7 +59,9 @@ export default function Tips(props) {
 		</div>
 
 		<div>
-			<Button variant="primary" onClick={props.callback}><span><img className="white" src="/white.svg" style={{ transform: "rotate(180deg)"}} />back</span></Button>{' '}
+			<Link href="/" passHref>
+				<Button variant="primary"><span><img className="white" src="/white.svg" style={{ transform: "rotate(180deg)"}} />back</span></Button>
+			</Link>
 		</div>
 
 
