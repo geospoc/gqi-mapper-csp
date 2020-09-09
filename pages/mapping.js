@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useCookies } from 'react-cookie';
 import { v4 as uuidv4 } from 'uuid';
 
+import useScriptText from '../hooks/useScriptText';
 import Intro from '../components/intro';
 import Quiz from '../components/quiz';
 import quizQuestions from '../api/quizQuestions';
@@ -18,6 +19,15 @@ export default function mapping() {
 	const [question, setQuestion] = useState({ lat: 0, lon: 0, answer: ''});
 
 	const [cookies, setCookie] = useCookies(['uuid']);
+
+	const scriptText = "\
+		const setVh = () => {\
+			let vh = window.innerHeight * 0.01;\
+			document.documentElement.style.setProperty('--vh', `${vh}px`);\
+		};\
+		window.addEventListener('load', setVh);\
+		window.addEventListener('resize', setVh);";
+	useScriptText(scriptText);
 
 	/**
 	 * Shuffles array in place. ES6 version
@@ -41,28 +51,6 @@ export default function mapping() {
 			setCookie('uuid', uuidv4(), { path: '/' });
 		}
 
-		var scriptFound = false;
-		let allsuspects=document.getElementsByTagName("script");
-		for (let i=allsuspects.length; i>=0; i--){
-			if (allsuspects[i] && allsuspects[i].getAttribute("src")===null
-				&& allsuspects[i].text.includes('setVh')){
-				scriptFound = true;
-				break;
-			}
-		}
-		if(!scriptFound){
-			// fix 100vh in Safari on iOS as well as Chrome 84+
-			// see https://www.bram.us/2020/05/06/100vh-in-safari-on-ios/
-			const script = document.createElement("script");
-			script.text = "\
-				const setVh = () => {\
-					let vh = window.innerHeight * 0.01;\
-					document.documentElement.style.setProperty('--vh', `${vh}px`);\
-				};\
-				window.addEventListener('load', setVh);\
-				window.addEventListener('resize', setVh);";
-			document.body.appendChild(script);
-		}
 	}, []);
 
 	useEffect(() => {
