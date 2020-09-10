@@ -59,8 +59,8 @@ export default function Tips(props) {
 		</div>
 
 		<div className="next-section">
-			<Link href="/" passHref>
-				<Button variant="primary"><span><img className="white" src="/white.svg" style={{ transform: "rotate(180deg)"}} />back</span></Button>
+			<Link href="/start-test" passHref>
+				<Button variant="primary"><span>Start Mapping Schools <img className="white" src="/white.svg"  /></span></Button>
 			</Link>
 		</div>
 
