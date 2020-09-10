@@ -4,16 +4,19 @@ import { v4 as uuidv4 } from 'uuid';
 
 import useScriptText from '../hooks/useScriptText';
 import Intro from '../components/intro';
-import Quiz from '../components/quiz';
-import Result from '../components/result';
+import QuizTest from '../components/quizTest';
+import quizQuestions from '../api/quizQuestions';
+import ResultTest from '../components/resultTest';
 
+
+const numQuestions = 6;
  
 export default function mapping() {
 
 	const [answerCount, setAnswerCount] = useState(0);
+	const [questions, setQuestions] = useState(null);
 	const [counter, setCounter] = useState(0);
 	const [question, setQuestion] = useState({ id: 0, lat: 0, lon: 0, answer: ''});
-	const [questions, setQuestions] = useState([question]);
 
 	const [cookies, setCookie] = useCookies(['uuid']);
 
@@ -39,14 +42,8 @@ export default function mapping() {
 	}
 
 	useEffect(() => {
-
 		// Initialize the set of questions
-		async function fetchData() {
-			// Get location data
-			const result = await fetch("/api/getLocations");
-			setQuestions(await result.json());
-		}
-		fetchData();
+		setQuestions(shuffle(quizQuestions));
 
 		// Initialize cookie if not present
 		if(!cookies.uuid){
@@ -67,35 +64,26 @@ export default function mapping() {
 		}
 	}, [counter])
 
-	function handleAnswerSelected(result) {
-		fetch("/api/validateLocation", {
-			'method': 'POST',
-			'headers': {
-				'content-type': 'application/json',
-				'accept': 'application/json'
-  			},
-  			'body': JSON.stringify({
-  				user_id: cookies.uuid, 
-  				school_id: result.school_id,
-  				result: result.answer
-  			})
-		})
-		if (counter < questions.length) {
+	function handleAnswerSelected(answer) {
+		if(answer){
+			setAnswerCount(answerCount + 1);
+		}
+		if (counter < numQuestions) {
 			setCounter(counter + 1);
 	  	} 
 	}
 
-  	if (counter < questions.length) {
+  	if (counter < numQuestions) {
 		return (
-			<Quiz
+			<QuizTest
 				question={question}
 				counter={counter}
-				questionTotal={questions.length}
+				questionTotal={numQuestions}
 				onAnswerSelected={handleAnswerSelected}
 			/>
 		);
 	} else {
-	  	return <Result correctAnswers={answerCount} />;
+	  	return <ResultTest correctAnswers={answerCount} totalQuestions={numQuestions}/>;
 	}
 
 }

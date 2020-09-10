@@ -10,34 +10,46 @@ const MapComponent = dynamic(import('../components/mapComponent'),{
 	ssr: false
 })
 
-export default function Quiz (props) {
+export default function QuizTest (props) {
 
 	const [next, setNext] = useState(false);
 	const [yes, setYes] = useState('outline-primary');
 	const [no, setNo] = useState('outline-primary');
-	const [maybe, setMaybe] = useState('outline-primary');
 	const [result, setResult] = useState(false);
 	const [answer, setAnswer] = useState({answer:'', answerClass: 'answerHidden'});
 
 	function handleClick(e, value) {
-		let buttons = document.getElementsByClassName('actionButton');
-		for(let button of buttons) {
-			button.className = "btn btn-outline-primary actionButton"
+		let buttonVariant = '';
+		if(value === props.question.answer) {
+			if(value === true) {
+				setYes('success');
+				setAnswer({answer: 'Correct answer', answerClass: 'answerCorrect'});
+			} else {
+				setNo('success');
+				setAnswer({answer: 'Correct answer', answerClass: 'answerCorrect'});
+			}
+			setResult(true);
+		} else {
+			if(value === true) {
+				setYes('danger');
+				setAnswer({answer: 'Incorrect answer', answerClass: 'answerIncorrect'});
+			} else {
+				setNo('danger');
+				setAnswer({answer: 'Incorrect answer', answerClass: 'answerIncorrect'});
+			}
+			setResult(false);
 		}
-		e.target.className = "btn btn-primary actionButton";
-		setResult({school_id: props.question.school_id, answer: value})
 		setNext(true);
 	}
 
 	function handleNext(){
-		let buttons = document.getElementsByClassName('actionButton');
-		for(let button of buttons) {
-			button.className = "btn btn-outline-primary actionButton"
-		}
 		setNext(false);
+		setYes('outline-primary');
+		setNo('outline-primary');
 		setAnswer({answer: '', answerClass: 'answerHidden'});
 		props.onAnswerSelected(result);
   	}
+
 
 	const latlon = [props.question.lat, props.question.lon];
 	const answerClass = "answer " + answer.answerClass
@@ -60,14 +72,11 @@ export default function Quiz (props) {
 
 				<div>
 					<Row className="p-3">
-						<Col xs={4}>
-							<Button className='actionButton' variant={yes} onClick={e => handleClick(e, 'yes')}>Yes</Button>
+						<Col xs={{size: 4, offset: 1}}>
+							<Button variant={yes} onClick={e => handleClick(e, true)} disabled={next}>Yes</Button>{' '}
 						</Col>
-						<Col xs={4}>
-							<Button className='actionButton' variant={no} onClick={e => handleClick(e, 'no')}>No</Button>
-						</Col>
-						<Col xs={4}>
-							<Button className='actionButton' variant={maybe} onClick={e => handleClick(e, 'maybe')}>Not Sure</Button>
+						<Col xs={{size: 4, offset: 2}}>
+							<Button variant={no} onClick={e => handleClick(e, false)} disabled={next}>No</Button>{' '}
 						</Col>
 					</Row>
 				</div>
@@ -76,6 +85,7 @@ export default function Quiz (props) {
 			<footer className="mt-auto next-section">
 				<Button variant="primary" onClick={handleNext} disabled={!next}><span>NEXT<img className="white" src="/white.svg"/></span></Button>{' '}
 			</footer>
+
 		</Layout>
 	)
 }

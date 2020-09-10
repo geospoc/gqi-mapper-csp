@@ -46,8 +46,8 @@ export default function Intro(props) {
 			<p>With just one minute you can help us map 5 schools.</p>
 		</div>
 
-		<div>
-			<Link href="/mapping" passHref>
+		<div className="next-section">
+			<Link href="/start-test" passHref>
 				<Button variant="primary"><span>Start Mapping Schools<img className="white" src="/white.svg"/></span></Button>
 			</Link>
 		</div>

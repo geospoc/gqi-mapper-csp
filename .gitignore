@@ -106,3 +106,5 @@ dist
 .env.local
 
 .DS_Store
+scripts/*.json
+scripts/*.csv
