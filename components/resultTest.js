@@ -49,8 +49,8 @@ export default function StartTest(props) {
 					</Row>
 				</Container>
 
-				<Link href="/test" passHref>
-					<Button variant="primary" href="/mapping">Start Tagging</Button>
+				<Link href="/mapping" passHref>
+					<Button variant="primary">Start Tagging</Button>
 				</Link>
 				<div>
 					<div style={{paddingTop: '1em'}}>
