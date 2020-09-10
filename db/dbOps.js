@@ -13,7 +13,7 @@ const config = {
   port: 5432
 };
 
-const pool = new Pool({ ssl: { rejectUnauthorized: false }})
+const pool = new Pool()
 
 function createDB() {
 	pgtools.createdb(config, process.env.PGDATABASE, function(err, res) {
