@@ -65,7 +65,6 @@ export default function mapping() {
 		}
 	}, [counter])
 
-
 	function handleAnswerSelected(answer) {
 		if(answer){
 			setAnswerCount(answerCount + 1);
