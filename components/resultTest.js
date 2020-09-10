@@ -1,3 +1,4 @@
+import React, { useState, useEffect } from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
 import { Container, Col, Row, Button } from 'react-bootstrap';
@@ -6,6 +7,26 @@ import useScriptText from '../hooks/useScriptText';
 import Layout from '../components/layout';
  
 export default function StartTest(props) {
+
+	const [height, setHeight] = useState(85);
+
+	function calculateHeight() {
+		let topElement = document.getElementById("testskills");
+		let bottomElement = document.getElementById("tagschools");
+		if(topElement && bottomElement) {
+			let topRect = topElement.getBoundingClientRect();
+			let bottomRect = bottomElement.getBoundingClientRect();
+			setHeight(bottomRect.top - topRect.top);
+		}
+	}
+
+	useEffect( () => {
+		calculateHeight();
+		window.addEventListener('resize', calculateHeight);
+		return () => {
+			window.removeEventListener('resize', calculateHeight);
+		}
+	}, [])
 
 	return (
 		 <Layout myClass="intro">
@@ -28,10 +49,10 @@ export default function StartTest(props) {
 					<Row>
 						<Col xs={3}>
 							<svg height="350" width="30" style={{paddingTop: '1.5em'}}>
-  								<circle cx="15" cy="25" r="10" stroke="#8bd432" strokeWidth="3" fill="#8bd432" />
-  								<text x="15" y="25" text-anchor="middle" stroke="white" strokeWidth="2px" dy=".3em">&#10003;</text>
-  								<line x1="15" y1="35" x2="15" y2="120" stroke="#8bd432" strokeWidth="3" />
-  								<circle cx="15" cy="130" r="10" stroke="#c5c5c5" strokeWidth="3" fill="white" />
+								<circle cx="15" cy="25" r="10" stroke="#8bd432" strokeWidth="3" fill="#8bd432" />
+								<text x="15" y="25" text-anchor="middle" stroke="white" strokeWidth="2px" dy=".3em">&#10003;</text>
+								<line x1="15" y1="35" x2="15" y2={55 + height} stroke="#8bd432" strokeWidth="3" />
+								<circle cx="15" cy={45 + height} r="10" stroke="#c5c5c5" strokeWidth="3" fill="white" />
 							</svg>
 						</Col>
 						<Col xs={9}>

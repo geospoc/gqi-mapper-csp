@@ -18,6 +18,26 @@ import Layout from '../components/layout';
  
 export default function StartTest() {
 
+	const [height, setHeight] = useState(165);
+
+	function calculateHeight() {
+		let topElement = document.getElementById("testskills");
+		let bottomElement = document.getElementById("tagschools");
+		if(topElement && bottomElement) {
+			let topRect = topElement.getBoundingClientRect();
+			let bottomRect = bottomElement.getBoundingClientRect();
+			setHeight(bottomRect.top - topRect.top);
+		}	
+	}
+
+	useEffect( () => {
+		calculateHeight();
+		window.addEventListener('resize', calculateHeight);
+		return () => {
+			window.removeEventListener('resize', calculateHeight);
+		}
+	}, [])
+
 	return (
 		 <Layout myClass="intro">
                 <Head>
@@ -38,22 +58,22 @@ export default function StartTest() {
 						<Row>
 							<Col xs={3}>
 								<svg height="350" width="30" style={{paddingTop: '1.5em'}}>
-	  								<circle cx="15" cy="25" r="10" stroke="#8bd432" strokeWidth="3" fill="#8bd432" />
-	  								<line x1="15" y1="35" x2="15" y2="220" stroke="#c5c5c5" strokeWidth="3" />
-	  								<line x1="15" y1="35" x2="15" y2="55" stroke="#8bd432" strokeWidth="3" />
-	  								<circle cx="15" cy="230" r="10" stroke="#c5c5c5" strokeWidth="3" fill="white" />
+									<circle cx="15" cy="25" r="10" stroke="#8bd432" strokeWidth="3" fill="#8bd432" />
+									<line x1="15" y1="35" x2="15" y2={35 + height} stroke="#c5c5c5" strokeWidth="3" />
+									<line x1="15" y1="35" x2="15" y2="55" stroke="#8bd432" strokeWidth="3" />
+									<circle cx="15" cy={25 + height} r="10" stroke="#c5c5c5" strokeWidth="3" fill="white" />
 								</svg>
 							</Col>
 							<Col xs={9}>
 								<Row>
-									<p>Test map skills</p>
+									<p id="testskills">Test map skills</p>
 									<p style={{fontSize: '1.2em', paddingTop:0}}>
 			                    		Play a short game to understand how schools look on a map and how to differentiate them from other buildings.
 			                    	</p>
 								</Row>
 								<Row>&nbsp;</Row>
 								<Row>
-									<p>Tag schools</p>
+									<p id="tagschools">Tag schools</p>
 								</Row>
 							</Col>
 						</Row>
