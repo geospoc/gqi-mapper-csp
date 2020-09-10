@@ -24,32 +24,38 @@ a:hover {
   border: .05rem solid #fff;
 }
 
+.btn-outline-primary,
+.btn-outline-secondary,
+.btn-success,
+.btn-danger,
 .btn-primary {
+  border-radius: 1em;
   width: 100%;
-  padding: 1.5em;
   text-transform: uppercase;
+  font-size: 0.7em;
 }
 
-.intro .btn-primary,
-.quiz .btn-primary {
+.big-button .btn-primary {
+  padding: 1.5em;
+  letter-spacing: 2px;
+}
+
+.big-button a.btn {
+  text-decoration: none;
+}
+
+.next-section .btn-primary {
+  width: 100%;
+  text-transform: uppercase;
   border-radius: 0;
   font-size: 12px;
   font-stretch: normal;
+  padding: 1.5em;
   font-style: normal;
   line-height: normal;
   letter-spacing: 1px;
   text-align: center;
   color: #ffffff;
-}
-
-.btn-outline-primary,
-.btn-outline-secondary,
-.btn-success,
-.btn-danger {
-  border-radius: 1em;
-  width: 100%;
-  text-transform: uppercase;
-  font-size: 0.7em;
 }
 
 .card {
@@ -103,6 +109,11 @@ body {
   color: #FFF;
   size: 1.5em;
   letter-spacing: 0.15em;
+}
+
+.inverse {
+  background-color: white;
+  color: #000;
 }
 
 .nav-masthead .nav-link {
@@ -191,6 +202,16 @@ footer {
   font-weight: lighter;
 }
 
+.start-test {
+  padding: 3em 2em;
+}
+
+.start-test p {
+  font-size: 1.7em;
+  padding-top: 1em;
+  font-weight: lighter;
+}
+
 .tips, .result {
   width: 100%;
   background-color: white;
@@ -266,4 +287,15 @@ a {
 .answerIncorrect {
   visibility: visible;
   background-color: #E97D88;
+}
+
+.tableResults {
+  margin: 50px auto;
+  width: 50%;
+  font-size: 0.8em;
+}
+
+.tableResults td {
+  padding: 0;
+  vertical-align: middle;
 }

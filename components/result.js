@@ -27,18 +27,17 @@ export default function Result(props) {
 			    </div>
 			</header>
 
-			<div className="result">
+			<div className="result big-button">
 				<h1>Thank you for your contribution to Project Connect!</h1>
-				<p>You correctly identified {props.correctAnswers} location{ (props.correctAnswers!=1)?'s':null }. Your contribution will help us connect these schools to the Internet 🚀</p>
 				<p style={{paddingTop: '.5em'}}>
 					Make sure to follow <a href="https://twitter.com/procoworld" target="_blank">
 				    @ProCoWorld</a> and <a href="https://twitter.com/gigaconnect" target="_blank">
 					@GigaConnect</a> for the latest news,
 					and look for the launch of our new mapping platform, coming soon in 2020!</p>
 				<p>See how many schools we have mapped so far:</p>
-				<Button variant="primary" href="https://projectconnect.world">Visit Project Connect</Button>{' '}
+				<Button variant="primary" href="https://projectconnect.world">Visit Project Connect</Button>
 				<p>&nbsp;</p>
-				<Button variant="primary" href="/">Map More Schools</Button>{' '}
+				<Button variant="primary" href="/">Map More Schools</Button>
 
 			</div>
 
