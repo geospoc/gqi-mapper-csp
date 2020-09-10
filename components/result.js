@@ -28,7 +28,7 @@ export default function Result(props) {
 			</header>
 
 			<div className="result big-button">
-				<h1>Thank you for your contribution to Project Connect!</h1>
+				<h1>Thank you for contributing to Project Connect!</h1>
 				<p style={{paddingTop: '.5em'}}>
 					Make sure to follow <a href="https://twitter.com/procoworld" target="_blank">
 				    @ProCoWorld</a> and <a href="https://twitter.com/gigaconnect" target="_blank">
