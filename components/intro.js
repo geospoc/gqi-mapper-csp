@@ -42,7 +42,7 @@ export default function Intro(props) {
 		</header>
 
 		<div className="main">
-			<h1>Welcome to Project Connect mapping tool</h1>
+			<h1>Welcome to Project Connect mapping game</h1>
 			<p>With just one minute you can help us map 5 schools.</p>
 		</div>
 
