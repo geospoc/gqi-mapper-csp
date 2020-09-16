@@ -44,6 +44,7 @@ export default function summary() {
 	const [results, setResults] = useState([]);
 	const [summary, setSummary] = useState({});
 	const [locations, setLocations] = useState([]);
+	const [users, setUsers] = useState([]);
 
 	const scriptText = "\
 		const setVh = () => {\
@@ -63,6 +64,9 @@ export default function summary() {
 
 			const locations = await fetch('/api/getLocationIds');
 			setLocations(await locations.json());
+
+			const users = await fetch('/api/summaryUsers');
+			setUsers(await users.json());
 		}
 		fetchData();
 	}, []);
@@ -119,6 +123,29 @@ export default function summary() {
 					</tr>
 					
 					))
+			}
+			</tbody>
+			</Table>
+
+			<p>&nbsp;</p>
+
+			<Table size="sm">
+			<thead>
+				<tr>
+					<th>#</th>
+					<th>User</th>
+					<th className="text-right">Schools Tagged</th>
+				</tr>
+			</thead>
+			<tbody>
+			{
+				Object.keys(users).map((k,i) => (
+					<tr key={i}>
+						<td>{k}</td>
+						<td>{users[k].user_id}</td>
+						<td className="text-right">{users[k].count}</td>
+					</tr>
+				))
 			}
 			</tbody>
 			</Table>
