@@ -48,9 +48,24 @@ export default function mapping() {
 		}
 		fetchData();
 
+		async function addUser(uuid) {
+			await fetch("/api/addUser", {
+				'method': 'POST',
+				'headers': {
+					'content-type': 'application/json',
+					'accept': 'application/json'
+				},
+				'body': JSON.stringify({
+					user_id: uuid
+				})
+			})
+		}
+
 		// Initialize cookie if not present
 		if(!cookies.uuid){
-			setCookie('uuid', uuidv4(), { path: '/' });
+			const userId = uuidv4();
+			setCookie('uuid', userId, { path: '/' });
+			addUser(userId);
 		}
 
 	}, []);

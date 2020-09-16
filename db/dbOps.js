@@ -52,6 +52,12 @@ async function createTables() {
 			unique (user_id, school_id)
 		);
 	`);
+	await pool.query(`
+		CREATE TABLE crowdusers(
+			user_id TEXT,
+			ip INET
+		);
+	`);
 	await pool.end()
 }
 
@@ -67,7 +73,7 @@ async function loadTables() {
 }
 
 async function dropTables() {
-	await pool.query(`DROP TABLE IF EXISTS locations; DROP TABLE IF EXISTS crowdsourcing; DROP TYPE IF EXISTS yesnomaybe;`);
+	await pool.query(`DROP TABLE IF EXISTS locations; DROP TABLE IF EXISTS crowdsourcing; DROP TYPE IF EXISTS yesnomaybe; DROP TABLE IF EXISTS crowdusers;`);
 	await pool.end();
 }
 
