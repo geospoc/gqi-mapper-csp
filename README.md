@@ -55,7 +55,7 @@ Setup your development environment as follows:
     cd proco-map-app
     npm install
     ```
-3. After having set up the proper [Configuration](#Configuration), run the developmnet server with [fast refresh](https://nextjs.org/docs/basic-features/fast-refresh):
+3. After having set up the proper [Configuration](#%EF%B8%8F-configuration), run the developmnet server with [fast refresh](https://nextjs.org/docs/basic-features/fast-refresh):
     ```bash
     npm run dev
     ```
