@@ -64,7 +64,7 @@ export default function mapping() {
 		// Initialize cookie if not present
 		if(!cookies.uuid){
 			const userId = uuidv4();
-			setCookie('uuid', userId, { path: '/' });
+			setCookie('uuid', userId, { path: '/', maxAge: 2592000 }); // maxAge: 30 days
 			addUser(userId);
 		}
 
