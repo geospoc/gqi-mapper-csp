@@ -20,15 +20,6 @@ export default function mapping() {
 
 	const [cookies, setCookie] = useCookies(['uuid']);
 
-	const scriptText = "\
-		const setVh = () => {\
-			let vh = window.innerHeight * 0.01;\
-			document.documentElement.style.setProperty('--vh', `${vh}px`);\
-		};\
-		window.addEventListener('load', setVh);\
-		window.addEventListener('resize', setVh);";
-	useScriptText(scriptText);
-
 	/**
 	 * Shuffles array in place. ES6 version
 	 * @param {Array} a items An array containing the items.
