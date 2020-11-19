@@ -50,7 +50,7 @@ export default function StartTest(props) {
 						<Col xs={3}>
 							<svg height="350" width="30" style={{paddingTop: '1.5em'}}>
 								<circle cx="15" cy="25" r="10" stroke="#8bd432" strokeWidth="3" fill="#8bd432" />
-								<text x="15" y="25" text-anchor="middle" stroke="white" strokeWidth="2px" dy=".3em">&#10003;</text>
+								<text x="15" y="25" textAnchor="middle" stroke="white" strokeWidth="2px" dy=".3em">&#10003;</text>
 								<line x1="15" y1="35" x2="15" y2={55 + height} stroke="#8bd432" strokeWidth="3" />
 								<circle cx="15" cy={45 + height} r="10" stroke="#c5c5c5" strokeWidth="3" fill="white" />
 							</svg>
