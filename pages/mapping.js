@@ -30,15 +30,6 @@ export default function mapping() {
 	}
 
 	useEffect(() => {
-
-		// Initialize the set of questions
-		async function fetchData() {
-			// Get location data
-			const result = await fetch("/api/getLocations");
-			setQuestions(await result.json());
-		}
-		fetchData();
-
 		async function addUser(uuid) {
 			await fetch("/api/addUser", {
 				'method': 'POST',
@@ -59,6 +50,13 @@ export default function mapping() {
 			addUser(userId);
 		}
 
+		// Initialize the set of questions
+		async function fetchData() {
+			// Get location data
+			const result = await fetch(`/api/getLocations/${cookies.uuid}`);
+			setQuestions(await result.json());
+		}
+		fetchData();
 	}, []);
 
 	useEffect(() => {
