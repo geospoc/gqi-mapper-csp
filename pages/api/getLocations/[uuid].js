@@ -10,17 +10,18 @@ export default async (req, res) => {
 		const user_id = req.query.uuid;
 		if (uuidValidate(user_id)) {
 			try {
-				result = await pool.query(`SELECT locations.school_id,
-											       locations.lat,
-											       locations.lon
-											FROM locations
-											LEFT JOIN
-											  (SELECT school_id
-											   FROM crowdsourcing
-											   WHERE user_id = '${user_id}') AS tagged 
-											   		ON locations.school_id = tagged.school_id
-											WHERE tagged.school_id IS NULL
-											ORDER BY random() LIMIT 10;`);
+				result = await pool.query(`
+					SELECT  locations.school_id,
+							locations.lat,
+							locations.lon
+					FROM locations
+					LEFT JOIN
+						(SELECT school_id
+						 FROM crowdsourcing
+						 WHERE user_id = '${user_id}') AS tagged 
+							ON locations.school_id = tagged.school_id
+					WHERE tagged.school_id IS NULL
+					ORDER BY random() LIMIT 10;`);
 			} catch(e) {
 				console.log(e)
 			}	
