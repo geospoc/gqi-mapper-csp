@@ -8,7 +8,7 @@ export default async (req, res) => {
 	if (req.method === 'GET') {
 		let result = null;
 		const user_id = req.query.uuid;
-		if (user_id && uuidValidate(user_id)) {
+		if (uuidValidate(user_id)) {
 			try {
 				result = await pool.query(`SELECT locations.school_id,
 											       locations.lat,
@@ -17,8 +17,9 @@ export default async (req, res) => {
 											LEFT JOIN
 											  (SELECT school_id
 											   FROM crowdsourcing
-											   WHERE user_id != '${user_id}') AS seen ON locations.school_id = seen.school_id
-											WHERE seen.school_id IS NULL
+											   WHERE user_id = '${user_id}') AS tagged 
+											   		ON locations.school_id = tagged.school_id
+											WHERE tagged.school_id IS NULL
 											ORDER BY random() LIMIT 10;`);
 			} catch(e) {
 				console.log(e)
