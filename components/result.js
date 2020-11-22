@@ -30,6 +30,9 @@ export default function Result(props) {
 			<div className="result big-button">
 				<h1>Thank you for contributing to Project Connect!</h1>
 				<p style={{paddingTop: '.5em'}}>
+					{props.taggedAllLocations ? '🏆 You are a mapping champion! 🗺 You have mapped all of the locations in our database. Please check back for more soon. ' : ''}
+				</p>
+				<p style={{paddingTop: '.5em'}}>
 					Make sure to follow <a href="https://twitter.com/procoworld" target="_blank">
 				    @ProCoWorld</a> and <a href="https://twitter.com/gigaconnect" target="_blank">
 					@GigaConnect</a> for the latest news,
@@ -37,7 +40,7 @@ export default function Result(props) {
 				<p>See how many schools we have mapped so far:</p>
 				<Button variant="primary" href="https://projectconnect.world">Visit Project Connect</Button>
 				<p>&nbsp;</p>
-				<Button variant="primary" href="/">Map More Schools</Button>
+				{props.taggedAllLocations ? '' : <Button variant="primary" href="/">Map More Schools</Button>}
 
 			</div>
 

@@ -17,6 +17,8 @@ export default function mapping() {
 
 	const [cookies, setCookie] = useCookies(['uuid']);
 
+	const [untaggedLocations, setUntaggedLocations] = useState(null);
+
 	/**
 	 * Shuffles array in place. ES6 version
 	 * @param {Array} a items An array containing the items.
@@ -57,6 +59,13 @@ export default function mapping() {
 			setQuestions(await result.json());
 		}
 		fetchData();
+
+		async function fetchUntaggedLocations() {
+			// Get untagged locations
+			const result = await fetch(`/api/getUntaggedLocations/${cookies.uuid}`);
+			setUntaggedLocations(parseInt(result));
+		};
+		fetchUntaggedLocations();
 	}, []);
 
 	useEffect(() => {
@@ -89,7 +98,8 @@ export default function mapping() {
 	  	} 
 	}
 
-  	if (counter < questions.length) {
+
+  	if (counter < questions.length && untaggedLocations != 0) {
 		return (
 			<Quiz
 				question={question}
@@ -99,7 +109,9 @@ export default function mapping() {
 			/>
 		);
 	} else {
-	  	return <Result correctAnswers={answerCount} />;
+		console.log("CREME BRULEE");
+		console.log(untaggedLocations);
+	  	return <Result correctAnswers={answerCount} taggedAllLocations={untaggedLocations == 0} />;
 	}
 
 }
