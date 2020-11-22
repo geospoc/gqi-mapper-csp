@@ -91,7 +91,6 @@ export default function mapping() {
 	  	} 
 	}
 
-
   	if (counter < questions.length) {
 		return (
 			<Quiz
