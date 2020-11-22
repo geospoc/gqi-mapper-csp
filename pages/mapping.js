@@ -91,7 +91,7 @@ export default function mapping() {
 	  	} 
 	}
 
-	async function fetchUntaggedLocations() {
+	async function fetchUntaggedLocationsCount() {
 		// Get number of untagged locations
 		const result = await fetch(`/api/getUntaggedLocationsCount/${cookies.uuid}`);
 		const response = await result.json();
@@ -108,7 +108,7 @@ export default function mapping() {
 			/>
 		);
 	} else {
-		fetchUntaggedLocations();
+		fetchUntaggedLocationsCount();
 	  	return <Result correctAnswers={answerCount} taggedAllLocations={untaggedLocations <= 0} />;
 	}
 
