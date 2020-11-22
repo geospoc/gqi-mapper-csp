@@ -59,14 +59,6 @@ export default function mapping() {
 			setQuestions(await result.json());
 		}
 		fetchData();
-
-		async function fetchUntaggedLocations() {
-			// Get untagged locations
-			const result = await fetch(`/api/getUntaggedLocations/${cookies.uuid}`);
-			const response = await result.json();
-			setUntaggedLocations(await response.count);
-		};
-		fetchUntaggedLocations();
 	}, []);
 
 	useEffect(() => {
@@ -110,7 +102,15 @@ export default function mapping() {
 			/>
 		);
 	} else {
-	  	return <Result correctAnswers={answerCount} taggedAllLocations={untaggedLocations <= 10} />;
+		async function fetchUntaggedLocations() {
+			// Get number of untagged locations
+			const result = await fetch(`/api/getUntaggedLocations/${cookies.uuid}`);
+			const response = await result.json();
+			setUntaggedLocations(await response.count);
+		};
+		fetchUntaggedLocations();
+
+	  	return <Result correctAnswers={answerCount} taggedAllLocations={untaggedLocations <= 0} />;
 	}
 
 }
