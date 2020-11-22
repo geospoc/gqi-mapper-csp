@@ -17,7 +17,7 @@ export default function mapping() {
 
 	const [cookies, setCookie] = useCookies(['uuid']);
 
-	const [untaggedLocations, setUntaggedLocations] = useState(null);
+	const [untaggedLocations, setUntaggedLocations] = useState(100);
 
 	/**
 	 * Shuffles array in place. ES6 version
@@ -99,7 +99,7 @@ export default function mapping() {
 	}
 
 
-  	if (counter < questions.length && untaggedLocations != 0) {
+  	if (counter < questions.length && untaggedLocations >= 10) {
 		return (
 			<Quiz
 				question={question}
@@ -109,9 +109,7 @@ export default function mapping() {
 			/>
 		);
 	} else {
-		console.log("CREME BRULEE");
-		console.log(untaggedLocations);
-	  	return <Result correctAnswers={answerCount} taggedAllLocations={untaggedLocations == 0} />;
+	  	return <Result correctAnswers={answerCount} taggedAllLocations={untaggedLocations <= 10} thing={untaggedLocations} />;
 	}
 
 }
