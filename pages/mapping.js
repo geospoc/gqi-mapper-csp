@@ -91,6 +91,13 @@ export default function mapping() {
 	  	} 
 	}
 
+	async function fetchUntaggedLocations() {
+		// Get number of untagged locations
+		const result = await fetch(`/api/getUntaggedLocations/${cookies.uuid}`);
+		const response = await result.json();
+		setUntaggedLocations(await response.count);
+	};
+
   	if (counter < questions.length) {
 		return (
 			<Quiz
@@ -101,14 +108,7 @@ export default function mapping() {
 			/>
 		);
 	} else {
-		async function fetchUntaggedLocations() {
-			// Get number of untagged locations
-			const result = await fetch(`/api/getUntaggedLocations/${cookies.uuid}`);
-			const response = await result.json();
-			setUntaggedLocations(await response.count);
-		};
 		fetchUntaggedLocations();
-
 	  	return <Result correctAnswers={answerCount} taggedAllLocations={untaggedLocations <= 0} />;
 	}
 
