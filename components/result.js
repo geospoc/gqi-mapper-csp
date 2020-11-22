@@ -30,7 +30,7 @@ export default function Result(props) {
 			<div className="result big-button">
 				<h1>Thank you for contributing to Project Connect!</h1>
 				<p style={{paddingTop: '.5em'}}>
-					{props.taggedAllLocations ? '🏆 You are a mapping champion! 🗺 You have mapped all of the locations in our database. Please check back for more soon. ' : ''}
+					{props.taggedAllLocations ? '🏆 You are a mapping champion! 🗺 You have mapped all of our potential school locations. We will add more shortly, so come back soon.' : ''}
 				</p>
 				<p style={{paddingTop: '.5em'}}>
 					Make sure to follow <a href="https://twitter.com/procoworld" target="_blank">

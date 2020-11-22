@@ -20,17 +20,17 @@ export default async (req, res) => {
 							ON locations.school_id = tagged.school_id
 					WHERE tagged.school_id IS NULL;`);
 			} catch(e) {
-				console.log(e)
+				console.log(e);
 			}	
 		}
 
 		let output = null;
 		if(result) {
 			res.statusCode = 200;
-			res.setHeader('Content-Type', 'text/plain');
+			res.setHeader('Content-Type', 'application/json');
 			output = JSON.stringify({count: parseInt(result.rows[0]["count"])});
 		} else {
-			res.statusCode = 500
+			res.statusCode = 500;
 		}
 		res.end(output);
 	} else {
