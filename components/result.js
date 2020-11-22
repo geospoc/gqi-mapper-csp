@@ -28,7 +28,7 @@ export default function Result(props) {
 			</header>
 
 			<div className="result big-button">
-				<h1>Thank you for contributing to Project Connect! {props.thing}</h1>
+				<h1>Thank you for contributing to Project Connect!</h1>
 				<p style={{paddingTop: '.5em'}}>
 					{props.taggedAllLocations ? '🏆 You are a mapping champion! 🗺 You have mapped all of the locations in our database. Please check back for more soon. ' : ''}
 				</p>

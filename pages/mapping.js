@@ -17,7 +17,7 @@ export default function mapping() {
 
 	const [cookies, setCookie] = useCookies(['uuid']);
 
-	const [untaggedLocations, setUntaggedLocations] = useState(100);
+	const [untaggedLocations, setUntaggedLocations] = useState(null);
 
 	/**
 	 * Shuffles array in place. ES6 version
@@ -63,7 +63,8 @@ export default function mapping() {
 		async function fetchUntaggedLocations() {
 			// Get untagged locations
 			const result = await fetch(`/api/getUntaggedLocations/${cookies.uuid}`);
-			setUntaggedLocations(parseInt(result));
+			const response = await result.json();
+			setUntaggedLocations(await response.count);
 		};
 		fetchUntaggedLocations();
 	}, []);
@@ -109,7 +110,7 @@ export default function mapping() {
 			/>
 		);
 	} else {
-	  	return <Result correctAnswers={answerCount} taggedAllLocations={untaggedLocations <= 10} thing={untaggedLocations} />;
+	  	return <Result correctAnswers={answerCount} taggedAllLocations={untaggedLocations <= 10} />;
 	}
 
 }

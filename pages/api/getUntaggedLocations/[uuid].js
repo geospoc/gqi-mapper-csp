@@ -28,7 +28,7 @@ export default async (req, res) => {
 		if(result) {
 			res.statusCode = 200;
 			res.setHeader('Content-Type', 'text/plain');
-			output = result.rows[0]["count"];
+			output = JSON.stringify({count: parseInt(result.rows[0]["count"])});
 		} else {
 			res.statusCode = 500
 		}
