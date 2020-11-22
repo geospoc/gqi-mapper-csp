@@ -99,7 +99,7 @@ export default function mapping() {
 	}
 
 
-  	if (counter < questions.length && untaggedLocations >= 10) {
+  	if (counter < questions.length) {
 		return (
 			<Quiz
 				question={question}
