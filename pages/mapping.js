@@ -93,7 +93,7 @@ export default function mapping() {
 
 	async function fetchUntaggedLocations() {
 		// Get number of untagged locations
-		const result = await fetch(`/api/getUntaggedLocations/${cookies.uuid}`);
+		const result = await fetch(`/api/getUntaggedLocationsCount/${cookies.uuid}`);
 		const response = await result.json();
 		setUntaggedLocations(await response.count);
 	};
