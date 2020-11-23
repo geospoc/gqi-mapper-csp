@@ -17,6 +17,8 @@ export default function mapping() {
 
 	const [cookies, setCookie] = useCookies(['uuid']);
 
+	const [untaggedLocationsCount, setUntaggedLocationsCount] = useState(null);
+
 	/**
 	 * Shuffles array in place. ES6 version
 	 * @param {Array} a items An array containing the items.
@@ -89,6 +91,13 @@ export default function mapping() {
 	  	} 
 	}
 
+	async function fetchUntaggedLocationsCount() {
+		// Get number of untagged locations
+		const result = await fetch(`/api/getUntaggedLocationsCount/${cookies.uuid}`);
+		const response = await result.json();
+		setUntaggedLocationsCount(await response.count);
+	};
+
   	if (counter < questions.length) {
 		return (
 			<Quiz
@@ -99,7 +108,8 @@ export default function mapping() {
 			/>
 		);
 	} else {
-	  	return <Result correctAnswers={answerCount} />;
+		fetchUntaggedLocationsCount();
+	  	return <Result correctAnswers={answerCount} taggedAllLocations={untaggedLocationsCount <= 0} />;
 	}
 
 }
