@@ -17,7 +17,7 @@ export default function mapping() {
 
 	const [cookies, setCookie] = useCookies(['uuid']);
 
-	const [untaggedLocationsCount, setUntaggedLocationsCount] = useState(null);
+	const [untaggedLocationsCount, setUntaggedLocationsCount] = useState(10);
 
 	/**
 	 * Shuffles array in place. ES6 version
