@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Head from 'next/head';
 import dynamic from 'next/dynamic'
-import {Row, Col, Button} from 'react-bootstrap';
+import {Row, Col, Button, ProgressBar} from 'react-bootstrap';
 
 import QuestionCount from '../components/questionCount';
 import Layout from '../components/layout'
@@ -41,7 +41,6 @@ export default function Quiz (props) {
 
 	const latlon = [props.question.lat, props.question.lon];
 	const answerClass = "answer " + answer.answerClass
-
 	return (
 		<Layout myClass="quiz">
 			<Head>
@@ -57,20 +56,27 @@ export default function Quiz (props) {
 						{answer['answer']}
 					</div>
 				</div>
-
-				<div>
-					<Row className="p-3">
-						<Col xs={4}>
-							<Button className='actionButton' variant={yes} onClick={e => handleClick(e, 'yes')}>Yes</Button>
-						</Col>
-						<Col xs={4}>
-							<Button className='actionButton' variant={no} onClick={e => handleClick(e, 'no')}>No</Button>
-						</Col>
-						<Col xs={4}>
-							<Button className='actionButton' variant={maybe} onClick={e => handleClick(e, 'maybe')}>Unsure</Button>
-						</Col>
-					</Row>
-				</div>
+				{next
+					? <div>
+						<ProgressBar variant="success" label="Yes" now={40} />
+						<ProgressBar variant="danger" label="No" now={80} />
+						<ProgressBar variant="warning" label="Unsure" now={60} />
+					</div>
+					:
+					<div>
+						<Row className="p-3">
+							<Col xs={4}>
+								<Button className='actionButton' variant={yes} onClick={e => handleClick(e, 'yes')}>Yes</Button>
+							</Col>
+							<Col xs={4}>
+								<Button className='actionButton' variant={no} onClick={e => handleClick(e, 'no')}>No</Button>
+							</Col>
+							<Col xs={4}>
+								<Button className='actionButton' variant={maybe} onClick={e => handleClick(e, 'maybe')}>Unsure</Button>
+							</Col>
+						</Row>
+					</div>
+				}
 			</main>
 
 			<footer className="mt-auto next-section">
