@@ -14,6 +14,7 @@ export default function mapping() {
 	const [counter, setCounter] = useState(0);
 	const [question, setQuestion] = useState({ id: 0, lat: 0, lon: 0, answer: ''});
 	const [questions, setQuestions] = useState([question]);
+	const [locationResults, setLocationResults] = useState({ yes_count: 0, no_count: 0, maybe_count: 0, total_count: 0});
 
 	const [cookies, setCookie] = useCookies(['uuid']);
 
@@ -61,9 +62,19 @@ export default function mapping() {
 		fetchData();
 	}, []);
 
+	async function fetchLocationResults() {
+		// Get number of untagged locations
+		const result = await fetch(`/api/getLocationResults/${question.id}`);
+		const response = await result.json();
+		setLocationResults(response);
+	};
+
 	useEffect(() => {
 		if(questions) {
 			setQuestion(questions[counter]);
+			if (question.id) {
+  				fetchLocationResults();
+	  		}
 		}
 	}, [questions]);
 
@@ -71,6 +82,9 @@ export default function mapping() {
 		if(questions) {
 			setQuestion(questions[counter]);
 		}
+		if (question.id) {
+  			fetchLocationResults();
+	  	}
 	}, [counter])
 
 	function handleAnswerSelected(result) {
@@ -105,6 +119,7 @@ export default function mapping() {
 				counter={counter}
 				questionTotal={questions.length}
 				onAnswerSelected={handleAnswerSelected}
+				locationResults={locationResults}
 			/>
 		);
 	} else {
