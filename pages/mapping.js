@@ -64,7 +64,7 @@ export default function mapping() {
 
 	async function fetchLocationResults() {
 		// Get number of untagged locations
-		const result = await fetch(`/api/getLocationResults/${question.id}`);
+		const result = await fetch(`/api/getLocationResults/${await question.id}`);
 		const response = await result.json();
 		setLocationResults(response);
 	};
@@ -107,7 +107,7 @@ export default function mapping() {
 
 	async function fetchUntaggedLocationsCount() {
 		// Get number of untagged locations
-		const result = await fetch(`/api/getUntaggedLocationsCount/${await cookies.uuid}`);
+		const result = await fetch(`/api/getUntaggedLocationsCount/${cookies.uuid}`);
 		const response = await result.json();
 		setUntaggedLocationsCount(await response.count);
 	};
