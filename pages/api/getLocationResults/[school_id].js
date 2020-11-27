@@ -3,6 +3,7 @@ const { Pool } = require('pg');
 const pool = new Pool()
 
 export default async (req, res) => {
+	console.log("Calling getLocationResults endpoint!")
 	if (req.method === 'GET') {
 		let result = null;
 		const school_id = req.query.school_id;

@@ -81,10 +81,10 @@ export default function mapping() {
 	useEffect(() => {
 		if(questions) {
 			setQuestion(questions[counter]);
+			if (question.id) {
+  				fetchLocationResults();
+	  		}
 		}
-		if (question.id) {
-  			fetchLocationResults();
-	  	}
 	}, [counter])
 
 	function handleAnswerSelected(result) {
