@@ -64,7 +64,7 @@ export default function mapping() {
 
 	async function fetchLocationResults() {
 		// Get number of untagged locations
-		const result = await fetch(`/api/getLocationResults/${await question.id}`);
+		const result = await fetch(`/api/getLocationResults/${questions[counter].id}`);
 		const response = await result.json();
 		setLocationResults(response);
 	};
@@ -72,18 +72,18 @@ export default function mapping() {
 	useEffect(() => {
 		if(questions) {
 			setQuestion(questions[counter]);
-			if (question.id) {
-  				fetchLocationResults();
-	  		}
+		}
+		if (questions[counter].id) {
+			fetchLocationResults();
 		}
 	}, [questions]);
 
 	useEffect(() => {
 		if(questions) {
 			setQuestion(questions[counter]);
-			if (question.id) {
-  				fetchLocationResults();
-	  		}
+		}
+		if (questions[counter].id) {
+			fetchLocationResults();
 		}
 	}, [counter])
 
