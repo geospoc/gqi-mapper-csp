@@ -62,9 +62,9 @@ export default function mapping() {
 		fetchData();
 	}, []);
 
-	async function fetchLocationResults(i) {
+	async function fetchLocationResults() {
 		// Get number of untagged locations
-		const result = await fetch(`/api/getLocationResults/${questions[i].id}`);
+		const result = await fetch(`/api/getLocationResults/${questions[counter].id}`);
 		const response = await result.json();
 		setLocationResults(response);
 	};
@@ -94,7 +94,7 @@ export default function mapping() {
   				result: result.answer
   			})
 		})
-		//fetchLocationResults(counter);
+		fetchLocationResults();
 	}
 
 	function handleNextSelected() {
