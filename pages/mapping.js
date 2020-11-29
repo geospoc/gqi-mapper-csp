@@ -62,9 +62,9 @@ export default function mapping() {
 		fetchData();
 	}, []);
 
-	async function fetchLocationResults() {
+	async function fetchLocationResults(i) {
 		// Get number of untagged locations
-		const result = await fetch(`/api/getLocationResults/${questions[counter].id}`);
+		const result = await fetch(`/api/getLocationResults/${questions[i].id}`);
 		const response = await result.json();
 		setLocationResults(response);
 	};
@@ -73,17 +73,11 @@ export default function mapping() {
 		if(questions) {
 			setQuestion(questions[counter]);
 		}
-		if (questions[counter].id) {
-			fetchLocationResults();
-		}
 	}, [questions]);
 
 	useEffect(() => {
 		if(questions) {
 			setQuestion(questions[counter]);
-		}
-		if (questions[counter].id) {
-			fetchLocationResults();
 		}
 	}, [counter])
 
@@ -100,9 +94,13 @@ export default function mapping() {
   				result: result.answer
   			})
 		})
+		//fetchLocationResults(counter);
+	}
+
+	function handleNextSelected() {
 		if (counter < questions.length) {
 			setCounter(counter + 1);
-	  	} 
+	  	}
 	}
 
 	async function fetchUntaggedLocationsCount() {
@@ -119,6 +117,7 @@ export default function mapping() {
 				counter={counter}
 				questionTotal={questions.length}
 				onAnswerSelected={handleAnswerSelected}
+				onNextSelected={handleNextSelected}
 				locationResults={locationResults}
 			/>
 		);

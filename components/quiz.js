@@ -27,6 +27,7 @@ export default function Quiz (props) {
 		e.target.className = "btn btn-primary actionButton";
 		setResult({school_id: props.question.school_id, answer: value})
 		setNext(true);
+		props.onAnswerSelected(result);
 	}
 
 	function handleNext(){
@@ -36,7 +37,7 @@ export default function Quiz (props) {
 		}
 		setNext(false);
 		setAnswer({answer: '', answerClass: 'answerHidden'});
-		props.onAnswerSelected(result);
+		props.onNextSelected();
   	}
 
 	const latlon = [props.question.lat, props.question.lon];
