@@ -49,7 +49,7 @@ export default function Quiz (props) {
 			</Head>
 			<main>
 				<QuestionCount counter={props.counter} total={props.questionTotal} />
-				<p>Does this look like a school location?</p>
+				<p>Does this look like a school location? {props.question.school_id} </p>
 
 				<div className="row no-gutters align-items-center mapdiv">
 					<MapComponent lat={props.question.lat} lon={props.question.lon} />
@@ -59,6 +59,7 @@ export default function Quiz (props) {
 				</div>
 				{next
 					? <div>
+						{props.locationResults.school_id}
 						<ProgressBar variant="success" label="Yes" now={(props.locationResults.yes_count / props.locationResults.total_count) * 100} />
 						<ProgressBar variant="danger" label="No" now={(props.locationResults.no_count / props.locationResults.total_count) * 100} />
 						<ProgressBar variant="warning" label="Unsure" now={(props.locationResults.maybe_count / props.locationResults.total_count) * 100} />
