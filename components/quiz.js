@@ -60,7 +60,6 @@ export default function Quiz (props) {
 				</div>
 				{next
 					? <div>
-						{props.locationResults.school_id}
 						<ProgressBar variant="success" label="Yes" now={(props.locationResults.yes_count / props.locationResults.total_count) * 100} />
 						<ProgressBar variant="danger" label="No" now={(props.locationResults.no_count / props.locationResults.total_count) * 100} />
 						<ProgressBar variant="warning" label="Unsure" now={(props.locationResults.maybe_count / props.locationResults.total_count) * 100} />
