@@ -25,9 +25,10 @@ export default function Quiz (props) {
 			button.className = "btn btn-outline-primary actionButton"
 		}
 		e.target.className = "btn btn-primary actionButton";
-		setResult({school_id: props.question.school_id, answer: value})
+		let resultValue = {school_id: props.question.school_id, answer: value};
+		props.onAnswerSelected(resultValue);
+        setResult(resultValue)
 		setNext(true);
-		props.onAnswerSelected(result);
 	}
 
 	function handleNext(){

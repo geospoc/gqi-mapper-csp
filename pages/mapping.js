@@ -102,6 +102,7 @@ export default function mapping() {
 	function handleNextSelected() {
 		if (counter < questions.length) {
 			setCounter(counter + 1);
+			setLocationResults({ school_id: 0, yes_count: 0, no_count: 0, maybe_count: 0, total_count: 0});
 	  	}
 	}
 
