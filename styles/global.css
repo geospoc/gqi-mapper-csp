@@ -109,11 +109,15 @@ body {
   color: #FFF;
   size: 1.5em;
   letter-spacing: 0.15em;
+  text-transform: uppercase;
 }
 
 .inverse {
   background-color: white;
-  color: #000;
+}
+
+.inverse .masthead-brand {
+  color: #141923;
 }
 
 .nav-masthead .nav-link {

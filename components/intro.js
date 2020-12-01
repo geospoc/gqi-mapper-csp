@@ -1,6 +1,7 @@
 import Head from 'next/head';
 import Link from 'next/link';
 import Layout from '../components/layout';
+import HeaderComponent from '../components/headerComponent';
 import { useContext } from 'react';
 import {Accordion, AccordionContext, Button, useAccordionToggle, Card} from 'react-bootstrap';
 
@@ -35,11 +36,7 @@ export default function Intro(props) {
 			<link href="https://fonts.googleapis.com/css2?family=Cabin&display=swap" rel="stylesheet" />
 		</Head>
 
-		<header className="masthead p-3">
-		    <div className="inner">
-		      <p className="masthead-brand">PROJECT CONNECT</p>
-		    </div>
-		</header>
+		<HeaderComponent inverse={false} />
 
 		<div className="main">
 			<h1>Welcome to Project Connect mapping game</h1>

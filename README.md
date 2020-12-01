@@ -36,6 +36,16 @@ PGHOST="POSTGRES_HOST"
 PGPASSWORD="POSTGRES_PASSWORD"
 PGDATABASE="POSTGRES_DATABASE"
 ```
+To work with the authentication functionalities, you need to add the following entries to the `.env` or `.env.local`:
+```
+NEXTAUTH_URL="HOST_URL"
+FACEBOOK_ID=1574451362742486
+FACEBOOK_SECRET=SECRET
+GITHUB_CLIENT_ID=585630903563e9c8af0c
+GITHUB_CLIENT_SECRET="SECRET"
+NEXT_PUBLIC_AUTH_CALLBACK="HOST_URL"
+```
+To obtain the secrets, contact one of the contributors.
 
 ## 💻 Development Environment
 
