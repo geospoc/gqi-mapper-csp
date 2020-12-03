@@ -5,9 +5,10 @@ import { v4 as uuidv4 } from 'uuid';
 import useScriptText from '../hooks/useScriptText';
 import Intro from '../components/intro';
 import QuizTest from '../components/quizTest';
-import quizQuestions from '../api/quizQuestions';
+//import quizQuestions from '../api/quizQuestions';
 import ResultTest from '../components/resultTest';
 
+const quizQuestions = [];
 
 const numQuestions = 6;
  
@@ -33,13 +34,18 @@ export default function mapping() {
 	}
 
 	useEffect(() => {
-		// Initialize the set of questions
-		setQuestions(shuffle(quizQuestions));
-
 		// Initialize cookie if not present
 		if(!cookies.uuid){
 			setCookie('uuid', uuidv4(), { path: '/' });
 		}
+
+		// Initialize the set of questions
+		async function fetchData() {
+			// Get location data
+			const result = await fetch(`/api/getLocationsTest`);
+			setQuestions(shuffle(await result.json()));
+		}
+		fetchData();
 
 	}, []);
 

@@ -8,7 +8,6 @@ import { Container, Table } from 'react-bootstrap';
 import useScriptText from '../hooks/useScriptText';
 import Intro from '../components/intro';
 import Quiz from '../components/quiz';
-import quizQuestions from '../api/quizQuestions';
 import Result from '../components/result';
 
 
