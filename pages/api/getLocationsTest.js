@@ -1,4 +1,4 @@
-var quizQuestions = [
+const testLocations = [
     {
         "id": 1,
         "lat": -1.91656,
@@ -85,5 +85,14 @@ var quizQuestions = [
     }
 ]
 
-
-export default quizQuestions;
+export default async (req, res) => {
+	if (req.method === 'GET') {
+		res.statusCode = 200;
+		res.setHeader('Content-Type', 'application/json');
+		res.end(JSON.stringify(testLocations));
+	} else {
+		// If it's not a GET request, return 405 - Method Not Allowed
+		res.statusCode = 405;
+		res.end();
+	}
+}

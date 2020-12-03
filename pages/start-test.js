@@ -1,19 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { useCookies } from 'react-cookie';
 import { v4 as uuidv4 } from 'uuid';
-
 import Head from 'next/head';
 import Link from 'next/link';
-
-
 import { Container, Col, Row, Button } from 'react-bootstrap';
-
 
 import useScriptText from '../hooks/useScriptText';
 import Intro from '../components/intro';
 import QuizTest from '../components/quizTest';
-import quizQuestions from '../api/quizQuestions';
-
 import Layout from '../components/layout';
 import HeaderComponent from '../components/headerComponent';
 
