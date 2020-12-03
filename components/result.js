@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import Head from 'next/head';
 import Link from 'next/link';
 import Layout from '../components/layout';
+import HeaderComponent from '../components/headerComponent';
 import Button from 'react-bootstrap/Button';
 
 export default function Result(props) {
@@ -21,11 +22,7 @@ export default function Result(props) {
 				<link href="https://fonts.googleapis.com/css2?family=Cabin&display=swap" rel="stylesheet" />
 			</Head>
 
-			<header className="masthead p-3">
-			    <div className="inner">
-			      <p className="masthead-brand">PROJECT CONNECT</p>
-			    </div>
-			</header>
+			<HeaderComponent inverse={false} />
 
 			<div className="result big-button">
 				<h1>Thank you for contributing to Project Connect!</h1>

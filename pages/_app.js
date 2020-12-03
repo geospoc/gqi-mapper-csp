@@ -1,4 +1,5 @@
 import { CookiesProvider } from "react-cookie";
+import { Provider as AuthProvider } from 'next-auth/client';
 import useScriptText from '../hooks/useScriptText';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -18,7 +19,9 @@ export default function MyApp({ Component, pageProps }) {
 
 	return  (
 		<CookiesProvider>
-			<Component {...pageProps} />
+			<AuthProvider session={pageProps.session}>
+				<Component {...pageProps} />
+			</AuthProvider>
 		</CookiesProvider>
 	);
 }
