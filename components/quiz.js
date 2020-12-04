@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import Head from 'next/head';
 import dynamic from 'next/dynamic'
-import {Row, Col, Button, ProgressBar} from 'react-bootstrap';
+import {Row, Col, Button} from 'react-bootstrap';
 
+import ProgressBar from '../components/progressBar';
 import QuestionCount from '../components/questionCount';
 import Layout from '../components/layout'
 
@@ -50,7 +51,7 @@ export default function Quiz (props) {
 			</Head>
 			<main>
 				<QuestionCount counter={props.counter} total={props.questionTotal} />
-				<p>Does this look like a school location? {props.question.school_id} </p>
+				<p>Does this look like a school location? {props.question.school_id}</p>
 
 				<div className="row no-gutters align-items-center mapdiv">
 					<MapComponent lat={props.question.lat} lon={props.question.lon} />
@@ -58,31 +59,32 @@ export default function Quiz (props) {
 						{answer['answer']}
 					</div>
 				</div>
-				{next
-					? <div>
-						<ProgressBar label="Yes" now={(props.locationResults.yes_count / props.locationResults.total_count) * 100} />
-						<ProgressBar label="No" now={(props.locationResults.no_count / props.locationResults.total_count) * 100} />
-						<ProgressBar label="Unsure" now={(props.locationResults.maybe_count / props.locationResults.total_count) * 100} />
-					</div>
-					:
-					<div>
-						<Row className="p-3">
-							<Col xs={4}>
-								<Button className='actionButton' variant={yes} onClick={e => handleClick(e, 'yes')}>Yes</Button>
-							</Col>
-							<Col xs={4}>
-								<Button className='actionButton' variant={no} onClick={e => handleClick(e, 'no')}>No</Button>
-							</Col>
-							<Col xs={4}>
-								<Button className='actionButton' variant={maybe} onClick={e => handleClick(e, 'maybe')}>Unsure</Button>
-							</Col>
-						</Row>
-					</div>
-				}
+				<div>
+					<Row className="p-3">
+						<Col xs={4}>
+							<Button className='actionButton' variant={yes} onClick={e => handleClick(e, 'yes')}>Yes</Button>
+						</Col>
+						<Col xs={4}>
+							<Button className='actionButton' variant={no} onClick={e => handleClick(e, 'no')}>No</Button>
+						</Col>
+						<Col xs={4}>
+							<Button className='actionButton' variant={maybe} onClick={e => handleClick(e, 'maybe')}>Unsure</Button>
+						</Col>
+					</Row>
+				</div>
 			</main>
 
 			<footer className="mt-auto next-section">
-				<Button variant="primary" onClick={handleNext} disabled={!next}><span>NEXT<img className="white" src="/white.svg"/></span></Button>{' '}
+				{next
+					? <div>
+						<ProgressBar color={result.answer == 'yes' ? '#0068ea' : '#1BAAE2'} label="Yes" value={(props.locationResults.yes_count / props.locationResults.total_count) * 100} />
+						<ProgressBar color={result.answer == 'no' ? '#0068ea' : '#1BAAE2'} label="No" value={(props.locationResults.no_count / props.locationResults.total_count) * 100} />
+						<ProgressBar color={result.answer == 'maybe' ? '#0068ea' : '#1BAAE2'} label="Unsure" value={(props.locationResults.maybe_count / props.locationResults.total_count) * 100} />
+					</div>
+					:
+					''
+				}
+				<Button variant="primary" onClick={handleNext} disabled={!next}><span>NEXT<img className="white" src="/white.svg"/></span></Button>
 			</footer>
 		</Layout>
 	)
