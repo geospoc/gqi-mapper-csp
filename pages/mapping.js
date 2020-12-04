@@ -82,6 +82,9 @@ export default function mapping() {
 	}, [counter])
 
 	function handleAnswerSelected(result) {
+		if (result.school_id) {
+			fetchLocationResults(result.school_id);
+		}
 		fetch("/api/validateLocation", {
 			'method': 'POST',
 			'headers': {
@@ -94,9 +97,6 @@ export default function mapping() {
   				result: result.answer
   			})
 		});
-		if (result.school_id) {
-			fetchLocationResults(result.school_id);
-		}
 	}
 
 	function handleNextSelected() {

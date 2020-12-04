@@ -51,7 +51,7 @@ export default function Quiz (props) {
 			</Head>
 			<main>
 				<QuestionCount counter={props.counter} total={props.questionTotal} />
-				<p>Does this look like a school location? {props.question.school_id}</p>
+				<p>Does this look like a school location?</p>
 
 				<div className="row no-gutters align-items-center mapdiv">
 					<MapComponent lat={props.question.lat} lon={props.question.lon} />
@@ -77,9 +77,18 @@ export default function Quiz (props) {
 			<footer className="mt-auto next-section">
 				{next
 					? <div>
-						<ProgressBar color={result.answer == 'yes' ? '#0068ea' : '#1BAAE2'} label="Yes" value={(props.locationResults.yes_count / props.locationResults.total_count) * 100} />
-						<ProgressBar color={result.answer == 'no' ? '#0068ea' : '#1BAAE2'} label="No" value={(props.locationResults.no_count / props.locationResults.total_count) * 100} />
-						<ProgressBar color={result.answer == 'maybe' ? '#0068ea' : '#1BAAE2'} label="Unsure" value={(props.locationResults.maybe_count / props.locationResults.total_count) * 100} />
+						<ProgressBar 
+							label="Yes" 
+							color={result.answer == 'yes' ? '#0068ea' : '#1BAAE2'}
+							value={((props.locationResults.yes_count + (result.answer == 'yes' ? 1 : 0)) / (props.locationResults.total_count + 1)) * 100} />
+						<ProgressBar 
+							label="No" 
+							color={result.answer == 'no' ? '#0068ea' : '#1BAAE2'} 
+							value={((props.locationResults.no_count + (result.answer == 'no' ? 1 : 0)) / (props.locationResults.total_count + 1)) * 100} />
+						<ProgressBar 
+							label="Unsure" 
+							color={result.answer == 'maybe' ? '#0068ea' : '#1BAAE2'} 
+							value={((props.locationResults.maybe_count + (result.answer == 'maybe' ? 1 : 0)) / (props.locationResults.total_count + 1)) * 100} />
 					</div>
 					:
 					''
