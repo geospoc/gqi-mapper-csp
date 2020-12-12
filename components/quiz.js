@@ -62,13 +62,13 @@ export default function Quiz (props) {
 				<div>
 					<Row className="p-3">
 						<Col xs={4}>
-							<Button className='actionButton' variant={yes} onClick={e => handleClick(e, 'yes')}>Yes</Button>
+							<Button className='actionButton' variant={yes} disabled={next} onClick={e => handleClick(e, 'yes')}>Yes</Button>
 						</Col>
 						<Col xs={4}>
-							<Button className='actionButton' variant={no} onClick={e => handleClick(e, 'no')}>No</Button>
+							<Button className='actionButton' variant={no} disabled={next} onClick={e => handleClick(e, 'no')}>No</Button>
 						</Col>
 						<Col xs={4}>
-							<Button className='actionButton' variant={maybe} onClick={e => handleClick(e, 'maybe')}>Unsure</Button>
+							<Button className='actionButton' variant={maybe} disabled={next} onClick={e => handleClick(e, 'maybe')}>Unsure</Button>
 						</Col>
 					</Row>
 				</div>
