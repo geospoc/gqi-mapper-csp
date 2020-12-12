@@ -79,15 +79,18 @@ export default function Quiz (props) {
 					? <div>
 						<ProgressBar 
 							label="Yes" 
-							color={result.answer == 'yes' ? '#0068ea' : '#1BAAE2'}
+							color={result.answer == 'yes' ? '#0068ea' : '#808080'}
+							backgroundColor={result.answer == 'yes' ? '#eeeeee' : '#C0C0C0'}
 							value={((props.locationResults.yes_count + (result.answer == 'yes' ? 1 : 0)) / (props.locationResults.total_count + 1)) * 100} />
 						<ProgressBar 
 							label="No" 
-							color={result.answer == 'no' ? '#0068ea' : '#1BAAE2'} 
+							color={result.answer == 'no' ? '#0068ea' : '#808080'} 
+							backgroundColor={result.answer == 'no' ? '#eeeeee' : '#C0C0C0'}
 							value={((props.locationResults.no_count + (result.answer == 'no' ? 1 : 0)) / (props.locationResults.total_count + 1)) * 100} />
 						<ProgressBar 
 							label="Unsure" 
-							color={result.answer == 'maybe' ? '#0068ea' : '#1BAAE2'} 
+							color={result.answer == 'maybe' ? '#0068ea' : '#808080'} 
+							backgroundColor={result.answer == 'maybe' ? '#eeeeee' : '#C0C0C0'}
 							value={((props.locationResults.maybe_count + (result.answer == 'maybe' ? 1 : 0)) / (props.locationResults.total_count + 1)) * 100} />
 					</div>
 					:

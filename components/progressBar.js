@@ -12,7 +12,7 @@ const Container = styled.div`
 		::-webkit-progress-bar {
 			height: 10px;
 			border-radius: 20px;
-			background-color: #eee;
+			background-color: ${props => props.backgroundColor};
 		}
 
 		::-webkit-progress-value {
@@ -31,10 +31,10 @@ const Container = styled.div`
 `;
 
 const ProgressBar = props => {
-	const { value, max, label, color, width } = props;
+	const { value, max, label, color, backgroundColor, width } = props;
 
 	return (
-		<Container value={value} width={width} color={color} label={label} >
+		<Container value={value} width={width} color={color} backgroundColor={backgroundColor} label={label} >
 			<span>{label}</span>&nbsp;
 			<progress label={label} value={value} max={max} />&nbsp;
 			<span>{((value / max) * 100).toFixed(2)}%</span>
@@ -52,6 +52,7 @@ ProgressBar.propTypes = {
 ProgressBar.defaultProps = {
 	max: 100,
 	color: '#0068ea',
+	backgroundColor: '#eeeeee',
 	width: '80%'
 }
 
