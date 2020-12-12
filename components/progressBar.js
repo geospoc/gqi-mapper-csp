@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 const Container = styled.div`
 	text-align: center;
-	
+
 	progress[value]{
 		width: ${props => props.width};
 		appearance: none;
@@ -20,7 +20,11 @@ const Container = styled.div`
 			border-radius: 20px;
 			background-color: ${props => props.color};
 		}
+	}
+
+	progress {
 		vertical-align: middle;
+		text-align: center;
 	}
 
 	span {
@@ -28,6 +32,24 @@ const Container = styled.div`
 		text-transform: uppercase;
 		color: ${props => props.color};
 	}
+
+	.grid-container {
+		display: grid;
+  		grid-template-columns: 10% auto 10%;
+	}
+
+	#label {
+		text-align: right;
+	}
+
+	#percentage {
+		text-align: left;
+	}
+
+	#progress-bar {
+		text-align: center;
+	}
+
 `;
 
 const ProgressBar = props => {
@@ -35,9 +57,11 @@ const ProgressBar = props => {
 
 	return (
 		<Container value={value} width={width} color={color} backgroundColor={backgroundColor} label={label} >
-			<span>{label}</span>&nbsp;
-			<progress label={label} value={value} max={max} />&nbsp;
-			<span>{((value / max) * 100).toFixed(2)}%</span>
+			<div class='grid-container'>
+				<span id='label'>{label}&nbsp;</span>
+				<div><progress id='progress-bar' label={label} value={value} max={max} /></div>
+				<span id='percentage'>&nbsp;{((value / max) * 100).toFixed(2)}%</span>
+			</div>
 		</Container>);
 }
 
@@ -53,7 +77,7 @@ ProgressBar.defaultProps = {
 	max: 100,
 	color: '#0068ea',
 	backgroundColor: '#eeeeee',
-	width: '80%'
+	width: '100%'
 }
 
 export default ProgressBar;
