@@ -12,7 +12,7 @@ const Container = styled.div`
 		::-webkit-progress-bar {
 			height: 10px;
 			border-radius: 20px;
-			background-color: ${props => props.backgroundColor};
+			background-color: #eeeeee;
 		}
 
 		::-webkit-progress-value {
@@ -35,7 +35,7 @@ const Container = styled.div`
 
 	.grid-container {
 		display: grid;
-  		grid-template-columns: 10% auto 10%;
+  		grid-template-columns: 11% auto 11%;
 	}
 
 	#label {
@@ -53,10 +53,10 @@ const Container = styled.div`
 `;
 
 const ProgressBar = props => {
-	const { value, max, label, color, backgroundColor, width } = props;
+	const { value, max, label, color, width } = props;
 
 	return (
-		<Container value={value} width={width} color={color} backgroundColor={backgroundColor} label={label} >
+		<Container value={value} width={width} color={color} label={label} >
 			<div class='grid-container'>
 				<span id='label'>{label}&nbsp;</span>
 				<div><progress id='progress-bar' label={label} value={value} max={max} /></div>
@@ -76,7 +76,6 @@ ProgressBar.propTypes = {
 ProgressBar.defaultProps = {
 	max: 100,
 	color: '#0068ea',
-	backgroundColor: '#eeeeee',
 	width: '100%'
 }
 
