@@ -79,15 +79,15 @@ export default function Quiz (props) {
 					? <div>
 						<ProgressBar 
 							label="Yes" 
-							chosen={result.answer == 'yes' ? true : false}
+							chosen={result.answer == 'yes'}
 							value={((props.locationResults.yes_count + (result.answer == 'yes' ? 1 : 0)) / (props.locationResults.total_count + 1)) * 100} />
 						<ProgressBar 
 							label="No" 
-							chosen={result.answer == 'no' ? true : false} 
+							chosen={result.answer == 'no'} 
 							value={((props.locationResults.no_count + (result.answer == 'no' ? 1 : 0)) / (props.locationResults.total_count + 1)) * 100} />
 						<ProgressBar 
 							label="Unsure" 
-							chosen={result.answer == 'maybe' ? true : false} 
+							chosen={result.answer == 'maybe'} 
 							value={((props.locationResults.maybe_count + (result.answer == 'maybe' ? 1 : 0)) / (props.locationResults.total_count + 1)) * 100} />
 					</div>
 					:
