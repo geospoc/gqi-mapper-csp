@@ -18,7 +18,19 @@ const Container = styled.div`
 		::-webkit-progress-value {
 			height: 10px;
 			border-radius: 20px;
-			background-color: ${props => props.color};
+		}
+
+	}
+
+	.btn-chosen {
+		::-webkit-progress-value {
+			background-color: #0068ea;
+		}
+	}
+
+	.btn-unchosen {
+		::-webkit-progress-value {
+			background-color: #808080;
 		}
 	}
 
@@ -53,13 +65,13 @@ const Container = styled.div`
 `;
 
 const ProgressBar = props => {
-	const { value, max, label, color, width } = props;
+	const { value, max, label, chosen, width } = props;
 
 	return (
-		<Container value={value} width={width} color={color} label={label} >
+		<Container value={value} width={width} chosen={chosen} label={label} >
 			<div class='grid-container'>
 				<span id='label'>{label}&nbsp;</span>
-				<div><progress id='progress-bar' label={label} value={value} max={max} /></div>
+				<div><progress class={chosen == true ? 'btn-chosen' : 'btn-unchosen'} id='progress-bar' label={label} value={value} max={max} /></div>
 				<span id='percentage'>&nbsp;{((value / max) * 100).toFixed(2)}%</span>
 			</div>
 		</Container>);
@@ -75,8 +87,8 @@ ProgressBar.propTypes = {
 
 ProgressBar.defaultProps = {
 	max: 100,
-	color: '#0068ea',
-	width: '100%'
+	width: '100%',
+	chosen: true
 }
 
 export default ProgressBar;
