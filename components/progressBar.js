@@ -22,32 +22,43 @@ const Container = styled.div`
 
 	}
 
-	.btn-chosen {
-		::-webkit-progress-value {
-			background-color: #0068ea;
+	.grid-container {
+		display: grid;
+  		grid-template-columns: 11% auto 11%;
+  		span {
+			font-size: 12px;
+			text-transform: uppercase;
 		}
 	}
 
-	.btn-unchosen {
-		::-webkit-progress-value {
-			background-color: #808080;
+	.bar-chosen {
+		color: red;
+  		progress[value]{
+			::-webkit-progress-value {
+				background-color: #0068ea;
+			}
+		}
+
+		span {
+			color: #0068ea;
+		}
+	}
+
+	.bar-unchosen {
+		progress[value]{
+			::-webkit-progress-value {
+				background-color: #808080;
+			}
+		}
+
+		span {
+			color: #808080;
 		}
 	}
 
 	progress {
 		vertical-align: middle;
 		text-align: center;
-	}
-
-	span {
-		font-size: 12px;
-		text-transform: uppercase;
-		color: ${props => props.color};
-	}
-
-	.grid-container {
-		display: grid;
-  		grid-template-columns: 11% auto 11%;
 	}
 
 	#label {
@@ -69,9 +80,9 @@ const ProgressBar = props => {
 
 	return (
 		<Container value={value} width={width} chosen={chosen} label={label} >
-			<div class='grid-container'>
+			<div class={chosen == true ? 'grid-container bar-chosen' : 'grid-container bar-unchosen'}>
 				<span id='label'>{label}&nbsp;</span>
-				<div><progress class={chosen == true ? 'btn-chosen' : 'btn-unchosen'} id='progress-bar' label={label} value={value} max={max} /></div>
+				<div><progress id='progress-bar' label={label} value={value} max={max} /></div>
 				<span id='percentage'>&nbsp;{((value / max) * 100).toFixed(2)}%</span>
 			</div>
 		</Container>);
