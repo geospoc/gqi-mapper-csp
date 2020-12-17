@@ -3,6 +3,7 @@ import Head from 'next/head';
 import dynamic from 'next/dynamic'
 import {Row, Col, Button} from 'react-bootstrap';
 
+import ProgressBar from '../components/progressBar';
 import QuestionCount from '../components/questionCount';
 import Layout from '../components/layout'
 
@@ -25,7 +26,9 @@ export default function Quiz (props) {
 			button.className = "btn btn-outline-primary actionButton"
 		}
 		e.target.className = "btn btn-primary actionButton";
-		setResult({school_id: props.question.school_id, answer: value})
+		let resultValue = {school_id: props.question.school_id, answer: value};
+		props.onAnswerSelected(resultValue);
+        setResult(resultValue)
 		setNext(true);
 	}
 
@@ -36,12 +39,11 @@ export default function Quiz (props) {
 		}
 		setNext(false);
 		setAnswer({answer: '', answerClass: 'answerHidden'});
-		props.onAnswerSelected(result);
+		props.onNextSelected();
   	}
 
 	const latlon = [props.question.lat, props.question.lon];
 	const answerClass = "answer " + answer.answerClass
-
 	return (
 		<Layout myClass="quiz">
 			<Head>
@@ -57,24 +59,41 @@ export default function Quiz (props) {
 						{answer['answer']}
 					</div>
 				</div>
-
 				<div>
 					<Row className="p-3">
 						<Col xs={4}>
-							<Button className='actionButton' variant={yes} onClick={e => handleClick(e, 'yes')}>Yes</Button>
+							<Button className='actionButton' variant={yes} disabled={next} onClick={e => handleClick(e, 'yes')}>Yes</Button>
 						</Col>
 						<Col xs={4}>
-							<Button className='actionButton' variant={no} onClick={e => handleClick(e, 'no')}>No</Button>
+							<Button className='actionButton' variant={no} disabled={next} onClick={e => handleClick(e, 'no')}>No</Button>
 						</Col>
 						<Col xs={4}>
-							<Button className='actionButton' variant={maybe} onClick={e => handleClick(e, 'maybe')}>Unsure</Button>
+							<Button className='actionButton' variant={maybe} disabled={next} onClick={e => handleClick(e, 'maybe')}>Unsure</Button>
 						</Col>
 					</Row>
 				</div>
 			</main>
 
 			<footer className="mt-auto next-section">
-				<Button variant="primary" onClick={handleNext} disabled={!next}><span>NEXT<img className="white" src="/white.svg"/></span></Button>{' '}
+				{next
+					? <div>
+						<ProgressBar 
+							label="Yes" 
+							chosen={result.answer == 'yes'}
+							value={((props.locationResults.yes_count + (result.answer == 'yes' ? 1 : 0)) / (props.locationResults.total_count + 1)) * 100} />
+						<ProgressBar 
+							label="No" 
+							chosen={result.answer == 'no'} 
+							value={((props.locationResults.no_count + (result.answer == 'no' ? 1 : 0)) / (props.locationResults.total_count + 1)) * 100} />
+						<ProgressBar 
+							label="Unsure" 
+							chosen={result.answer == 'maybe'} 
+							value={((props.locationResults.maybe_count + (result.answer == 'maybe' ? 1 : 0)) / (props.locationResults.total_count + 1)) * 100} />
+					</div>
+					:
+					''
+				}
+				<Button variant="primary" onClick={handleNext} disabled={!next}><span>NEXT<img className="white" src="/white.svg"/></span></Button>
 			</footer>
 		</Layout>
 	)

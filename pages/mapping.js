@@ -14,10 +14,11 @@ export default function mapping() {
 	const [counter, setCounter] = useState(0);
 	const [question, setQuestion] = useState({ id: 0, lat: 0, lon: 0, answer: ''});
 	const [questions, setQuestions] = useState([question]);
+	const [locationResults, setLocationResults] = useState({ yes_count: 0, no_count: 0, maybe_count: 0, total_count: 0});
 
 	const [cookies, setCookie] = useCookies(['uuid']);
 
-	const [untaggedLocationsCount, setUntaggedLocationsCount] = useState(null);
+	const [untaggedLocationsCount, setUntaggedLocationsCount] = useState(10);
 
 	/**
 	 * Shuffles array in place. ES6 version
@@ -61,6 +62,13 @@ export default function mapping() {
 		fetchData();
 	}, []);
 
+	async function fetchLocationResults(school_id) {
+		// Get number of untagged locations
+		const result = await fetch(`/api/getLocationResults/${school_id}`);
+		const response = await result.json();
+		setLocationResults(response);
+	};
+
 	useEffect(() => {
 		if(questions) {
 			setQuestion(questions[counter]);
@@ -74,6 +82,9 @@ export default function mapping() {
 	}, [counter])
 
 	function handleAnswerSelected(result) {
+		if (result.school_id) {
+			fetchLocationResults(result.school_id);
+		}
 		fetch("/api/validateLocation", {
 			'method': 'POST',
 			'headers': {
@@ -85,10 +96,14 @@ export default function mapping() {
   				school_id: result.school_id,
   				result: result.answer
   			})
-		})
+		});
+	}
+
+	function handleNextSelected() {
 		if (counter < questions.length) {
 			setCounter(counter + 1);
-	  	} 
+			setLocationResults({ yes_count: 0, no_count: 0, maybe_count: 0, total_count: 0});
+	  	}
 	}
 
 	async function fetchUntaggedLocationsCount() {
@@ -105,6 +120,8 @@ export default function mapping() {
 				counter={counter}
 				questionTotal={questions.length}
 				onAnswerSelected={handleAnswerSelected}
+				onNextSelected={handleNextSelected}
+				locationResults={locationResults}
 			/>
 		);
 	} else {
