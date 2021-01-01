@@ -40,6 +40,7 @@ async function createTables() {
 			lat REAL,
 			lon REAL,
 			school BOOLEAN,
+			country TEXT,
 			unique (school_id)
 		);
 	`);
