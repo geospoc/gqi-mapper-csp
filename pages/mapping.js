@@ -131,7 +131,7 @@ export default function mapping() {
 		);
 	} else {
 		fetchUntaggedLocationsCount();
-	  	return <Result correctAnswers={answerCount} taggedAllLocations={untaggedLocationsCount <= 0} countryCounts={JSON.stringify(gameStats.country_counts)} />;
+	  	return <Result correctAnswers={answerCount} taggedAllLocations={untaggedLocationsCount <= 0} countryCounts={gameStats.country_counts} />;
 	}
 
 }
