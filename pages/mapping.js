@@ -16,6 +16,7 @@ export default function mapping() {
 	const [questions, setQuestions] = useState([question]);
 	const [locationResults, setLocationResults] = useState({ yes_count: 0, no_count: 0, maybe_count: 0, total_count: 0});
 	const [gameStats, setGameStats] = useState({ country_counts: {} });
+	const [userStats, setUserStats] = useState({ total: 0 });
 
 	const [cookies, setCookie] = useCookies(['uuid']);
 
@@ -118,6 +119,12 @@ export default function mapping() {
 		setUntaggedLocationsCount(await response.count);
 	};
 
+	async function fetchUserStats() {
+		const result = await fetch(`/api/getUserStats/${cookies.uuid}`);
+		const response = await result.json();
+		setUserStats(await response);
+	};
+
   	if (counter < questions.length) {
 		return (
 			<Quiz
@@ -130,8 +137,9 @@ export default function mapping() {
 			/>
 		);
 	} else {
+    fetchUserStats();
 		fetchUntaggedLocationsCount();
-	  	return <Result correctAnswers={answerCount} taggedAllLocations={untaggedLocationsCount <= 0} countryCounts={gameStats.country_counts} />;
+	  return <Result correctAnswers={answerCount} taggedAllLocations={untaggedLocationsCount <= 0} userStats={userStats} countryCounts={gameStats.country_counts} />;
 	}
 
 }
