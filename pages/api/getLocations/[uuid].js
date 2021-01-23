@@ -14,7 +14,8 @@ export default async (req, res) => {
 					SELECT  locations.school_id,
 							locations.lat,
 							locations.lon,
-							countries.country_name
+							countries.country_name,
+							countries.country_code
 					FROM locations
 					LEFT JOIN
 						(SELECT school_id

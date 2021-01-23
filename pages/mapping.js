@@ -12,10 +12,11 @@ export default function mapping() {
 
 	const [answerCount, setAnswerCount] = useState(0);
 	const [counter, setCounter] = useState(0);
-	const [question, setQuestion] = useState({ id: 0, lat: 0, lon: 0, country_name: '', answer: ''});
+	const [question, setQuestion] = useState({ id: 0, lat: 0, lon: 0, country_name: '', country_code: '', answer: ''});
 	const [questions, setQuestions] = useState([question]);
 	const [locationResults, setLocationResults] = useState({ yes_count: 0, no_count: 0, maybe_count: 0, total_count: 0});
 	const [userStats, setUserStats] = useState({ total: 0 });
+	const [gameStats, setGameStats] = useState({ country_counts: {} });
 
 	const [cookies, setCookie] = useCookies(['uuid']);
 
@@ -101,6 +102,14 @@ export default function mapping() {
 	}
 
 	function handleNextSelected() {
+		var countryCounts = gameStats.country_counts;
+		if (countryCounts[question.country_code]) {
+			countryCounts[question.country_code] = countryCounts[question.country_code] + 1;
+		} else {
+			countryCounts[question.country_code] = 1;
+		}
+		setGameStats({ country_counts: countryCounts });
+
 		if (counter < questions.length) {
 			setCounter(counter + 1);
 			setLocationResults({ yes_count: 0, no_count: 0, maybe_count: 0, total_count: 0});
@@ -134,7 +143,7 @@ export default function mapping() {
 	} else {
     fetchUserStats();
 		fetchUntaggedLocationsCount();
-	  return <Result correctAnswers={answerCount} taggedAllLocations={untaggedLocationsCount <= 0} userStats={userStats} />;
+	  return <Result correctAnswers={answerCount} taggedAllLocations={untaggedLocationsCount <= 0} userStats={userStats} gameStats={gameStats} />;
 	}
 
 }
