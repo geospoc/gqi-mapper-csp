@@ -89,6 +89,16 @@ async function createTables() {
 			PRIMARY KEY (id)
 		);
 	`);
+
+	await pool.query(`
+		CREATE TABLE useranswers(
+			user_id INTEGER,
+			school_id INTEGER,
+			result yesnomaybe,
+			unique (user_id, school_id)
+		);
+	`);
+
 	await pool.end()
 }
 
@@ -104,7 +114,7 @@ async function loadTables() {
 }
 
 async function dropTables() {
-	await pool.query(`DROP TABLE IF EXISTS locations; DROP TABLE IF EXISTS crowdsourcing; DROP TYPE IF EXISTS yesnomaybe; DROP TABLE IF EXISTS crowdusers; DROP TABLE IF EXISTS users; DROP TABLE IF EXISTS accounts`);
+	await pool.query(`DROP TABLE IF EXISTS locations; DROP TABLE IF EXISTS crowdsourcing; DROP TYPE IF EXISTS yesnomaybe; DROP TABLE IF EXISTS crowdusers; DROP TABLE IF EXISTS users; DROP TABLE IF EXISTS accounts; DROP TABLE IF EXISTS useranswers`);
 	await pool.end();
 }
 

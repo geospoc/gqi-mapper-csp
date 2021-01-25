@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useCookies } from 'react-cookie';
+import { useSession } from 'next-auth/client'
 import { v4 as uuidv4 } from 'uuid';
 
 import useScriptText from '../hooks/useScriptText';
@@ -17,6 +18,7 @@ export default function mapping() {
 	const [locationResults, setLocationResults] = useState({ yes_count: 0, no_count: 0, maybe_count: 0, total_count: 0});
 
 	const [cookies, setCookie] = useCookies(['uuid']);
+	const [session] = useSession();
 
 	const [untaggedLocationsCount, setUntaggedLocationsCount] = useState(10);
 
@@ -85,18 +87,35 @@ export default function mapping() {
 		if (result.school_id) {
 			fetchLocationResults(result.school_id);
 		}
-		fetch("/api/validateLocation", {
-			'method': 'POST',
-			'headers': {
-				'content-type': 'application/json',
-				'accept': 'application/json'
-  			},
-  			'body': JSON.stringify({
-  				user_id: cookies.uuid, 
-  				school_id: result.school_id,
-  				result: result.answer
-  			})
-		});
+		if(!session) { 
+				fetch("/api/validateLocation", {
+				'method': 'POST',
+				'headers': {
+					'content-type': 'application/json',
+					'accept': 'application/json'
+				},
+				'body': JSON.stringify({
+					user_id: cookies.uuid, 
+					school_id: result.school_id,
+					result: result.answer
+					})
+				});
+		}	
+		
+		if(session) {
+			fetch('/api/postAnswer', {
+				'method': 'POST',
+				'headers': {
+					'content-type': 'application/json',
+					'accept': 'application/json'
+				  },
+				  'body': JSON.stringify({
+					  user_id: session.user.uid, 
+					  school_id: result.school_id,
+					  result: result.answer
+				  })
+			})
+		}
 	}
 
 	function handleNextSelected() {
