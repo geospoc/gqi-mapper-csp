@@ -141,9 +141,9 @@ export default function mapping() {
 			/>
 		);
 	} else {
-    fetchUserStats();
+    	fetchUserStats();
 		fetchUntaggedLocationsCount();
-	  return <Result correctAnswers={answerCount} taggedAllLocations={untaggedLocationsCount <= 0} userStats={userStats} gameStats={gameStats} />;
+	  	return <Result correctAnswers={answerCount} taggedAllLocations={untaggedLocationsCount <= 0} userStats={userStats} gameStats={gameStats} />;
 	}
 
 }
