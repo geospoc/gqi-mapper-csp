@@ -77,8 +77,18 @@ const options = {
   callbacks: {
     // signIn: async (user, account, profile) => { return Promise.resolve(true) },
     // redirect: async (url, baseUrl) => { return Promise.resolve(baseUrl) },
-    // session: async (session, user, sessionToken) => { return Promise.resolve(session) },
-    // jwt: async (token, user, account, profile, isNewUser) => { return Promise.resolve(token) }
+   
+    jwt: async (token, user, account, profile, isNewUser) => { 
+      if (user) {
+        token.uid = user.id;
+      }
+      return Promise.resolve(token)
+    },
+
+    session: async (session, user) => {
+      session.user.uid = user.uid
+      return Promise.resolve(session)
+    }
   },
 
   // Events are useful for logging
