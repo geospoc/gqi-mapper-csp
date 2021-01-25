@@ -83,7 +83,7 @@ async function loadTables() {
 		console.log(countryCodes[i]);
 		const res = await pool.query(`
 			INSERT INTO countries(country_code, country_name) VALUES($1, $2) RETURNING *;`, 
-			[countryCodes[i].code, countryCodes[i].name]);
+			[countryCodes[i]["Code"], countryCodes[i]["Name"]]);
 		console.log(res);
 	}
 	await pool.end()

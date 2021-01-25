@@ -37,6 +37,8 @@ PGPASSWORD="POSTGRES_PASSWORD"
 PGDATABASE="POSTGRES_DATABASE"
 ```
 
+You must populate the database by using the the script `db/dbOps.js`, which you can run from the root directory with the command `node db/dbOps.js`. In order to load the table `countries`, download [the JSON file of country names and ISO-3166 alpha-2 codes here](https://datahub.io/core/country-list) from Data Hub and uncomment the `loadTables();` command at the bottom of `db/dbOps.js`. 
+
 ## 💻 Development Environment
 
 Setup your development environment as follows:
