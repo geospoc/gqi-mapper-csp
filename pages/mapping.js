@@ -9,10 +9,8 @@ import Result from '../components/result';
 
  
 export default function mapping() {
-
-	const [answerCount, setAnswerCount] = useState(0);
 	const [counter, setCounter] = useState(0);
-	const [question, setQuestion] = useState({ id: 0, lat: 0, lon: 0, country_name: '', country_code: '', answer: ''});
+	const [question, setQuestion] = useState({ id: 0, lat: 0, lon: 0, country_code: '', answer: ''});
 	const [questions, setQuestions] = useState([question]);
 	const [locationResults, setLocationResults] = useState({ yes_count: 0, no_count: 0, maybe_count: 0, total_count: 0});
 	const [userStats, setUserStats] = useState({ total: 0 });
@@ -143,7 +141,7 @@ export default function mapping() {
 	} else {
 		fetchUserStats();
 		fetchUntaggedLocationsCount();
-	  	return <Result correctAnswers={answerCount} taggedAllLocations={untaggedLocationsCount <= 0} userStats={userStats} gameStats={gameStats} />;
+	  	return <Result taggedAllLocations={untaggedLocationsCount <= 0} userStats={userStats} gameStats={gameStats} />;
 	}
 
 }

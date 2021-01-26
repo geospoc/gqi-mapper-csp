@@ -2,7 +2,6 @@ const { Pool } = require('pg');
 const pgtools = require("pgtools");
 
 const schools = require('../scripts/schools.json');
-const countryCodes = require('../scripts/countryCodes.json');
 
 require('dotenv').config();
 
@@ -78,19 +77,11 @@ async function loadTables() {
 			[schools[i].id, schools[i].lat, schools[i].lon, schools[i].school, schools[i].country_code]);
 		console.log(res)
 	}
-
-	for (let i = 0; i < countryCodes.length; i++) {
-		console.log(countryCodes[i]);
-		const res = await pool.query(`
-			INSERT INTO countries(country_code, country_name) VALUES($1, $2) RETURNING *;`, 
-			[countryCodes[i]["Code"], countryCodes[i]["Name"]]);
-		console.log(res);
-	}
 	await pool.end()
 }
 
 async function dropTables() {
-	await pool.query(`DROP TABLE IF EXISTS locations; DROP TABLE IF EXISTS crowdsourcing; DROP TYPE IF EXISTS yesnomaybe; DROP TABLE IF EXISTS crowdusers; DROP TABLE IF EXISTS countries;`);
+	await pool.query(`DROP TABLE IF EXISTS locations; DROP TABLE IF EXISTS crowdsourcing; DROP TYPE IF EXISTS yesnomaybe; DROP TABLE IF EXISTS crowdusers;`);
 	await pool.end();
 }
 
