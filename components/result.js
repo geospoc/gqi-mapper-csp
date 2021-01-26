@@ -6,13 +6,6 @@ import Layout from '../components/layout';
 import Button from 'react-bootstrap/Button';
 
 export default function Result(props) {
-	let msg = '';
-	switch(props.correctAnswers){
-		case 5:
-			msg = '🏆 You are a mapping champion! 🗺';
-			break;
-	}
-
 	return(
 	  	<Layout className="result">
 			<Head>
@@ -49,5 +42,4 @@ export default function Result(props) {
 }
 
 Result.propTypes = {
-  correctAnswers: PropTypes.number.isRequired
 };
