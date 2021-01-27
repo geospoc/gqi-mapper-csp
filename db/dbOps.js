@@ -60,12 +60,6 @@ async function createTables() {
 			ip INET
 		);
 	`);
-	await pool.query(`
-		CREATE TABLE countries(
-			country_code TEXT,
-			country_name TEXT
-		);
-	`);
 	await pool.end()
 }
 
