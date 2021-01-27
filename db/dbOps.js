@@ -31,6 +31,7 @@ function dropDB(){
 			process.exit(-1);
 	    }
   	});
+  	console.log("Dropped tables");
 }
 
 async function createTables() {
@@ -40,6 +41,7 @@ async function createTables() {
 			lat REAL,
 			lon REAL,
 			school BOOLEAN,
+			country_code TEXT,
 			unique (school_id)
 		);
 	`);
@@ -62,11 +64,11 @@ async function createTables() {
 }
 
 async function loadTables() {
-	for(let i=0; i<schools.length; i++) {
-		console.log(schools[i])
+	for (let i = 0; i < schools.length; i++) {
+		console.log(schools[i]);
 		const res = await pool.query(`
-			INSERT INTO locations(school_id, lat, lon, school) VALUES($1, $2, $3, $4) RETURNING *;`,
-			[schools[i].id, schools[i].lat, schools[i].lon, schools[i].school])
+			INSERT INTO locations(school_id, lat, lon, school, country_code) VALUES($1, $2, $3, $4, $5) RETURNING *;`,
+			[schools[i].id, schools[i].lat, schools[i].lon, schools[i].school, schools[i].country_code]);
 		console.log(res)
 	}
 	await pool.end()

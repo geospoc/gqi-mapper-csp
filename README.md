@@ -37,6 +37,18 @@ PGPASSWORD="POSTGRES_PASSWORD"
 PGDATABASE="POSTGRES_DATABASE"
 ```
 
+The [countries.json](data/countries.json) is included in this repository to associate country codes with country names. If this file needs to be updated or replaced, follow these instructions:
+
+1. Download [the JSON file of country names and ISO-3166 alpha-2 codes here](https://datahub.io/core/country-list) from Data Hub. Place the JSON file in `scripts/` of this repository and call it `countryCodes.json`.
+2. From the root directory, run `node scripts/createCountryCodesJson.js` to run the script that creates the JSON file the game requires and places it in `data/`. 
+3. Verify that the JSON file `countries.json` exists inside `data/` and it is in the format:
+```
+{
+    "Country code": "Country name",
+    ...
+}
+```
+
 ## 💻 Development Environment
 
 Setup your development environment as follows:

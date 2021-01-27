@@ -13,7 +13,8 @@ export default async (req, res) => {
 				result = await pool.query(`
 					SELECT  locations.school_id,
 							locations.lat,
-							locations.lon
+							locations.lon,
+							locations.country_code
 					FROM locations
 					LEFT JOIN
 						(SELECT school_id
