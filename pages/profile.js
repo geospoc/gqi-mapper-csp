@@ -16,7 +16,7 @@ const UserView = ({ user }) => {
             setMappings(userMappings)
         }
         getUserMappings()
-    })
+    }, [])
     return (
         <Container fluid style={{ marginTop: '1em' }}>
             <Row>
