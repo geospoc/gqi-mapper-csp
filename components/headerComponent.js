@@ -37,7 +37,7 @@ const Header = (props) => {
                 variant={`${inverse ? 'light' : 'dark'}`}
                 className="justify-content-between"
             >
-                <Link href="/"><span className="masthead-brand">Project Connect</span></Link>
+                <a href="/" className="masthead-brand">Project Connect</a>
                 <Nav>
                     {!session && <SignInButton inverse={inverse} />}
                     {session && !loading && (

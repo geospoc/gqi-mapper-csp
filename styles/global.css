@@ -104,12 +104,16 @@ body {
   font-weight: 100;
 }
 
-.masthead-brand {
+.masthead-brand:link,
+.masthead-brand:visited,
+.masthead-brand:hover,
+.masthead-brand:active {
   margin-bottom: 0;
   color: #FFF;
   size: 1.5em;
   letter-spacing: 0.15em;
   text-transform: uppercase;
+  text-decoration: none;
 }
 
 .inverse {
