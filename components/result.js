@@ -51,12 +51,12 @@ export default function Result(props) {
 					</div>
 					<div className="innerMessage">
 						<p className="fact" style={{paddingTop: '.5em'}}>
-							You have mapped {props.userStats.total} locations in total.</p>
+							You have mapped {props.userStats.mapped_count} locations in total.</p>
 						<p className="fact"><strong>
 						_</strong>
 						</p>
 						<p className="fact" style={{paddingTop: '.5em'}}><strong>
-							The 10 schools you mapped consist of approx. 2000 students.</strong></p>
+							{props.fact}</strong></p>
 						<p style={{paddingTop: '.5em'}}>
 						{props.taggedAllLocations ? '🏆 You are a mapping champion! 🗺 You have mapped all of our potential school locations. We will add more shortly, so come back soon.' : 'Help us connect more children to opportunity by mapping more schools.'}
 						</p>

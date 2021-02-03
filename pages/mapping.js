@@ -13,8 +13,9 @@ export default function mapping() {
 	const [question, setQuestion] = useState({ id: 0, lat: 0, lon: 0, country_code: '', answer: ''});
 	const [questions, setQuestions] = useState([question]);
 	const [locationResults, setLocationResults] = useState({ yes_count: 0, no_count: 0, maybe_count: 0, total_count: 0});
-	const [userStats, setUserStats] = useState({ total: 0 });
+	const [userStats, setUserStats] = useState({ mapped_count: 0 });
 	const [gameStats, setGameStats] = useState({ country_counts: {}, mapped_count: 0 });
+	const [fact, setFact] = useState('');
 
 	const [cookies, setCookie] = useCookies(['uuid']);
 
@@ -128,6 +129,13 @@ export default function mapping() {
 		setUserStats(await response);
 	};
 
+	async function fetchFact() {
+		setFact('Hello!');
+		// const result = await fetch(`/api/getFact/${cookies.uuid}`);
+		// const response = await result.json();
+		// setFact(JSON.stringify(await response));
+	}
+
   	if (counter < questions.length) {
 		return (
 			<Quiz
@@ -142,7 +150,8 @@ export default function mapping() {
 	} else {
 		fetchUserStats();
 		fetchUntaggedLocationsCount();
-	  	return <Result taggedAllLocations={untaggedLocationsCount <= 0} userStats={userStats} gameStats={gameStats} />;
+		//fetchFact();
+	  	return <Result taggedAllLocations={untaggedLocationsCount <= 0} fact={fact} userStats={userStats} gameStats={gameStats} />;
 	}
 
 }
