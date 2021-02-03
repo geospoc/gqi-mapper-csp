@@ -11,7 +11,7 @@ const UserView = ({ user }) => {
 
     useEffect(() => {
         const getUserMappings = async () => {
-            const result = await fetch(`/api/getAnswersByUser/${user.uid}`)
+            const result = await fetch(`/api/getAnswersByUser/${user.id}`)
             const userMappings = await result.json()
             setMappings(userMappings)
         }
