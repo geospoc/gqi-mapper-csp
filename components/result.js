@@ -7,13 +7,6 @@ import HeaderComponent from '../components/headerComponent';
 import Button from 'react-bootstrap/Button';
 
 export default function Result(props) {
-	let msg = '';
-	switch(props.correctAnswers){
-		case 5:
-			msg = '🏆 You are a mapping champion! 🗺';
-			break;
-	}
-
 	return(
 	  	<Layout className="result">
 			<Head>
@@ -25,7 +18,7 @@ export default function Result(props) {
 			<HeaderComponent inverse={false} />
 
 			<div className="result big-button">
-				<h1>Thank you for contributing to Project Connect!</h1>
+				<h1>Thank you for contributing to Project Connect! You have helped us connect {props.userStats.total} schools to the internet!</h1>
 				<p style={{paddingTop: '.5em'}}>
 					{props.taggedAllLocations ? '🏆 You are a mapping champion! 🗺 You have mapped all of our potential school locations. We will add more shortly, so come back soon.' : ''}
 				</p>
@@ -46,5 +39,4 @@ export default function Result(props) {
 }
 
 Result.propTypes = {
-  correctAnswers: PropTypes.number.isRequired
 };

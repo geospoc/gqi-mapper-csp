@@ -9,12 +9,12 @@ import Result from '../components/result';
 
  
 export default function mapping() {
-
-	const [answerCount, setAnswerCount] = useState(0);
 	const [counter, setCounter] = useState(0);
-	const [question, setQuestion] = useState({ id: 0, lat: 0, lon: 0, answer: ''});
+	const [question, setQuestion] = useState({ id: 0, lat: 0, lon: 0, country_code: '', answer: ''});
 	const [questions, setQuestions] = useState([question]);
 	const [locationResults, setLocationResults] = useState({ yes_count: 0, no_count: 0, maybe_count: 0, total_count: 0});
+	const [userStats, setUserStats] = useState({ total: 0 });
+	const [gameStats, setGameStats] = useState({ country_counts: {} });
 
 	const [cookies, setCookie] = useCookies(['uuid']);
 
@@ -100,6 +100,14 @@ export default function mapping() {
 	}
 
 	function handleNextSelected() {
+		var countryCounts = gameStats.country_counts;
+		if (countryCounts[question.country_code]) {
+			countryCounts[question.country_code] = countryCounts[question.country_code] + 1;
+		} else {
+			countryCounts[question.country_code] = 1;
+		}
+		setGameStats({ country_counts: countryCounts });
+
 		if (counter < questions.length) {
 			setCounter(counter + 1);
 			setLocationResults({ yes_count: 0, no_count: 0, maybe_count: 0, total_count: 0});
@@ -111,6 +119,12 @@ export default function mapping() {
 		const result = await fetch(`/api/getUntaggedLocationsCount/${cookies.uuid}`);
 		const response = await result.json();
 		setUntaggedLocationsCount(await response.count);
+	};
+
+	async function fetchUserStats() {
+		const result = await fetch(`/api/getUserStats/${cookies.uuid}`);
+		const response = await result.json();
+		setUserStats(await response);
 	};
 
   	if (counter < questions.length) {
@@ -125,8 +139,9 @@ export default function mapping() {
 			/>
 		);
 	} else {
+		fetchUserStats();
 		fetchUntaggedLocationsCount();
-	  	return <Result correctAnswers={answerCount} taggedAllLocations={untaggedLocationsCount <= 0} />;
+	  	return <Result taggedAllLocations={untaggedLocationsCount <= 0} userStats={userStats} gameStats={gameStats} />;
 	}
 
 }

@@ -11,18 +11,10 @@ export default async (req, res) => {
 		if (uuidValidate(user_id)) {
 			try {
 				result = await pool.query(`
-					SELECT  locations.school_id,
-							locations.lat,
-							locations.lon,
-							locations.country_code
-					FROM locations
-					LEFT JOIN
-						(SELECT school_id
+					SELECT  count(tagged.school_id) as total
+					FROM (SELECT school_id
 						 FROM crowdsourcing
-						 WHERE user_id = '${user_id}') AS tagged 
-							ON locations.school_id = tagged.school_id
-					WHERE tagged.school_id IS NULL
-					ORDER BY random() LIMIT 10;`);
+						 WHERE user_id = '${user_id}') AS tagged;`);
 			} catch(e) {
 				console.log(e)
 			}	
@@ -32,7 +24,7 @@ export default async (req, res) => {
 		if(result) {
 			res.statusCode = 200;
 			res.setHeader('Content-Type', 'application/json');
-			output = JSON.stringify(result.rows)
+			output = JSON.stringify(result.rows[0])
 		} else {
 			res.statusCode = 500
 		}
