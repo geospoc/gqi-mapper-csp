@@ -14,7 +14,7 @@ export default function mapping() {
 	const [questions, setQuestions] = useState([question]);
 	const [locationResults, setLocationResults] = useState({ yes_count: 0, no_count: 0, maybe_count: 0, total_count: 0});
 	const [userStats, setUserStats] = useState({ total: 0 });
-	const [gameStats, setGameStats] = useState({ country_counts: {} });
+	const [gameStats, setGameStats] = useState({ country_counts: {}, mapped_count: 0 });
 
 	const [cookies, setCookie] = useCookies(['uuid']);
 
@@ -101,12 +101,13 @@ export default function mapping() {
 
 	function handleNextSelected() {
 		var countryCounts = gameStats.country_counts;
+		const mappedCount = gameStats.mapped_count;
 		if (countryCounts[question.country_code]) {
 			countryCounts[question.country_code] = countryCounts[question.country_code] + 1;
 		} else {
 			countryCounts[question.country_code] = 1;
 		}
-		setGameStats({ country_counts: countryCounts });
+		setGameStats({ country_counts: countryCounts, mapped_count: mappedCount + 1 });
 
 		if (counter < questions.length) {
 			setCounter(counter + 1);

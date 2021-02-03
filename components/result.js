@@ -47,7 +47,7 @@ export default function Result(props) {
 				<div className="result big-button">
 					<div className="outerMessage">
 						<h2>Congratulations!</h2>
-						<p>You just mapped 10 schools</p>
+						<p>You just mapped {props.gameStats.mapped_count} schools</p>
 					</div>
 					<div className="innerMessage">
 						<p className="fact" style={{paddingTop: '.5em'}}>
