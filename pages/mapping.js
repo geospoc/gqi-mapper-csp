@@ -136,7 +136,7 @@ export default function mapping() {
 	async function fetchFact() {
 		const result = await fetch(`/api/getFact/${cookies.uuid}`);
 		const response = await result.json();
-		setFact(JSON.stringify(await response));
+		setFact(await response['message']);
 	}
 
   	if (counter < questions.length) {
