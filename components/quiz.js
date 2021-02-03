@@ -7,6 +7,8 @@ import ProgressBar from '../components/progressBar';
 import QuestionCount from '../components/questionCount';
 import Layout from '../components/layout'
 
+const countryCodes = require('../data/countries.json');
+
 const MapComponent = dynamic(import('../components/mapComponent'),{
 	ssr: false
 })
@@ -43,7 +45,8 @@ export default function Quiz (props) {
   	}
 
 	const latlon = [props.question.lat, props.question.lon];
-	const answerClass = "answer " + answer.answerClass
+	const answerClass = "answer " + answer.answerClass;
+	const countryName = countryCodes[props.question.country_code];
 	return (
 		<Layout myClass="quiz">
 			<Head>
