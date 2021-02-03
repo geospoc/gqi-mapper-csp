@@ -57,8 +57,9 @@ export default function mapping() {
 
 		// Initialize the set of questions
 		async function fetchData() {
+			const user_id = session ? session.user.id : cookies.uuid
 			// Get location data
-			const result = await fetch(`/api/getLocations/${cookies.uuid}`);
+			const result = await fetch(`/api/getLocations/${user_id}`);
 			setQuestions(await result.json());
 		}
 		fetchData();
@@ -87,35 +88,22 @@ export default function mapping() {
 		if (result.school_id) {
 			fetchLocationResults(result.school_id);
 		}
-		if(!session) { 
-				fetch("/api/validateLocation", {
-				'method': 'POST',
-				'headers': {
-					'content-type': 'application/json',
-					'accept': 'application/json'
-				},
-				'body': JSON.stringify({
-					user_id: cookies.uuid, 
-					school_id: result.school_id,
-					result: result.answer
-					})
-				});
-		}	
-		
-		if(session) {
-			fetch('/api/postAnswer', {
-				'method': 'POST',
-				'headers': {
-					'content-type': 'application/json',
-					'accept': 'application/json'
-				  },
-				  'body': JSON.stringify({
-					  user_id: session.user.uid, 
-					  school_id: result.school_id,
-					  result: result.answer
-				  })
-			})
-		}
+
+		const user_id = session ? session.user.id : cookies.uuid
+
+		fetch("/api/validateLocation", {
+			'method': 'POST',
+			'headers': {
+				'content-type': 'application/json',
+				'accept': 'application/json'
+			},
+			'body': JSON.stringify({
+				user_id: user_id, 
+				school_id: result.school_id,
+				result: result.answer
+				})
+			});
+
 	}
 
 	function handleNextSelected() {
@@ -126,8 +114,10 @@ export default function mapping() {
 	}
 
 	async function fetchUntaggedLocationsCount() {
+		const user_id = session ? session.user.id : cookies.uuid
+
 		// Get number of untagged locations
-		const result = await fetch(`/api/getUntaggedLocationsCount/${cookies.uuid}`);
+		const result = await fetch(`/api/getUntaggedLocationsCount/${user_id}`);
 		const response = await result.json();
 		setUntaggedLocationsCount(await response.count);
 	};
