@@ -1,6 +1,7 @@
 import NextAuth from 'next-auth'
 import Providers from 'next-auth/providers'
 import Adapters from 'next-auth/adapters'
+import { v4 as uuidv4 } from 'uuid'
 
 import Models from '../../../models'
 
@@ -31,32 +32,17 @@ export default (req, res) =>
             jwt: true,
         },
         callbacks: {
-            signIn: async (user, account, profile) => {
-                // Defined on all sign ins, except the first sign in
-                if (user.id) {
-                    await fetch(
-                        `${process.env.NEXTAUTH_URL}/api/saveUserData`,
-                        {
-                            method: 'POST',
-                            headers: {
-                                'content-type': 'application/json',
-                                accept: 'application/json',
-                            },
-                            body: JSON.stringify({
-                                user_id: user.id,
-                                uuid: req.cookies.uuid,
-                            }),
-                        },
-                    )
-                }
-                return Promise.resolve(true)
-            },
-
             jwt: async (token, user, account, profile, isNewUser) => {
                 // True only on first sign in
                 if (isNewUser) {
+                    let uuid = req.cookies.uuid
+                    if (!uuid) {
+                        uuid = uuidv4()
+                        console.log(uuid)
+                    }
+                    token.id = uuid
                     await fetch(
-                        `${process.env.NEXTAUTH_URL}/api/saveUserData`,
+                        `${process.env.NEXTAUTH_URL}/api/saveUserUuid`,
                         {
                             method: 'POST',
                             headers: {
@@ -65,13 +51,30 @@ export default (req, res) =>
                             },
                             body: JSON.stringify({
                                 user_id: user.id,
-                                uuid: req.cookies.uuid,
+                                uuid: uuid,
                             }),
                         },
                     )
-                }
-
-                if (user) {
+                } 
+                // On other sign ins
+                else if (user) {
+                    const session_uuid = req.cookies.uuid
+                    if (session_uuid) {
+                        await fetch(
+                            `${process.env.NEXTAUTH_URL}/api/mergeUuidData`,
+                            {
+                                method: 'POST',
+                                headers: {
+                                    'content-type': 'application/json',
+                                    accept: 'application/json',
+                                },
+                                body: JSON.stringify({
+                                    from_uuid: session_uuid,
+                                    to_uuid: user.uuid,
+                                }),
+                            },
+                        )
+                    }
                     token.id = user.uuid
                 }
 
