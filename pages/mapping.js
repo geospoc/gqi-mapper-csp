@@ -68,7 +68,7 @@ export default function mapping() {
 		const result = await fetch(`/api/getLocationResults/${school_id}`);
 		const response = await result.json();
 		setLocationResults(response);
-	};
+	}
 
 	useEffect(() => {
 		if(questions) {
@@ -113,27 +113,30 @@ export default function mapping() {
 		if (counter < questions.length) {
 			setCounter(counter + 1);
 			setLocationResults({ yes_count: 0, no_count: 0, maybe_count: 0, total_count: 0});
+	  	} else {
+	  		fetchUserStats();
+			fetchUntaggedLocationsCount();
+			fetchFact();
 	  	}
 	}
 
 	async function fetchUntaggedLocationsCount() {
 		// Get number of untagged locations
-		const result = await fetch(`/api/getUntaggedLocationsCount/${cookies.uuid}`);
+		const result = await fetch(`/api/getUntaggedLocationsCount/${cookies.uuid}`)
 		const response = await result.json();
 		setUntaggedLocationsCount(await response.count);
 	};
 
 	async function fetchUserStats() {
-		const result = await fetch(`/api/getUserStats/${cookies.uuid}`);
+		const result = await fetch(`/api/getUserStats/${cookies.uuid}`)
 		const response = await result.json();
 		setUserStats(await response);
 	};
 
 	async function fetchFact() {
-		setFact('Hello!');
-		// const result = await fetch(`/api/getFact/${cookies.uuid}`);
-		// const response = await result.json();
-		// setFact(JSON.stringify(await response));
+		const result = await fetch(`/api/getFact/${cookies.uuid}`);
+		const response = await result.json();
+		setFact(JSON.stringify(await response));
 	}
 
   	if (counter < questions.length) {
@@ -148,9 +151,12 @@ export default function mapping() {
 			/>
 		);
 	} else {
-		fetchUserStats();
-		fetchUntaggedLocationsCount();
-		//fetchFact();
+		if (counter == questions.length) {
+			fetchUserStats();
+			fetchUntaggedLocationsCount();
+			fetchFact();
+			setCounter(counter + 1);
+		}
 	  	return <Result taggedAllLocations={untaggedLocationsCount <= 0} fact={fact} userStats={userStats} gameStats={gameStats} />;
 	}
 

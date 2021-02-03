@@ -9,7 +9,7 @@ export default async (req, res) => {
 		let result = null;
 		const user_id = req.query.uuid;
 		if (uuidValidate(user_id)) {
-			queries = [
+			const queries = [
 			`SELECT count(tagged.school_id) AS mapped_count
 			FROM
 			  (SELECT school_id
