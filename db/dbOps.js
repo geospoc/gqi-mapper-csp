@@ -86,16 +86,8 @@ async function createTables() {
 			image          VARCHAR(255),
 			created_at     TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP,
 			updated_at     TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP,
+			uuid           TEXT,
 			PRIMARY KEY (id)
-		);
-	`);
-
-	await pool.query(`
-		CREATE TABLE useranswers(
-			user_id INTEGER,
-			school_id INTEGER,
-			result yesnomaybe,
-			unique (user_id, school_id)
 		);
 	`);
 
@@ -114,7 +106,7 @@ async function loadTables() {
 }
 
 async function dropTables() {
-	await pool.query(`DROP TABLE IF EXISTS locations; DROP TABLE IF EXISTS crowdsourcing; DROP TYPE IF EXISTS yesnomaybe; DROP TABLE IF EXISTS crowdusers; DROP TABLE IF EXISTS users; DROP TABLE IF EXISTS accounts; DROP TABLE IF EXISTS useranswers`);
+	await pool.query(`DROP TABLE IF EXISTS locations; DROP TABLE IF EXISTS crowdsourcing;  DROP TABLE IF EXISTS crowdusers; DROP TABLE IF EXISTS users; DROP TABLE IF EXISTS accounts; DROP TYPE IF EXISTS yesnomaybe;`);
 	await pool.end();
 }
 
