@@ -13,8 +13,9 @@ export default function mapping() {
 	const [question, setQuestion] = useState({ id: 0, lat: 0, lon: 0, country_code: '', answer: ''});
 	const [questions, setQuestions] = useState([question]);
 	const [locationResults, setLocationResults] = useState({ yes_count: 0, no_count: 0, maybe_count: 0, total_count: 0});
-	const [userStats, setUserStats] = useState({ total: 0 });
-	const [gameStats, setGameStats] = useState({ country_counts: {} });
+	const [userStats, setUserStats] = useState({ mapped_count: 0 });
+	const [gameStats, setGameStats] = useState({ country_counts: {}, mapped_count: 0 });
+	const [fact, setFact] = useState('');
 
 	const [cookies, setCookie] = useCookies(['uuid']);
 
@@ -67,7 +68,7 @@ export default function mapping() {
 		const result = await fetch(`/api/getLocationResults/${school_id}`);
 		const response = await result.json();
 		setLocationResults(response);
-	};
+	}
 
 	useEffect(() => {
 		if(questions) {
@@ -101,12 +102,13 @@ export default function mapping() {
 
 	function handleNextSelected() {
 		var countryCounts = gameStats.country_counts;
+		const mappedCount = gameStats.mapped_count;
 		if (countryCounts[question.country_code]) {
 			countryCounts[question.country_code] = countryCounts[question.country_code] + 1;
 		} else {
 			countryCounts[question.country_code] = 1;
 		}
-		setGameStats({ country_counts: countryCounts });
+		setGameStats({ country_counts: countryCounts, mapped_count: mappedCount + 1 });
 
 		if (counter < questions.length) {
 			setCounter(counter + 1);
@@ -119,13 +121,19 @@ export default function mapping() {
 		const result = await fetch(`/api/getUntaggedLocationsCount/${cookies.uuid}`);
 		const response = await result.json();
 		setUntaggedLocationsCount(await response.count);
-	};
+	}
 
 	async function fetchUserStats() {
 		const result = await fetch(`/api/getUserStats/${cookies.uuid}`);
 		const response = await result.json();
 		setUserStats(await response);
-	};
+	}
+
+	async function fetchFact() {
+		const result = await fetch(`/api/getFact/${cookies.uuid}`);
+		const response = await result.json();
+		setFact(await response['message']);
+	}
 
   	if (counter < questions.length) {
 		return (
@@ -139,9 +147,13 @@ export default function mapping() {
 			/>
 		);
 	} else {
-		fetchUserStats();
-		fetchUntaggedLocationsCount();
-	  	return <Result taggedAllLocations={untaggedLocationsCount <= 0} userStats={userStats} gameStats={gameStats} />;
+		if (counter == questions.length) {
+			fetchUserStats();
+			fetchUntaggedLocationsCount();
+			fetchFact();
+			setCounter(counter + 1);
+		}
+	  	return <Result taggedAllLocations={untaggedLocationsCount <= 0} fact={fact} userStats={userStats} gameStats={gameStats} />;
 	}
 
 }
