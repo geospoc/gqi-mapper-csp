@@ -113,25 +113,21 @@ export default function mapping() {
 		if (counter < questions.length) {
 			setCounter(counter + 1);
 			setLocationResults({ yes_count: 0, no_count: 0, maybe_count: 0, total_count: 0});
-	  	} else {
-	  		fetchUserStats();
-			fetchUntaggedLocationsCount();
-			fetchFact();
 	  	}
 	}
 
 	async function fetchUntaggedLocationsCount() {
 		// Get number of untagged locations
-		const result = await fetch(`/api/getUntaggedLocationsCount/${cookies.uuid}`)
+		const result = await fetch(`/api/getUntaggedLocationsCount/${cookies.uuid}`);
 		const response = await result.json();
 		setUntaggedLocationsCount(await response.count);
-	};
+	}
 
 	async function fetchUserStats() {
-		const result = await fetch(`/api/getUserStats/${cookies.uuid}`)
+		const result = await fetch(`/api/getUserStats/${cookies.uuid}`);
 		const response = await result.json();
 		setUserStats(await response);
-	};
+	}
 
 	async function fetchFact() {
 		const result = await fetch(`/api/getFact/${cookies.uuid}`);
