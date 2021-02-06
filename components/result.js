@@ -19,7 +19,7 @@ const Container = styled.div`
 }
 
 .fact {
-	color: #0068ea;
+	color: #2779FF;
 	font-size: 1.5em;
 }
 
@@ -46,6 +46,7 @@ export default function Result(props) {
 
 				<div className="result big-button">
 					<div className="outerMessage">
+						<img src='Congratulations.svg' alt='next' />
 						<h2>Congratulations!</h2>
 						<p>You just mapped {props.gameStats.mapped_count} schools</p>
 					</div>

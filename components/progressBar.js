@@ -34,12 +34,12 @@ const Container = styled.div`
 	.bar-chosen {
   		progress[value]{
 			::-webkit-progress-value {
-				background-color: #0068ea;
+				background-color: #2779FF;
 			}
 		}
 
 		span {
-			color: #0068ea;
+			color: #2779FF;
 		}
 	}
 
