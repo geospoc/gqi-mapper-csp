@@ -49,7 +49,7 @@ export default function mapping() {
 		}
 
 		// Initialize cookie if not present
-		if(!cookies.uuid){
+		if(!session && !cookies.uuid){
 			const userId = uuidv4();
 			setCookie('uuid', userId, { path: '/', maxAge: 2592000 }); // maxAge: 30 days
 			addUser(userId);
@@ -131,7 +131,9 @@ export default function mapping() {
 	};
 
 	async function fetchUserStats() {
-		const result = await fetch(`/api/getUserStats/${cookies.uuid}`);
+		const user_id = session ? session.user.id : cookies.uuid
+
+		const result = await fetch(`/api/getUserStats/${user_id}`);
 		const response = await result.json();
 		setUserStats(await response);
 	};
