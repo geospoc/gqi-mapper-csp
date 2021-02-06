@@ -78,9 +78,9 @@ export default (req, res) => {
                             },
                         )
                     }
-                    cookies.set('uuid')
                     token.id = user.uuid
                 }
+                cookies.set('uuid')
 
                 return Promise.resolve(token)
             },
