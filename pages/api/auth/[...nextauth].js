@@ -10,7 +10,7 @@ export default (req, res) => {
 
     const cookies = new Cookies(req, res)
 
-    NextAuth(req, res, {
+    return NextAuth(req, res, {
         providers: [
             Providers.Facebook({
                 clientId: process.env.FACEBOOK_ID,
