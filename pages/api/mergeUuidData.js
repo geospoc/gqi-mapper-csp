@@ -12,26 +12,47 @@ export default async (req, res) => {
 
     const from_uuid = req.body.from_uuid
     const to_uuid = req.body.to_uuid
-    console.log('from', from_uuid)
-    console.log('to', to_uuid)
 
-    if (!(from_uuid && to_uuid && uuidValidate(from_uuid) && uuidValidate(to_uuid))) {
+    if (
+        !(
+            from_uuid &&
+            to_uuid &&
+            uuidValidate(from_uuid) &&
+            uuidValidate(to_uuid)
+        )
+    ) {
         res.statusCode = 400
         res.end()
     }
 
-    // TODO: Handle possible duplicates
+    const deleteQuery = `DELETE FROM crowdsourcing
+                        WHERE user_id=($1)
+                        RETURNING *;`
 
-    const query = 'UPDATE crowdsourcing SET user_id=($2) WHERE user_id=($1) RETURNING *;'
+    const insertQuery = `INSERT INTO crowdsourcing (user_id, school_id, result)
+                        VALUES ($1, $2, $3)
+                        ON CONFLICT (user_id, school_id)
+                        DO NOTHING
+                        RETURNING *;`
 
-    pool.query(query, [from_uuid, to_uuid])
-        .then((result) => {
-            res.statusCode = 200
-            res.end(JSON.stringify(result.rows))
+    try {
+        const deletedRes = await pool.query(deleteQuery, [from_uuid])
+        const insertedRows = []
+
+        deletedRes.rows.forEach(async (row) => {
+            const insertedRes = await pool.query(insertQuery, [
+                to_uuid,
+                row.school_id,
+                row.result,
+            ])
+            insertedRows.push(insertedRes.rows[0])
         })
-        .catch((err) => {
-            console.log(err.stack)
-            res.statusCode = 404
-            res.end()
-        })
+
+        res.statusCode = 200
+        res.end(JSON.stringify(insertedRows))
+    } catch (err) {
+        console.log(err.stack)
+        res.statusCode = 404
+        res.end()
+    }
 }
