@@ -2,10 +2,14 @@ import NextAuth from 'next-auth'
 import Providers from 'next-auth/providers'
 import Adapters from 'next-auth/adapters'
 import { v4 as uuidv4 } from 'uuid'
+import Cookies from 'cookies'
 
 import Models from '../../../models'
 
-export default (req, res) =>
+export default (req, res) => {
+
+    const cookies = new Cookies(req, res)
+
     NextAuth(req, res, {
         providers: [
             Providers.Facebook({
@@ -38,7 +42,6 @@ export default (req, res) =>
                     let uuid = req.cookies.uuid
                     if (!uuid) {
                         uuid = uuidv4()
-                        console.log(uuid)
                     }
                     token.id = uuid
                     await fetch(
@@ -55,7 +58,7 @@ export default (req, res) =>
                             }),
                         },
                     )
-                } 
+                }
                 // On other sign ins
                 else if (user) {
                     const session_uuid = req.cookies.uuid
@@ -75,6 +78,7 @@ export default (req, res) =>
                             },
                         )
                     }
+                    cookies.set('uuid')
                     token.id = user.uuid
                 }
 
@@ -89,3 +93,4 @@ export default (req, res) =>
 
         debug: false,
     })
+}
