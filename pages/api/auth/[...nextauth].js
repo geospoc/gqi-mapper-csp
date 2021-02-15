@@ -115,7 +115,7 @@ export default (req, res) => {
                 // On other sign ins
                 else if (user) {
                     const session_uuid = req.cookies.uuid
-                    if (session_uuid) {
+                    if (session_uuid && session_uuid !== user.uuid) {
                         await fetch(
                             `${process.env.NEXTAUTH_URL}/api/mergeUuidData`,
                             {
