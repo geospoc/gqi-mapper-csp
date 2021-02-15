@@ -49,15 +49,15 @@ export default function mapping() {
 		}
 
 		// Initialize cookie if not present
+		const userId = uuidv4();
 		if(!session && !cookies.uuid){
-			const userId = uuidv4();
 			setCookie('uuid', userId, { path: '/', maxAge: 2592000 }); // maxAge: 30 days
 			addUser(userId);
 		}
 
 		// Initialize the set of questions
 		async function fetchData() {
-			const user_id = session ? session.user.id : cookies.uuid
+			const user_id = session ? session.user.id : (cookies.uuid ? cookies.uuid : userId);
 			// Get location data
 			const result = await fetch(`/api/getLocations/${user_id}`);
 			setQuestions(await result.json());
