@@ -11,7 +11,7 @@ export default async (req, res) => {
 		if (uuidValidate(user_id)) {
 			try {
 				result = await pool.query(`
-					SELECT  count(tagged.school_id) as total
+					SELECT  count(tagged.school_id) as mapped_count
 					FROM (SELECT school_id
 						 FROM crowdsourcing
 						 WHERE user_id = '${user_id}') AS tagged;`);

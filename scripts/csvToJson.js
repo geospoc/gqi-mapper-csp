@@ -5,15 +5,15 @@
  * It was not designed to be fool-proof, but only an assist in automating the task of
  * processing multiple entries. 
  *
- * This script was executed inside a tmp/ folder with the following command:
- * node ../scripts/csvToJson.js
+ * This script should be run in its current folder with the following command:
+ * node csvToJson.js
  *
- * Additional changes were done manually, and when all json files were compliant with 
- * the schema, they were moved to the nominees/ folder.
  */
 
 const fs = require('fs');
 const csv = require('csvtojson');
+const countries = require('../data/countries.json');
+
 
 // Set CSV file to process
 const csvFilePath='schools.csv';
@@ -53,10 +53,13 @@ csv()
       jsonObj[i]['school']=(jsonObj[i]['school pattern'] == 'yes') ? true : false;
       delete jsonObj[i]['school pattern'];
 
+      // Parse country code from country name, and delete the old field
+      jsonObj[i]['country_code']=Object.keys(countries).find(key => countries[key] === jsonObj[i]['country']);
+      delete jsonObj[i]['country'];
+
       delete jsonObj[i]['res check'];
       delete jsonObj[i]['image notes'];
       delete jsonObj[i]['school id notes'];
-      delete jsonObj[i]['country'];
 
   }
 
