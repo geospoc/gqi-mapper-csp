@@ -109,3 +109,4 @@ dist
 scripts/*.json
 scripts/*.csv
 .vercel/
+.prettierrc.json
