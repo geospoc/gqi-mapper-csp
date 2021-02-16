@@ -317,3 +317,18 @@ a {
   padding: 0;
   vertical-align: middle;
 }
+
+/*
+ * Sign In page
+ */
+
+.signin-title {
+  margin: 40px 0px 30px;
+  font-size: 26px;
+  color: #141923;
+}
+
+.signin-divider {
+  border-top: solid 1.5px #96999b;
+  margin: 30px 0;
+}
