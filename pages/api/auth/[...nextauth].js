@@ -26,7 +26,7 @@ export default (req, res) => {
 
         // https://next-auth.js.org/schemas/adapters
         adapter: Adapters.TypeORM.Adapter({
-            type: 'postgresql',
+            type: 'postgres',
             database: process.env.DATABASE_URL,
             models: {
                 User: Models.User,
