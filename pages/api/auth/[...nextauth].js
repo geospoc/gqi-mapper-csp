@@ -29,7 +29,7 @@ export default (req, res) => {
         // https://next-auth.js.org/schemas/adapters
         adapter: Adapters.TypeORM.Adapter(DATABASE_URL, {
             models: {
-                User: Models.User,
+                users: Models.users,
             },
         }),
 
