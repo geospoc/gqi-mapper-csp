@@ -1,65 +1,106 @@
 import React from 'react'
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 import { signin, signout, useSession } from 'next-auth/client'
-import { Navbar, Nav, NavItem, NavLink, Dropdown, Container } from 'react-bootstrap'
+import { Navbar, Nav, NavItem, Dropdown, Button } from 'react-bootstrap'
 
-const callbackURL = process.env.NEXT_PUBLIC_AUTH_CALLBACK
+import './headerComponent.module.css'
 
-const SignInButton = ({ inverse }) => {
-    return (
-        <button
-            className={`btn btn-outline-${inverse ? 'dark' : 'light'}`}
-            onClick={signin}
-        >
-            Sign In
-        </button>
-    )
-}
-
-const SignOutButton = ({ inverse }) => {
-    return (
-        <button
-            className={`btn btn-outline-${inverse ? 'dark' : 'light'}`}
-            onClick={() => signout({ callbackUrl: callbackURL })}
-        >
-            Sign Out
-        </button>
-    )
-}
-
-const Header = (props) => {
-    const [session, loading] = useSession()
-    const inverse = props.inverse
-
-    return (
-        <div className={`masthead pt-2${inverse ? ' inverse' : ''}`}>
-            <Navbar
-                variant={`${inverse ? 'light' : 'dark'}`}
-                className="justify-content-between"
-            >
-                <a href="/" className="masthead-brand">Project Connect</a>
-                <Nav>
-                    {!session && <SignInButton inverse={inverse} />}
-                    {session && !loading && (
-                        <Dropdown as={NavItem}>
-                            <Dropdown.Toggle as={NavLink}>
-                                {session.user.name}
-                            </Dropdown.Toggle>
-                            <Dropdown.Menu align="right">
-                                <Dropdown.Item as={Container}>
-                                    <Link href="/profile">My Profile</Link>
-                                </Dropdown.Item>
-                                <Dropdown.Divider />
-                                <Dropdown.Item>
-                                    <SignOutButton inverse={true} />
-                                </Dropdown.Item>
-                            </Dropdown.Menu>
-                        </Dropdown>
-                    )}
-                    {session && <li className="nav-item"></li>}
-                </Nav>
-            </Navbar>
+const CustomToggle = React.forwardRef(({ children, onClick }, ref) => (
+    <button
+        className="custom-dropdown-toggle"
+        ref={ref}
+        onClick={(e) => {
+            e.preventDefault()
+            onClick(e)
+        }}
+    >
+        <div className="dropdown-toggle-content">
+            <div>{children}</div>
+            <img src="white.svg" className="dropdown-toggle-caret" />
         </div>
+    </button>
+))
+
+const CustomMenu = React.forwardRef(
+    ({ children, style, className, 'aria-labelledby': labeledBy }, ref) => {
+        return (
+            <div
+                ref={ref}
+                style={style}
+                className={className}
+                aria-labelledby={labeledBy}
+            >
+                <ul className="custom-dropdown-list">
+                    {React.Children.toArray(children)}
+                </ul>
+            </div>
+        )
+    },
+)
+
+const Header = () => {
+    const [session, loading] = useSession()
+    const router = useRouter()
+
+    // Redirect to landing page if on authorized-only page
+    const signOutWithRedirect = async () => {
+        signout()
+
+        if (router.asPath.startsWith('/profile')) {
+            router.push('/')
+        }
+    }
+
+    return (
+        <Navbar className="justify-content-between">
+            <Link href="/">
+                <a className="masthead-brand">Project Connect</a>
+            </Link>
+            <Nav style={{ height: 100 + '%' }}>
+                {!session && !loading && (
+                    <NavItem className="signin-button" onClick={signin}>
+                        Sign In
+                    </NavItem>
+                )}
+                {session && !loading && (
+                    <Dropdown as={NavItem}>
+                        <Dropdown.Toggle
+                            as={CustomToggle}
+                            id="custom-dropdown-toggle"
+                        >
+                            {session.user.name.split(' ')[0]}
+                        </Dropdown.Toggle>
+                        <Dropdown.Menu as={CustomMenu} align="right">
+                            <Dropdown.Item
+                                as={Link}
+                                href="/profile"
+                                className="profile-link"
+                            >
+                                <a className="dropdown-item profile-link">
+                                    My Profile
+                                    <img
+                                        src="./blue.svg"
+                                        className="dropdown-caret"
+                                    ></img>
+                                </a>
+                            </Dropdown.Item>
+                            <Dropdown.Divider />
+                            <Dropdown.Item
+                                className="signout-button"
+                                onClick={() => signOutWithRedirect()}
+                            >
+                                Sign Out
+                                <img
+                                    src="caret-red.svg"
+                                    className="dropdown-caret"
+                                ></img>
+                            </Dropdown.Item>
+                        </Dropdown.Menu>
+                    </Dropdown>
+                )}
+            </Nav>
+        </Navbar>
     )
 }
 
