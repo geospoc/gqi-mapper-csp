@@ -6,6 +6,8 @@ import Cookies from 'cookies'
 
 import Models from '../../../models'
 
+const DATABASE_URL = `postgres://${process.env.PGUSER}:${process.env.PGPASSWORD}@${process.env.PGHOST}/${process.env.PGDATABASE}`
+
 export default (req, res) => {
     const cookies = new Cookies(req, res)
 
@@ -25,7 +27,7 @@ export default (req, res) => {
         ],
 
         // https://next-auth.js.org/schemas/adapters
-        adapter: Adapters.TypeORM.Adapter(process.env.DATABASE_URL, {
+        adapter: Adapters.TypeORM.Adapter(DATABASE_URL, {
             models: {
                 User: Models.User,
             },
@@ -37,7 +39,7 @@ export default (req, res) => {
         // Notes:
         // * You must to install an appropriate node_module for your database
         // * The Email provider requires a database (OAuth providers do not)
-        database: process.env.DATABASE_URL,
+        database: DATABASE_URL,
 
         // The secret should be set to a reasonably long random string.
         // It is used to sign cookies and to sign and encrypt JSON Web Tokens, unless
@@ -78,7 +80,7 @@ export default (req, res) => {
         // pages is not specified for that route.
         // https://next-auth.js.org/configuration/pages
         pages: {
-            // signIn: '/api/auth/signin',  // Displays signin buttons
+            signIn: '/signin',  // Displays signin buttons
             // signOut: '/api/auth/signout', // Displays form with sign out button
             // error: '/api/auth/error', // Error code passed in query string as ?error=
             // verifyRequest: '/api/auth/verify-request', // Used for check email page
