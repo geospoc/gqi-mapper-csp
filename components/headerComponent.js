@@ -39,7 +39,7 @@ const CustomMenu = React.forwardRef(
     },
 )
 
-const Header = () => {
+const Header = ({ hideSignIn }) => {
     const [session, loading] = useSession()
     const router = useRouter()
 
@@ -58,7 +58,7 @@ const Header = () => {
                 <a className="masthead-brand">Project Connect</a>
             </Link>
             <Nav style={{ height: 100 + '%' }}>
-                {!session && !loading && (
+                {!session && !loading && !hideSignIn && (
                     <NavItem onClick={signin}>
                         <button className="signin-button">Sign in</button>
                     </NavItem>
