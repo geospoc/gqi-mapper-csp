@@ -78,7 +78,7 @@ const Header = ({ hideSignIn }) => {
                                 className="profile-link"
                             >
                                 <a className="dropdown-item profile-link">
-                                    My Profile
+                                    View Profile
                                     <img
                                         src="./blue.svg"
                                         className="dropdown-caret"
