@@ -59,8 +59,8 @@ const Header = () => {
             </Link>
             <Nav style={{ height: 100 + '%' }}>
                 {!session && !loading && (
-                    <NavItem className="signin-button" onClick={signin}>
-                        Sign In
+                    <NavItem onClick={signin}>
+                        <button className="signin-button">Sign in</button>
                     </NavItem>
                 )}
                 {session && !loading && (
