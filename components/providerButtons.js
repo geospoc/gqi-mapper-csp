@@ -7,14 +7,10 @@ const ProviderIcon = ({ provider }) => {
     switch (provider) {
         case 'facebook':
             return <img src="/icons/facebook-blue.svg"></img>
-        case 'github':
-            return <img src="icons/github-blue.svg"></img>
         case 'twitter':
             return <img src="icons/twitter-blue.svg"></img>
         case 'google':
             return <img src="icons/google-blue.svg"></img>
-        case 'instagram':
-            return <img src="icons/instagram-blue.svg"></img>
         default:
             return null
     }
