@@ -20,7 +20,7 @@ export default (req, res) => {
                 clientId: process.env.FACEBOOK_ID,
                 clientSecret: process.env.FACEBOOK_SECRET,
             }),
-              Providers.Google({
+            Providers.Google({
                 clientId: process.env.GOOGLE_CLIENT_ID,
                 clientSecret: process.env.GOOGLE_CLIENT_SECRET
             }),
