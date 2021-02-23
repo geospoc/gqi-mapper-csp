@@ -7,6 +7,8 @@ import ProgressBar from '../components/progressBar';
 import QuestionCount from '../components/questionCount';
 import Layout from '../components/layout'
 
+import '../styles/custom.css';
+
 const countryCodes = require('../data/countries.json');
 
 const MapComponent = dynamic(import('../components/mapComponent'),{
