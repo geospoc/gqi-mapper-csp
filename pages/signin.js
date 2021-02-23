@@ -22,7 +22,7 @@ export default function SignIn({ providers }) {
                 />
             </Head>
             <Layout>
-                <HeaderComponent />
+                <HeaderComponent hideSignIn={true} />
                 <div className="container px-4">
                     <div className="signin-title">Sign in to your account</div>
                     <ProviderButtons
