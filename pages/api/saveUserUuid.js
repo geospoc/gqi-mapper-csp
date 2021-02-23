@@ -20,14 +20,15 @@ export default async (req, res) => {
 
     const query = 'UPDATE users SET uuid=($1) WHERE id=($2) AND uuid IS NULL RETURNING *;'
 
-    pool.query(query, [uuid, user_id])
-        .then((result) => {
-            res.statusCode = 200
-            res.end()
-        })
-        .catch((err) => {
-            console.log(err.stack)
-            res.statusCode = 404
-            res.end()
-        })
+    try {
+        await pool.query(query, [uuid, user_id])
+
+        res.statusCode = 200
+        res.end()
+    } catch (err) {
+        console.log(err.stack)
+
+        res.statusCode = 404
+        res.end()
+    }
 }
