@@ -7,8 +7,6 @@ import ProgressBar from '../components/progressBar';
 import QuestionCount from '../components/questionCount';
 import Layout from '../components/layout'
 
-import '../styles/custom.css';
-
 const countryCodes = require('../data/countries.json');
 
 const MapComponent = dynamic(import('../components/mapComponent'),{
@@ -67,13 +65,13 @@ export default function Quiz (props) {
 				<div>
 					<Row className="p-3">
 						<Col xs={4}>
-							<Button className='actionButton' variant={yes} disabled={next} onClick={e => handleClick(e, 'yes')}>Yes</Button>
+							<Button className='actionButton yes' variant={yes} disabled={next} onClick={e => handleClick(e, 'yes')}>Yes</Button>
 						</Col>
 						<Col xs={4}>
-							<Button className='actionButton' variant={no} disabled={next} onClick={e => handleClick(e, 'no')}>No</Button>
+							<Button className='actionButton no' variant={no} disabled={next} onClick={e => handleClick(e, 'no')}>No</Button>
 						</Col>
 						<Col xs={4}>
-							<Button className='actionButton' variant={maybe} disabled={next} onClick={e => handleClick(e, 'maybe')}>Unsure</Button>
+							<Button className='actionButton maybe' variant={maybe} disabled={next} onClick={e => handleClick(e, 'maybe')}>Unsure</Button>
 						</Col>
 					</Row>
 				</div>
