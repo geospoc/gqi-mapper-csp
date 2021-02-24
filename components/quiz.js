@@ -22,14 +22,17 @@ export default function Quiz (props) {
 	const [result, setResult] = useState(false);
 	const [answer, setAnswer] = useState({answer:'', answerClass: 'answerHidden'});
 
+	function getClassNameMaintainingFirstElement(e, replacement) {
+		let firstClassName = e.classList[0];
+		return `${firstClassName} ${replacement}`;
+	}
+
 	function handleClick(e, value) {
 		let buttons = document.getElementsByClassName('actionButton');
 		for(let button of buttons) {
-			let firstClassName = button.classList[0];
-			button.className = `${firstClassName} actionButton btn btn-outline-primary`
+			button.className = getClassNameMaintainingFirstElement(button, 'actionButton btn btn-outline-primary');
 		}
-		let firstClassName = e.target.classList[0];
-		e.target.className = `${firstClassName} actionButton btn btn-primary`;
+		e.target.className = getClassNameMaintainingFirstElement(e.target, 'actionButton btn btn-primary');
 		let resultValue = {school_id: props.question.school_id, answer: value};
 		props.onAnswerSelected(resultValue);
         setResult(resultValue)
@@ -39,8 +42,7 @@ export default function Quiz (props) {
 	function handleNext(){
 		let buttons = document.getElementsByClassName('actionButton');
 		for(let button of buttons) {
-			let firstClassName = button.classList[0];
-			button.className = `${firstClassName} actionButton btn btn-outline-primary`
+			button.className = getClassNameMaintainingFirstElement(button, 'actionButton btn btn-outline-primary');
 		}
 		setNext(false);
 		setAnswer({answer: '', answerClass: 'answerHidden'});
