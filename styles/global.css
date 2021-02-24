@@ -284,7 +284,7 @@ a {
 
 .answer {
   margin: -8rem auto 0 auto;
-  background-color: #ff615b;
+  background-color: #ff625b;
   z-index: 10;
   border-radius: 5px;
   width: 60%;
@@ -316,6 +316,44 @@ a {
 .tableResults td {
   padding: 0;
   vertical-align: middle;
+}
+
+/*
+ * Quiz
+ */
+
+.actionButton {
+  border-radius: 15px;
+}
+
+.actionButton.yes {
+  color: #8dd240;
+  border: 1px solid #8dd240;
+}
+
+.actionButton.yes:hover:not([disabled]), .actionButton.yes.btn-primary {
+  color: #ffffff;
+  background-color: #8dd240;
+}
+
+.actionButton.no {
+  color: #fc625f;
+  border: 1px solid #fc625f;
+}
+
+.actionButton.no:hover:not([disabled]), .actionButton.no.btn-primary {
+  color: #ffffff;
+  background-color: #fc625f;
+}
+
+.actionButton.maybe {
+  color: #fec84c;
+  border: 1px solid #fec84c;
+}
+
+.actionButton.maybe:hover:not([disabled]), .actionButton.maybe.btn-primary {
+  color: #ffffff;
+  background-color: #fec84c;
 }
 
 /*
