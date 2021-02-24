@@ -31,27 +31,51 @@ const Container = styled.div`
 		}
 	}
 
-	.bar-chosen {
+	.bar-chosen.yes {
   		progress[value]{
 			::-webkit-progress-value {
-				background-color: #2779FF;
+				background-color: #8dd240;
 			}
 		}
 
 		span {
-			color: #2779FF;
+			color: #8dd240;
+		}
+	}
+
+	.bar-chosen.no {
+  		progress[value]{
+			::-webkit-progress-value {
+				background-color: #fc625f;
+			}
+		}
+
+		span {
+			color: #fc625f;
+		}
+	}
+
+	.bar-chosen.maybe {
+  		progress[value]{
+			::-webkit-progress-value {
+				background-color: #fec84c;
+			}
+		}
+
+		span {
+			color: #fec84c;
 		}
 	}
 
 	.bar-unchosen {
 		progress[value]{
 			::-webkit-progress-value {
-				background-color: #808080;
+				background-color: #A9A9A9;
 			}
 		}
 
 		span {
-			color: #808080;
+			color: #A9A9A9;
 		}
 	}
 
@@ -75,11 +99,11 @@ const Container = styled.div`
 `;
 
 const ProgressBar = props => {
-	const { value, max, label, chosen, width } = props;
+	const { value, answer, max, label, chosen, width } = props;
 
 	return (
-		<Container value={value} width={width} chosen={chosen} label={label} >
-			<div class={chosen == true ? 'grid-container bar-chosen' : 'grid-container bar-unchosen'}>
+		<Container value={value} answer={answer} width={width} chosen={chosen} label={label} >
+			<div class={chosen == true ? `grid-container bar-chosen ${answer}` : 'grid-container bar-unchosen'}>
 				<span id='label'>{label}&nbsp;</span>
 				<div><progress id='progress-bar' label={label} value={value} max={max} /></div>
 				<span id='percentage'>&nbsp;{((value / max) * 100).toFixed(2)}%</span>
@@ -89,6 +113,7 @@ const ProgressBar = props => {
 
 ProgressBar.propTypes = {
 	value: PropTypes.number.isRequired,
+	answer: PropTypes.string,
 	max: PropTypes.number,
 	label: PropTypes.string,
 	color: PropTypes.string,
