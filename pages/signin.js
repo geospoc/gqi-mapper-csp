@@ -6,9 +6,28 @@ import Layout from '../components/layout'
 import HeaderComponent from '../components/headerComponent'
 import ProviderButtons from '../components/providerButtons'
 
+const SignInError = ({ error }) => {
+    const errors = {
+        Signin: 'Try signing with a different account.',
+        OAuthSignin: 'Try signing with a different account.',
+        OAuthCallback: 'Try signing with a different account.',
+        OAuthCreateAccount: 'Try signing with a different account.',
+        EmailCreateAccount: 'Try signing with a different account.',
+        Callback: 'Try signing with a different account.',
+        OAuthAccountNotLinked: 'To confirm your identity, sign in with the same account you used originally.',
+        EmailSignin: 'Check your email address.',
+        CredentialsSignin: 'Sign in failed. Check the details you provided are correct.',
+        default: 'Unable to sign in.'
+    }
+
+    const errorMessage = error && (errors[error] ?? errors.default)
+
+    return <div className="signin-error">{errorMessage}</div>
+}
+
 export default function SignIn({ providers }) {
     const {
-        query: { callbackUrl },
+        query: { callbackUrl, error },
     } = useRouter()
 
     return (
@@ -25,6 +44,9 @@ export default function SignIn({ providers }) {
                 <HeaderComponent hideSignIn={true} />
                 <div className="container px-4">
                     <div className="signin-title">Sign in to your account</div>
+                    {error &&
+                        <SignInError error={error} />
+                    }
                     <ProviderButtons
                         providers={providers}
                         callbackUrl={callbackUrl}
