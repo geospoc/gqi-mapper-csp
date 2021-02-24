@@ -25,9 +25,11 @@ export default function Quiz (props) {
 	function handleClick(e, value) {
 		let buttons = document.getElementsByClassName('actionButton');
 		for(let button of buttons) {
-			button.className = "btn btn-outline-primary actionButton"
+			let firstClassName = button.classList[0];
+			button.className = `${firstClassName} actionButton btn btn-outline-primary`
 		}
-		e.target.className = "btn btn-primary actionButton";
+		let firstClassName = e.target.classList[0];
+		e.target.className = `${firstClassName} actionButton btn btn-primary`;
 		let resultValue = {school_id: props.question.school_id, answer: value};
 		props.onAnswerSelected(resultValue);
         setResult(resultValue)
@@ -37,7 +39,8 @@ export default function Quiz (props) {
 	function handleNext(){
 		let buttons = document.getElementsByClassName('actionButton');
 		for(let button of buttons) {
-			button.className = "btn btn-outline-primary actionButton"
+			let firstClassName = button.classList[0];
+			button.className = `${firstClassName} actionButton btn btn-outline-primary`
 		}
 		setNext(false);
 		setAnswer({answer: '', answerClass: 'answerHidden'});
@@ -65,13 +68,13 @@ export default function Quiz (props) {
 				<div>
 					<Row className="p-3">
 						<Col xs={4}>
-							<Button className='actionButton yes' variant={yes} disabled={next} onClick={e => handleClick(e, 'yes')}>Yes</Button>
+							<Button className='yes actionButton' variant={yes} disabled={next} onClick={e => handleClick(e, 'yes')}>Yes</Button>
 						</Col>
 						<Col xs={4}>
-							<Button className='actionButton no' variant={no} disabled={next} onClick={e => handleClick(e, 'no')}>No</Button>
+							<Button className='no actionButton' variant={no} disabled={next} onClick={e => handleClick(e, 'no')}>No</Button>
 						</Col>
 						<Col xs={4}>
-							<Button className='actionButton maybe' variant={maybe} disabled={next} onClick={e => handleClick(e, 'maybe')}>Unsure</Button>
+							<Button className='maybe actionButton' variant={maybe} disabled={next} onClick={e => handleClick(e, 'maybe')}>Unsure</Button>
 						</Col>
 					</Row>
 				</div>

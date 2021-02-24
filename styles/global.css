@@ -331,7 +331,7 @@ a {
   border: 1px solid #8dd240;
 }
 
-.actionButton.yes:hover {
+.actionButton.yes:hover:not([disabled]), .actionButton.yes.btn-primary {
   color: #ffffff;
   background-color: #8dd240;
 }
@@ -341,7 +341,7 @@ a {
   border: 1px solid #fc625f;
 }
 
-.actionButton.no:hover {
+.actionButton.no:hover:not([disabled]), .actionButton.no.btn-primary {
   color: #ffffff;
   background-color: #fc625f;
 }
@@ -351,7 +351,7 @@ a {
   border: 1px solid #fec84c;
 }
 
-.actionButton.maybe:hover {
+.actionButton.maybe:hover:not([disabled]), .actionButton.maybe.btn-primary {
   color: #ffffff;
   background-color: #fec84c;
 }
