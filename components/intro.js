@@ -102,6 +102,12 @@ export default function Intro(props) {
 				</Card>
 			</Accordion>
 		</div>
+
+		<footer className="masthead pt-2 mt-3">
+			<p style={{textAlign:"center"}}>
+				<a href="/legal">Legal</a> &nbsp;&nbsp;|&nbsp;&nbsp; <a href="mailto:projectconnect@unicef.org">Contact us</a>
+			</p>
+		</footer>
     </Layout>
   )
 }
