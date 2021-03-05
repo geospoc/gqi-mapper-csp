@@ -51,7 +51,7 @@ export default function Tips(props) {
 			<img src="/tips/campus_boundaries_2.png" width="100%" />
 			<img src="/tips/campus_boundaries_3.png" width="100%" />
 
-			<h5 className="blueText">Pattern 7: Buildings with playgrounds or fields</h5>
+			<h5 className="blueText">Pattern 7: Buildings with playgrounds or sport courts</h5>
 			<img src="/tips/field.png" width="100%" />
 			<img src="/tips/playground_1.png" width="100%" />
 			<img src="/tips/playground_2.png" width="100%" />
