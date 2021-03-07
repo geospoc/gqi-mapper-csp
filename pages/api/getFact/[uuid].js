@@ -53,10 +53,10 @@ export default async (req, res) => {
 				      WHERE user_id = '${user_id}') AS tagged
 				   LEFT JOIN locations ON locations.school_id = tagged.school_id
 				   GROUP BY locations.country_code) AS country_counts;`,
-				`SELECT count(DISTINCT locations.country_code) AS num_locations_mapped_total
+				`SELECT count(DISTINCT locations.country_code) AS num_countries_mapped_total
 					FROM crowdsourcing
 					LEFT JOIN locations ON locations.school_id = crowdsourcing.school_id;`,
-				`SELECT COUNT(DISTINCT school_id) FROM crowdsourcing;`
+				`SELECT COUNT(DISTINCT school_id) as num_locations_mapped_total FROM crowdsourcing;`
 				]
 				const rand = Math.floor(Math.random() * queries.length);
 				result = await pool.query(queries[rand]);
