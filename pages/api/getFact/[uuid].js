@@ -29,7 +29,7 @@ export default async (req, res) => {
 					'country_count',
 					'top_country',
 					'num_countries_mapped_total',
-					'num_schools_mapped_total'
+					'num_locations_mapped_total'
 				]
 				// SQL queries which fetch facts
 				const queries = [
@@ -53,7 +53,7 @@ export default async (req, res) => {
 				      WHERE user_id = '${user_id}') AS tagged
 				   LEFT JOIN locations ON locations.school_id = tagged.school_id
 				   GROUP BY locations.country_code) AS country_counts;`,
-				`SELECT count(DISTINCT locations.country_code) AS num_countries_mapped_total
+				`SELECT count(DISTINCT locations.country_code) AS num_locations_mapped_total
 					FROM crowdsourcing
 					LEFT JOIN locations ON locations.school_id = crowdsourcing.school_id;`,
 				`SELECT COUNT(DISTINCT school_id) FROM crowdsourcing;`
@@ -67,7 +67,7 @@ export default async (req, res) => {
 					'country_count': `You have mapped locations in ${answer} countr${(answer == 1) ? 'y' : 'ies'}.`,
 					'top_country': `Your top country is ${countryCodes[answer]}.`,
 					'num_countries_mapped_total': `You are part of a global movement! Together, players have mapped locations in ${answer} countr${(answer == 1) ? 'y' : 'ies'}.`,
-					'num_schools_mapped_total': `You are part of a global movement! Together, players have mapped ${answer} locations.`
+					'num_locations_mapped_total': `You are part of a global movement! Together, players have mapped ${answer} locations.`
 				}
 
 				fact = messages[factTypes[rand]];
