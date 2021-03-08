@@ -59,7 +59,7 @@ export default function Quiz (props) {
 			</Head>
 			<main>
 				<QuestionCount counter={props.counter} total={props.questionTotal} />
-				<p>Does this location in {countryName} look like a school?</p>
+				<p>Does this location in <b>{countryName}</b> look like a school?</p>
 
 				<div className="row no-gutters align-items-center mapdiv">
 					<MapComponent lat={props.question.lat} lon={props.question.lon} />
