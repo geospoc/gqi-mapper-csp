@@ -59,7 +59,7 @@ export default function Result(props) {
 						<p style={{paddingTop: '.5em'}}>
 						{props.taggedAllLocations ? '🏆 You are a mapping champion! 🗺 You have mapped all of our potential school locations. We will add more shortly, so come back soon.' : 'Help us connect more children to opportunity by mapping more schools.'}
 						</p>
-						{props.taggedAllLocations ? <Button variant="primary" href="https://projectconnect.world">Visit Project Connect</Button> : <Button variant="primary" href="/">Map More Schools</Button>}
+						{props.taggedAllLocations ? <Button variant="primary" href="https://projectconnect.world">Visit Project Connect</Button> : <Button variant="primary" href="/mapping">Map More Schools</Button>}
 					</div>
 				</div>
 		    </Layout>
