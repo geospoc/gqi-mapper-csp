@@ -51,7 +51,7 @@ export default function Intro(props) {
 
 		<div>
 			<p className="stdpar">
-				Want to know what a school looks like on a map? <Link href="/tips">
+				Want to know what a school looks like on a map? <Link href="/tips" passHref>
 			    <a>View school mapping tips</a></Link>
 			</p>
 		</div>
@@ -71,8 +71,8 @@ export default function Intro(props) {
 							There are approximately 6 million schools in the world, but nobody knows where all of them are.
 							We want to use the power of crowdsourcing to map and validate the location of these schools.
 							For more information on the mission of Project Connect, visit&nbsp;
-							<Link href="https://projectconnect.world">
-								<a>our website</a>
+							<Link href="https://projectconnect.world" passHref>
+								<a target="_blank" rel="noopener">our website</a>
 							</Link>.
 						</Card.Body>
 					</Accordion.Collapse>
@@ -103,9 +103,13 @@ export default function Intro(props) {
 			</Accordion>
 		</div>
 
-		<footer className="masthead pt-2 mt-3">
+		<footer className="masthead pt-3 mt-3">
 			<p style={{textAlign:"center"}}>
-				<a href="/legal">Legal</a> &nbsp;&nbsp;|&nbsp;&nbsp; <a href="mailto:projectconnect@unicef.org">Contact us</a>
+				<a href="/legal">Legal</a>
+				&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+				<a href="https://github.com/unicef/projectconnect-game" target="_blank" rel="noopener">Source Code</a>
+				&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+				<a href="mailto:projectconnect@unicef.org">Contact us</a>
 			</p>
 		</footer>
     </Layout>
