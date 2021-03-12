@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useCookies } from 'react-cookie';
+import { useSession } from 'next-auth/client'
 import { v4 as uuidv4 } from 'uuid';
 
 import useScriptText from '../hooks/useScriptText';
@@ -18,6 +19,7 @@ export default function mapping() {
 	const [fact, setFact] = useState('');
 
 	const [cookies, setCookie] = useCookies(['uuid']);
+	const [session] = useSession();
 
 	const [untaggedLocationsCount, setUntaggedLocationsCount] = useState(10);
 
@@ -48,16 +50,17 @@ export default function mapping() {
 		}
 
 		// Initialize cookie if not present
-		if(!cookies.uuid){
-			const userId = uuidv4();
+		const userId = uuidv4();
+		if(!session && !cookies.uuid){
 			setCookie('uuid', userId, { path: '/', maxAge: 2592000 }); // maxAge: 30 days
 			addUser(userId);
 		}
 
 		// Initialize the set of questions
 		async function fetchData() {
+			const user_id = session ? session.user.id : (cookies.uuid ? cookies.uuid : userId);
 			// Get location data
-			const result = await fetch(`/api/getLocations/${cookies.uuid}`);
+			const result = await fetch(`/api/getLocations/${user_id}`);
 			setQuestions(await result.json());
 		}
 		fetchData();
@@ -86,18 +89,22 @@ export default function mapping() {
 		if (result.school_id) {
 			fetchLocationResults(result.school_id);
 		}
+
+		const user_id = session ? session.user.id : cookies.uuid
+
 		fetch("/api/validateLocation", {
 			'method': 'POST',
 			'headers': {
 				'content-type': 'application/json',
 				'accept': 'application/json'
-  			},
-  			'body': JSON.stringify({
-  				user_id: cookies.uuid, 
-  				school_id: result.school_id,
-  				result: result.answer
-  			})
-		});
+			},
+			'body': JSON.stringify({
+				user_id: user_id, 
+				school_id: result.school_id,
+				result: result.answer
+				})
+			});
+
 	}
 
 	function handleNextSelected() {
@@ -117,14 +124,18 @@ export default function mapping() {
 	}
 
 	async function fetchUntaggedLocationsCount() {
+		const user_id = session ? session.user.id : cookies.uuid
+
 		// Get number of untagged locations
-		const result = await fetch(`/api/getUntaggedLocationsCount/${cookies.uuid}`);
+		const result = await fetch(`/api/getUntaggedLocationsCount/${user_id}`);
 		const response = await result.json();
 		setUntaggedLocationsCount(await response.count);
 	}
 
 	async function fetchUserStats() {
-		const result = await fetch(`/api/getUserStats/${cookies.uuid}`);
+		const user_id = session ? session.user.id : cookies.uuid
+
+		const result = await fetch(`/api/getUserStats/${user_id}`);
 		const response = await result.json();
 		setUserStats(await response);
 	}

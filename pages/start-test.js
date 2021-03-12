@@ -9,7 +9,8 @@ import useScriptText from '../hooks/useScriptText';
 import Intro from '../components/intro';
 import QuizTest from '../components/quizTest';
 import Layout from '../components/layout';
- 
+import HeaderComponent from '../components/headerComponent';
+
 export default function StartTest() {
 
 	const [height, setHeight] = useState(165);
@@ -40,11 +41,7 @@ export default function StartTest() {
                         <link href="https://fonts.googleapis.com/css2?family=Cabin&display=swap" rel="stylesheet" />
                 </Head>
 
-				<header className="masthead p-3 inverse">
-                    <div className="inner">
-                      <p className="masthead-brand inverse">PROJECT CONNECT</p>
-                    </div>
-                </header>
+				<HeaderComponent inverse={true} />
 
                 <div className="start-test big-button">
                     <h2>Let's start with testing your school mapping skills</h2>

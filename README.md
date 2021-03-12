@@ -36,6 +36,19 @@ PGHOST="POSTGRES_HOST"
 PGPASSWORD="POSTGRES_PASSWORD"
 PGDATABASE="POSTGRES_DATABASE"
 ```
+To work with the authentication functionalities, you need to add the following entries to the `.env` or `.env.local`:
+```
+SECRET="A secret to use for key generation"
+NEXTAUTH_URL="HOST_URL"
+FACEBOOK_ID="YOUR_FACEBOOK_ID"
+FACEBOOK_SECRET="YOUR_FACEBOOK_SECRET"
+TWITTER_CLIENT_ID="YOUR_TWITTER_CLIENT_ID"
+TWITTER_CLIENT_SECRET="YOUR_TWITTER_CLIENT_SECRET"
+GOOGLE_CLIENT_ID="YOUR_GOOGLE_CLIENT_ID"
+GOOGLE_CLIENT_SECRET="YOUR_GOOGLE_CLIENT_SECRET"
+NEXT_PUBLIC_AUTH_CALLBACK="HOST_URL"
+```
+To obtain the secrets, contact one of the contributors.
 
 The [countries.json](data/countries.json) is included in this repository to associate country codes with country names. If this file needs to be updated or replaced, follow these instructions:
 

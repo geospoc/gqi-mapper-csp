@@ -1,6 +1,7 @@
 import Head from 'next/head';
 import Link from 'next/link';
 import Layout from '../components/layout';
+import HeaderComponent from '../components/headerComponent';
 import { Accordion, AccordionContext, Button, useAccordionToggle } from 'react-bootstrap';
 
 
@@ -13,11 +14,7 @@ export default function Tips(props) {
 			<link href="https://fonts.googleapis.com/css2?family=Cabin&display=swap" rel="stylesheet" />
 		</Head>
 
-		<header className="masthead p-3">
-		    <div className="inner">
-		      <p className="masthead-brand">PROJECT CONNECT</p>
-		    </div>
-		</header>
+		<HeaderComponent inverse={false} />
 
 		<div className="tips">
 			<h1>School Mapping Tips</h1>

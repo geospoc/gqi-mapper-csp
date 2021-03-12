@@ -1,6 +1,7 @@
 import Head from 'next/head';
 import Link from 'next/link';
 import Layout from '../components/layout';
+import HeaderComponent from '../components/headerComponent';
 import { Accordion, AccordionContext, Button, useAccordionToggle } from 'react-bootstrap';
 
 
@@ -13,11 +14,7 @@ export default function Tips(props) {
 			<link href="https://fonts.googleapis.com/css2?family=Cabin&display=swap" rel="stylesheet" />
 		</Head>
 
-		<header className="masthead p-3">
-		    <div className="inner">
-		      <p className="masthead-brand">PROJECT CONNECT</p>
-		    </div>
-		</header>
+		<HeaderComponent inverse={false} />
 
 		<div className="tips">
 			<a name="top">
@@ -39,7 +36,7 @@ export default function Tips(props) {
 
 			<p>&nbsp;</p>
 
-			<h3 class="text-align-center">Terms of Use</h3>
+			<h3 className="text-align-center">Terms of Use</h3>
 
 			<p>&nbsp;</p>
 
@@ -84,7 +81,7 @@ export default function Tips(props) {
 			<p>&nbsp;</p>
 
 			<a name="privacy-policy">
-				<h3 class="text-align-center">Privacy policy</h3>
+				<h3 className="text-align-center">Privacy policy</h3>
 			</a>
 
 			<p>&nbsp;</p>
@@ -153,7 +150,7 @@ export default function Tips(props) {
 			<p>&nbsp;</p>
 
 			<a name="cookies-policy">
-				<h3 class="text-align-center">Cookies policy</h3>
+				<h3 className="text-align-center">Cookies policy</h3>
 			</a>
 
 			<p>&nbsp;</p>
@@ -231,7 +228,7 @@ export default function Tips(props) {
 			<p>&nbsp;</p>
 
 			<a name="note-on-maps">
-				<h3 class="text-align-center">Note on maps</h3>
+				<h3 className="text-align-center">Note on maps</h3>
 			</a>
 
 			<p>&nbsp;</p>
@@ -242,9 +239,13 @@ export default function Tips(props) {
 
 		</div>
 
-		<footer className="masthead pt-2 mt-3">
+		<footer className="masthead pt-3 mt-3">
 			<p style={{textAlign:"center"}}>
-				<a href="/legal">Legal</a> &nbsp;&nbsp;|&nbsp;&nbsp; <a href="mailto:projectconnect@unicef.org">Contact us</a>
+				<a href="/legal">Legal</a>
+				&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+				<a href="https://github.com/unicef/projectconnect-game" target="_blank" rel="noopener">Source Code</a>
+				&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+				<a href="mailto:projectconnect@unicef.org">Contact us</a>
 			</p>
 		</footer>
 

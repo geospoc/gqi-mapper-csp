@@ -60,6 +60,39 @@ async function createTables() {
 			ip INET
 		);
 	`);
+
+	await pool.query(`
+		CREATE TABLE accounts
+		(
+			id                   SERIAL,
+			compound_id          VARCHAR(255) NOT NULL,
+			user_id              INTEGER NOT NULL,
+			provider_type        VARCHAR(255) NOT NULL,
+			provider_id          VARCHAR(255) NOT NULL,
+			provider_account_id  VARCHAR(255) NOT NULL,
+			refresh_token        TEXT,
+			access_token         TEXT,
+			access_token_expires TIMESTAMPTZ,
+			created_at           TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP,
+			updated_at           TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP,
+			PRIMARY KEY (id)
+		);
+	`)
+	await pool.query(`
+		CREATE TABLE users
+		(
+			id             SERIAL,
+			name           VARCHAR(255),
+			email          VARCHAR(255),
+			email_verified TIMESTAMPTZ,
+			image          VARCHAR(255),
+			created_at     TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP,
+			updated_at     TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP,
+			uuid           TEXT,
+			PRIMARY KEY (id)
+		);
+	`);
+
 	await pool.end()
 }
 
@@ -75,7 +108,7 @@ async function loadTables() {
 }
 
 async function dropTables() {
-	await pool.query(`DROP TABLE IF EXISTS locations; DROP TABLE IF EXISTS crowdsourcing; DROP TYPE IF EXISTS yesnomaybe; DROP TABLE IF EXISTS crowdusers;`);
+	await pool.query(`DROP TABLE IF EXISTS locations; DROP TABLE IF EXISTS crowdsourcing;  DROP TABLE IF EXISTS crowdusers; DROP TABLE IF EXISTS users; DROP TABLE IF EXISTS accounts; DROP TYPE IF EXISTS yesnomaybe;`);
 	await pool.end();
 }
 

@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import Head from 'next/head';
 import Link from 'next/link';
 import Layout from '../components/layout';
+import HeaderComponent from '../components/headerComponent';
 import Button from 'react-bootstrap/Button';
 import styled from 'styled-components';
 
@@ -38,11 +39,8 @@ export default function Result(props) {
 					<link href="https://fonts.googleapis.com/css2?family=Cabin&display=swap" rel="stylesheet" />
 				</Head>
 
-				<header className="masthead p-3">
-				    <div className="inner">
-				      <p className="masthead-brand">PROJECT CONNECT</p>
-				    </div>
-				</header>
+				<HeaderComponent inverse={false} />
+
 
 				<div className="result big-button">
 					<div className="outerMessage">
@@ -61,7 +59,7 @@ export default function Result(props) {
 						<p style={{paddingTop: '.5em'}}>
 						{props.taggedAllLocations ? '🏆 You are a mapping champion! 🗺 You have mapped all of our potential school locations. We will add more shortly, so come back soon.' : 'Help us connect more children to opportunity by mapping more schools.'}
 						</p>
-						{props.taggedAllLocations ? <Button variant="primary" href="https://projectconnect.world">Visit Project Connect</Button> : <Button variant="primary" href="/">Map More Schools</Button>}
+						{props.taggedAllLocations ? <Button variant="primary" href="https://projectconnect.world" target="_blank" rel="noopener">Visit Project Connect</Button> : <Button variant="primary" href="/mapping">Map More Schools</Button>}
 					</div>
 				</div>
 		    </Layout>

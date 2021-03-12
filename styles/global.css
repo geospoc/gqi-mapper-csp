@@ -104,16 +104,24 @@ body {
   font-weight: 100;
 }
 
-.masthead-brand {
+.masthead-brand:link,
+.masthead-brand:visited,
+.masthead-brand:hover,
+.masthead-brand:active {
   margin-bottom: 0;
   color: #FFF;
   size: 1.5em;
   letter-spacing: 0.15em;
+  text-transform: uppercase;
+  text-decoration: none;
 }
 
 .inverse {
   background-color: white;
-  color: #000;
+}
+
+.inverse .masthead-brand {
+  color: #141923;
 }
 
 .nav-masthead .nav-link {
@@ -137,6 +145,16 @@ body {
   color: #fff;
   border-bottom-color: #fff;
 }
+
+.navbar-nav .dropdown .dropdown-toggle {
+  text-decoration: none;
+  color: #0068ea;
+}
+
+.navbar-nav .dropdown .dropdown-toggle:hover {
+  color: #0068ea;
+}
+
 
 @media (min-width: 48em) {
   .masthead-brand {
@@ -166,6 +184,7 @@ body {
 footer {
   width: 100%;
   color: white;
+  font-size: 0.8em;
 }
 
 footer a {
@@ -276,7 +295,7 @@ a {
 
 .answer {
   margin: -8rem auto 0 auto;
-  background-color: #ff615b;
+  background-color: #ff625b;
   z-index: 10;
   border-radius: 5px;
   width: 60%;
@@ -308,4 +327,65 @@ a {
 .tableResults td {
   padding: 0;
   vertical-align: middle;
+}
+
+/*
+ * Quiz
+ */
+
+.actionButton {
+  border-radius: 15px;
+}
+
+.actionButton.yes {
+  color: #8dd240;
+  border: 1px solid #8dd240;
+}
+
+.actionButton.yes:hover:not([disabled]), .actionButton.yes.btn-primary {
+  color: #ffffff;
+  background-color: #8dd240;
+}
+
+.actionButton.no {
+  color: #fc625f;
+  border: 1px solid #fc625f;
+}
+
+.actionButton.no:hover:not([disabled]), .actionButton.no.btn-primary {
+  color: #ffffff;
+  background-color: #fc625f;
+}
+
+.actionButton.maybe {
+  color: #fec84c;
+  border: 1px solid #fec84c;
+}
+
+.actionButton.maybe:hover:not([disabled]), .actionButton.maybe.btn-primary {
+  color: #ffffff;
+  background-color: #fec84c;
+}
+
+/*
+ * Sign In page
+ */
+
+.signin-title {
+  margin: 40px 0px 30px;
+  font-size: 26px;
+  color: #141923;
+}
+
+.signin-divider {
+  border-top: solid 1.5px #96999b;
+  margin: 30px 0;
+}
+
+.signin-error {
+  padding: 0.5em 1em;
+  margin: 1em 0em;
+  background-color: #277aff;
+  color: #ffffff;
+  border-radius: 5px;
 }
