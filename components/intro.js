@@ -64,7 +64,7 @@ export default function Intro(props) {
 			<Accordion>
 				<Card>
 					<ContextAwareToggle eventKey="0">
-						How is my contribution important?
+						Why does mapping matter?
 					</ContextAwareToggle>
 					<Accordion.Collapse eventKey="0">
 						<Card.Body>
@@ -79,16 +79,16 @@ export default function Intro(props) {
 				</Card>
 				<Card>
 					<ContextAwareToggle eventKey="1">
-						What is the purpose of this game?
+						What do you do with my answers?
 					</ContextAwareToggle>
 					<Accordion.Collapse eventKey="1">
 						<Card.Body>
-							In this first version, the purpose of the game is to crowdsource the validation of known locations
-							– at least in the short term, we are not planning to use this game to crowdsource the location of
-							new schools. We have other methods and tools for that purpose (i.e. ML models, apps that crowdsource geolocation
-							from teachers and students when they are in their school, etc.) Once we have the thresholds well defined,
-							it will be technically possible to send images of any areas with buildings and use this to map locations of
-							unknown schools.
+							UNICEF partners with country governments to obtain the coordinates of locations that might be
+							schools or might not. Right now, players like you are helping us determine whether these locations
+							are indeed schools. We have other tools to help us do this (e.g. ML models, apps where teachers
+							and students around the world can send us geolocations of their schools, and more). Once enough
+							players have helped us figure out which locations are schools, we can start enhancing our methods
+							so we can determine whether any location, not just locations sent to us, is a school.
 						</Card.Body>
 					</Accordion.Collapse>
 				</Card>
@@ -107,18 +107,6 @@ export default function Intro(props) {
 					</Accordion.Collapse>
 				</Card>
 				<Card>
-					<ContextAwareToggle eventKey="3">
-						How will you estimate the accuracy of my school tagging?
-					</ContextAwareToggle>
-					<Accordion.Collapse eventKey="3">
-						<Card.Body>
-							This is a beta version of the tool. Your responses will help us develop algorithms that process
-							results and set thresholds for the number of individual responses needed in order to accurately
-							tag a school. No single person will have the power to validate a school alone.
-						</Card.Body>
-					</Accordion.Collapse>
-				</Card>
-				<Card>
 					<ContextAwareToggle eventKey="4">
 						What is done with the yes/no/unsure ratings?
 					</ContextAwareToggle>
@@ -130,6 +118,7 @@ export default function Intro(props) {
 							a dataset that has been manually validated by a trained team of "data mappers" as ground
 							truth for this initial validation and for determining the yes/no thresholds. The more users
 							play the game and the more answers we have, the better we’ll be able to define these thresholds.
+							On the other hand, no single person will have the power to validate a school alone.
 							<br/><br/>
 							The ratings will be used in the following ways:
 							<ol>
