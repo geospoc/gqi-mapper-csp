@@ -389,3 +389,112 @@ a {
   color: #ffffff;
   border-radius: 5px;
 }
+
+/*
+ * Profile page
+ */
+
+.user-view {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.profile-card-container {
+  flex-basis: auto;
+  margin: 35px 0 35px 25px;
+}
+
+.profile-info {
+  display: inline-flex;
+  align-items: center;
+}
+
+.profile-picture {
+  width: 60px;
+}
+
+.profile-name {
+  margin-left: 20px;
+  color: #141923;
+  font-size: 19px;
+  font-weight: 900;
+}
+
+.profile-signout-container {
+  margin-top: 25px;
+}
+
+.profile-signout {
+  padding: 0;
+  background-color: #ffffff;
+  color: #ff615b;
+  border: none;
+  font-size: 12px;
+  font-weight: bold;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  line-height: 25px;
+  display: flex;
+  align-items: center;
+}
+
+.profile-bottom {
+  max-height: 39em;
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.mappings-container {
+  flex: 1 1 auto;
+  background-color: #dde3ee;
+  display: flex;
+  flex-direction: column;
+}
+
+.mappings-header {
+  padding: 0 25px;
+  background-color: #646973;
+  color: #ffffff;
+  font-size: 16px;
+  line-height: 36px;
+  align-items: center;
+}
+
+.mappings-title {
+  margin-left: 8px;
+  letter-spacing: 1px;
+}
+
+.mappings-list {
+  padding: 0 25px;
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+
+.profile-fact {
+  flex-basis: 0;
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
+  font-size: 17px;
+  color: #141923;
+}
+
+.profile-fact-divider {
+  margin: 0;
+  color: #b6bbc6;
+}
+
+.bottom-button .btn-primary {
+  flex: 0 1 80px;
+  text-transform: uppercase;
+  border-radius: 0;
+  font-size: 12px;
+  padding: 1.5em;
+  letter-spacing: 1px;
+  color: #ffffff;
+}
