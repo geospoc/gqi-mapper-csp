@@ -23,16 +23,15 @@ export default async (req, res) => {
 		var fact = null;
 		const user_id = req.query.uuid;
 		if (uuidValidate(user_id)) {
-			try {
-				// Fact keys
-				const factTypes = [
-					'country_count',
-					'top_country',
-					'num_countries_mapped_total',
-					'num_locations_mapped_total'
-				]
-				// SQL queries which fetch facts
-				const queries = [
+			// Fact keys
+			const factTypes = [
+				'country_count',
+				'top_country',
+				'num_countries_mapped_total',
+				'num_locations_mapped_total'
+			]
+			// SQL queries which fetch facts
+			const queries = [
 				`SELECT count(1) as country_count
 				FROM
 				  (SELECT locations.country_code,
@@ -57,34 +56,71 @@ export default async (req, res) => {
 					FROM crowdsourcing
 					LEFT JOIN locations ON locations.school_id = crowdsourcing.school_id;`,
 				`SELECT COUNT(DISTINCT school_id) as num_locations_mapped_total FROM crowdsourcing;`
-				]
-				const rand = Math.floor(Math.random() * queries.length);
-				result = await pool.query(queries[rand]);
-				const answer = result.rows[0][factTypes[rand]];
+			]
 
-				// Fact messages
-				const messages = {
-					'country_count': `You have mapped locations in ${answer} countr${(answer == 1) ? 'y' : 'ies'}.`,
-					'top_country': `Your top country is ${countryCodes[answer]}.`,
-					'num_countries_mapped_total': `You are part of a global movement! Together, players have mapped locations in ${answer} countr${(answer == 1) ? 'y' : 'ies'}.`,
-					'num_locations_mapped_total': `You are part of a global movement! Together, players have mapped ${answer} locations.`
+			// Fact messages for each fact type
+			const getMessage = (factType, answer) => {
+				switch (factType) {
+					case 'country_count':
+						return `You have mapped locations in ${answer} countr${(answer == 1) ? 'y' : 'ies'}.`
+					case 'top_country':
+						return `Your top country is ${countryCodes[answer]}.`
+					case 'num_countries_mapped_total':
+						return `You are part of a global movement! Together, players have mapped locations in ${answer} countr${(answer == 1) ? 'y' : 'ies'}.`
+					case 'num_locations_mapped_total':
+						return `You are part of a global movement! Together, players have mapped ${answer} locations.`
+				}
+			}
+
+			// Return random fact for the result page
+			if (req.query.page === 'result') {
+				try {
+					const rand = Math.floor(Math.random() * queries.length);
+					const factType = factTypes[rand]
+					result = await pool.query(queries[rand]);
+					const answer = result.rows[0][factType];
+
+					fact = getMessage(factType, answer);
+				} catch (e) {
+					console.log(e);
+				}
+				let output = null;
+				if (result) {
+					res.statusCode = 200;
+					res.setHeader('Content-Type', 'application/json');
+					output = JSON.stringify({ 'message': fact })
+				} else {
+					res.statusCode = 500;
+				}
+				res.end(output);
+			}
+
+			// Return all the facts for the profile page.
+			if (req.query.page === 'profile') {
+				try {
+					const promises = [];
+					result = {};
+
+					queries.forEach((query) => promises.push(pool.query(query)));
+
+					const queryResults = await Promise.all(promises);
+
+					queryResults.forEach((queryResult, indx) => {
+						const factType = factTypes[indx]
+
+						const answer = queryResult.rows[0][factType]
+
+						result[factType] = getMessage(factType, answer)
+					});
+
+					res.statusCode = 200;
+					res.end(JSON.stringify(result));
+				} catch (e) {
+					console.log(e);
 				}
 
-				fact = messages[factTypes[rand]];
-			} catch(e) {
-				console.log(e);
-			}	
+			}
 		}
-		
-		let output = null;
-		if(result) {
-			res.statusCode = 200;
-			res.setHeader('Content-Type', 'application/json');
-			output = JSON.stringify({'message': fact})
-		} else {
-			res.statusCode = 500;
-		}
-		res.end(output);
 	} else {
 		// If it's not a GET request, return 405 - Method Not Allowed
 		res.statusCode = 405;
