@@ -141,7 +141,8 @@ export default function mapping() {
 	}
 
 	async function fetchFact() {
-		const result = await fetch(`/api/getFact/${cookies.uuid}`);
+		const user_id = session ? session.user.id : cookies.uuid
+		const result = await fetch(`/api/getFact/${user_id}?page=result`);
 		const response = await result.json();
 		setFact(await response['message']);
 	}
