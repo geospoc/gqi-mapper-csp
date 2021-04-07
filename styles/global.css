@@ -270,6 +270,7 @@ main {
 .mapdiv {
   width: 100%;
   height: calc(100% - 8em);
+  position: relative;
 }
 
 a, .blueText {
@@ -365,6 +366,19 @@ a {
 .actionButton.maybe:hover:not([disabled]), .actionButton.maybe.btn-primary {
   color: #ffffff;
   background-color: #fec84c;
+}
+
+#countryName {
+  background-color: rgb(249, 249, 249);
+  opacity: 0.95;
+  position: absolute;
+  padding: 5px 10px;
+  z-index: 1;
+  top: 10px;
+  left: 10px;
+  border-radius: 3px;
+  border: 1px solid rgba(0, 0, 0, 0.4);
+  font-family: 'Open Sans', sans-serif;
 }
 
 /*

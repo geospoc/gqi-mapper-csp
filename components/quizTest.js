@@ -4,7 +4,10 @@ import dynamic from 'next/dynamic'
 import {Row, Col, Button} from 'react-bootstrap';
 
 import QuestionCount from '../components/questionCount';
-import Layout from '../components/layout'
+import Layout from '../components/layout';
+
+const countryCodes = require('../data/countries.json');
+
 
 const MapComponent = dynamic(import('../components/mapComponent'),{
 	ssr: false
@@ -53,6 +56,7 @@ export default function QuizTest (props) {
 
 	const latlon = [props.question.lat, props.question.lon];
 	const answerClass = "answer " + answer.answerClass
+	const countryName = countryCodes[props.question.country_code];
 
 	return (
 		<Layout myClass="quiz">
@@ -65,6 +69,9 @@ export default function QuizTest (props) {
 
 				<div className="row no-gutters align-items-center mapdiv">
 					<MapComponent lat={props.question.lat} lon={props.question.lon} />
+					<div id="countryName">
+						{countryName}
+					</div>
 					<div className={answerClass}>
 						{answer['answer']}
 					</div>
