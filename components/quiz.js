@@ -5,7 +5,8 @@ import {Row, Col, Button} from 'react-bootstrap';
 
 import ProgressBar from '../components/progressBar';
 import QuestionCount from '../components/questionCount';
-import Layout from '../components/layout'
+import Layout from '../components/layout';
+import CountryNameLabel from '../components/countrynamelabel';
 
 const countryCodes = require('../data/countries.json');
 
@@ -63,9 +64,7 @@ export default function Quiz (props) {
 
 				<div className="row no-gutters align-items-center mapdiv">
 					<MapComponent lat={props.question.lat} lon={props.question.lon} />
-					<div id="countryName">
-						{countryName}
-					</div>
+					<CountryNameLabel countryName={countryName} />
 					<div className={answerClass}>
 						{answer['answer']}
 					</div>
