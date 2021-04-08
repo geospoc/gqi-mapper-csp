@@ -3,14 +3,14 @@ import Head from 'next/head';
 import dynamic from 'next/dynamic'
 import {Row, Col, Button} from 'react-bootstrap';
 
-import ProgressBar from '../components/progressBar';
-import QuestionCount from '../components/questionCount';
-import Layout from '../components/layout';
-import CountryNameLabel from '../components/countryNameLabel';
+import ProgressBar from './progressBar';
+import QuestionCount from './questionCount';
+import Layout from './layout';
+import CountryNameLabel from './countryNameLabel';
 
 const countryCodes = require('../data/countries.json');
 
-const MapComponent = dynamic(import('../components/mapComponent'),{
+const MapComponent = dynamic(import('./mapComponent'),{
 	ssr: false
 })
 
