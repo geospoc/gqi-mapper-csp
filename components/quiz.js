@@ -6,7 +6,7 @@ import {Row, Col, Button} from 'react-bootstrap';
 import ProgressBar from '../components/progressBar';
 import QuestionCount from '../components/questionCount';
 import Layout from '../components/layout';
-import CountryNameLabel from '../components/countrynamelabel';
+import CountryNameLabel from '../components/countryNameLabel';
 
 const countryCodes = require('../data/countries.json');
 
