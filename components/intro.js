@@ -1,11 +1,14 @@
+import React, { useContext, useState, useEffect } from 'react';
+import { useCookies } from 'react-cookie';
+import { useSession } from 'next-auth/client';
 import Head from 'next/head';
 import Link from 'next/link';
 import Layout from '../components/layout';
 import HeaderComponent from '../components/headerComponent';
-import { useContext } from 'react';
 import {Accordion, AccordionContext, Button, useAccordionToggle, Card} from 'react-bootstrap';
 
 function ContextAwareToggle({ children, eventKey, callback }) {
+
 	const currentEventKey = useContext(AccordionContext);
 
 	const decoratedOnClick = useAccordionToggle(
@@ -28,8 +31,29 @@ function ContextAwareToggle({ children, eventKey, callback }) {
 
 
 export default function Intro(props) {
+
+	const [linkLocation, setLinkLocation] = useState('/tips');
+	const [cookies, setCookie] = useCookies(['uuid']);
+	const [session] = useSession();
+
+	useEffect(() => {
+
+		const getUserStats = async () => {
+			const result = await fetch(`/api/getUserStats/${user_id}`)
+			const response = await result.json()
+			if(response){
+				setLinkLocation('/mapping');
+			}
+		}
+
+		const user_id = session ? session.user.id : (cookies.uuid ? cookies.uuid : null);
+		if(user_id){
+			getUserStats();
+		}
+	}, []);
+
   return (
-    <Layout myClass="intro">
+	<Layout myClass="intro">
 		<Head>
 			<title>Project Connect</title>
 			<link rel="icon" href="/favicon.ico" />
@@ -44,20 +68,13 @@ export default function Intro(props) {
 		</div>
 
 		<div className="next-section">
-			<Link href="/start-test" passHref>
+			<Link href={linkLocation} passHref>
 				<Button variant="primary"><span>Start Mapping Schools<img className="white" src="/white.svg"/></span></Button>
 			</Link>
 		</div>
-
-		<div>
-			<p className="stdpar">
-				Want to know what a school looks like on a map? <Link href="/tips" passHref>
-			    <a>View school mapping tips</a></Link>
-			</p>
-		</div>
 		
 		<div>
-			<p style= {{textAlign: 'center'}}>
+			<p style= {{textAlign: 'center', paddingTop: '2.5em'}}>
 				<b>Frequently asked questions</b><br/>
 				<img src="/blue.svg" />
 			</p>
@@ -79,9 +96,25 @@ export default function Intro(props) {
 				</Card>
 				<Card>
 					<ContextAwareToggle eventKey="1">
-						What do you do with my answers?
+						What does a school look like on a map?
 					</ContextAwareToggle>
 					<Accordion.Collapse eventKey="1">
+						<Card.Body>
+							Despite their varied structures, many schools have features that can help you identify a 
+							building as a school, whether it is the shape of the building, a group of buildings with
+							the same colored roof, or nearby sport courts or playgrounds. See&nbsp;
+							<Link href="/tips" passHref>
+								<a>examples of schools on a map</a>
+							</Link>,
+							learn to identify the most common set of features and hone in your school mapping skills!
+						</Card.Body>
+					</Accordion.Collapse>
+				</Card>
+				<Card>
+					<ContextAwareToggle eventKey="2">
+						What do you do with my answers?
+					</ContextAwareToggle>
+					<Accordion.Collapse eventKey="2">
 						<Card.Body>
 							UNICEF partners with country governments to obtain the coordinates of locations that might be
 							schools or might not. Right now, players like you are helping us determine whether these locations
@@ -93,10 +126,10 @@ export default function Intro(props) {
 					</Accordion.Collapse>
 				</Card>
 				<Card>
-					<ContextAwareToggle eventKey="2">
+					<ContextAwareToggle eventKey="3">
 						Where does the school location data come from?
 					</ContextAwareToggle>
-					<Accordion.Collapse eventKey="2">
+					<Accordion.Collapse eventKey="3">
 						<Card.Body>
 							The main sources of data for the game are country governments. Project Connect works very closely
 							with governments to gather existing data from different local stakeholders. The accuracy of the
@@ -156,6 +189,6 @@ export default function Intro(props) {
 				<a href="mailto:projectconnect@unicef.org">Contact us</a>
 			</p>
 		</footer>
-    </Layout>
+	</Layout>
   )
 }
