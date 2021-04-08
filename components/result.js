@@ -2,8 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Head from 'next/head';
 import Link from 'next/link';
-import Layout from '../components/layout';
-import HeaderComponent from '../components/headerComponent';
+import Layout from './layout';
+import HeaderComponent from './headerComponent';
 import Button from 'react-bootstrap/Button';
 import styled from 'styled-components';
 

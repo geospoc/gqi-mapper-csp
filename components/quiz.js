@@ -3,13 +3,14 @@ import Head from 'next/head';
 import dynamic from 'next/dynamic'
 import {Row, Col, Button} from 'react-bootstrap';
 
-import ProgressBar from '../components/progressBar';
-import QuestionCount from '../components/questionCount';
-import Layout from '../components/layout'
+import ProgressBar from './progressBar';
+import QuestionCount from './questionCount';
+import Layout from './layout';
+import CountryNameLabel from './countryNameLabel';
 
 const countryCodes = require('../data/countries.json');
 
-const MapComponent = dynamic(import('../components/mapComponent'),{
+const MapComponent = dynamic(import('./mapComponent'),{
 	ssr: false
 })
 
@@ -63,9 +64,7 @@ export default function Quiz (props) {
 
 				<div className="row no-gutters align-items-center mapdiv">
 					<MapComponent lat={props.question.lat} lon={props.question.lon} />
-					<div id="countryName">
-						{countryName}
-					</div>
+					<CountryNameLabel countryName={countryName} />
 					<div className={answerClass}>
 						{answer['answer']}
 					</div>

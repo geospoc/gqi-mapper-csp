@@ -3,8 +3,8 @@ import { useCookies } from 'react-cookie';
 import { useSession } from 'next-auth/client';
 import Head from 'next/head';
 import Link from 'next/link';
-import Layout from '../components/layout';
-import HeaderComponent from '../components/headerComponent';
+import Layout from './layout';
+import HeaderComponent from './headerComponent';
 import {Accordion, AccordionContext, Button, useAccordionToggle, Card} from 'react-bootstrap';
 
 function ContextAwareToggle({ children, eventKey, callback }) {
