@@ -17,10 +17,12 @@ export default function Tips(props) {
 		<HeaderComponent inverse={false} />
 
 		<div className="tips">
-			<h1>School Mapping Tips</h1>
-			<p>This section provides some useful information on how to identify a school on a map. 
+			<h4>What do schools look like?<br/>
+			Here's what you should know</h4>
+
+			<p style={{paddingTop: '1em'}}>
 			Despite their varied structures, many schools have features that can help you identify a building as a school. 
-			When looking at an image, keep an eye out for the following patterns.
+			When looking at an image, keep an eye out for these common school patterns.
 			</p>
 
 			<h5 className="blueText">Pattern 1: Buildings with U-shape</h5>
@@ -57,7 +59,7 @@ export default function Tips(props) {
 
 		<div className="next-section">
 			<Link href="/start-test" passHref>
-				<Button variant="primary"><span>Start Mapping Schools <img className="white" src="/white.svg"  /></span></Button>
+				<Button variant="primary"><span>Start Mapping Schools <img className="white" src="/white.svg" /></span></Button>
 			</Link>
 		</div>
 

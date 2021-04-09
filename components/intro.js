@@ -96,7 +96,7 @@ export default function Intro(props) {
 				</Card>
 				<Card>
 					<ContextAwareToggle eventKey="1">
-						What does a school look like on a map?
+						How can a school be identified on a map?
 					</ContextAwareToggle>
 					<Accordion.Collapse eventKey="1">
 						<Card.Body>
