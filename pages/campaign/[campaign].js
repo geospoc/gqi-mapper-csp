@@ -50,42 +50,63 @@ export default function campaign() {
 
 				<Container fluid>
 					<Row>
-						<h4>Total number of taggings</h4>
+						<Col>
+							<h4>Total number of taggings</h4>
+						</Col>
 					</Row>
 					<Row>
-						<Col xs={9} style={{paddingTop: '0.5em'}}>
+						<Col xs={7} style={{paddingTop: '0.5em'}}>
 							<ProgressBar now={stats.taggings/campaigns[campaign].taggings*100} />
 						</Col>
 						<Col className="text-right">
-							<h3>{numberWithCommas(campaigns[campaign].taggings)}</h3>
+							<h4>
+								<span style={{color: '#007bff'}}>
+									{numberWithCommas(stats.taggings)}
+								</span>
+								&nbsp;/&nbsp;{numberWithCommas(campaigns[campaign].taggings)}
+							</h4>
 						</Col>
 					</Row>
 					<Row>
 						<p>&nbsp;</p>
 					</Row>
 					<Row>
-						<h4>Schools Tagged</h4>
+						<Col>
+							<h4>Schools Tagged</h4>
+						</Col>
 					</Row>
 					<Row>
-						<Col xs={9} style={{paddingTop: '0.5em'}}>
+						<Col xs={7} style={{paddingTop: '0.5em'}}>
 							<ProgressBar now={stats.schools/campaigns[campaign].schools*100} />
 						</Col>
 						<Col className="text-right">
-							<h3>{numberWithCommas(campaigns[campaign].schools)}</h3>
+							<h4>
+								<span style={{color: '#007bff'}}>
+									{numberWithCommas(stats.schools)}
+								</span>
+								&nbsp;/&nbsp;{numberWithCommas(campaigns[campaign].schools)}
+							</h4>
 						</Col>
 					</Row>
 					<Row>
 						<p>&nbsp;</p>
 					</Row>
 					<Row>
-						<h4>Users Registered</h4>
+						<Col>
+							<h4>Users Registered</h4>
+						</Col>
 					</Row>
 					<Row>
-						<Col xs={9} style={{paddingTop: '0.5em'}}>
+						<Col xs={7} style={{paddingTop: '0.5em'}}>
 							<ProgressBar now={stats.users/campaigns[campaign].users*100} />
 						</Col>
 						<Col className="text-right">
-							<h3>{numberWithCommas(campaigns[campaign].users)}</h3>
+							<h4>
+								<span style={{color: '#007bff'}}>
+									{numberWithCommas(stats.users)}
+								</span>
+								&nbsp;/&nbsp;{numberWithCommas(campaigns[campaign].users)}
+							</h4>
 						</Col>
 					</Row>
 				</Container>
