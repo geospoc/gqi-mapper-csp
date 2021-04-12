@@ -48,34 +48,46 @@ const UserView = ({ user, signout }) => {
                     </button>
                 </div>
             </div>
+
             <div className="profile-bottom">
-                <div className="mappings-container">
-                    <div className="mappings-header">
-                        <img src="/star-white.svg" />
-                        <span className="mappings-title">Your mappings</span>
+                {userStats.mapped_count > 0
+                    ? <div>
+                        <div className="mappings-container">
+                            <div className="mappings-header">
+                                <img src="/star-white.svg" />
+                                <span className="mappings-title">Your mappings</span>
+                            </div>
+                            <div className="mappings-list">
+                                <div className="profile-fact">
+                                    You have mapped {userStats.mapped_count} schools.
+                                </div>
+                                <hr className="profile-fact-divider" />
+                                <div className="profile-fact">
+                                    {facts.country_count}
+                                </div>
+                                <hr className="profile-fact-divider" />
+                                <div className="profile-fact">
+                                    {facts.top_country}
+                                </div>
+                                <hr className="profile-fact-divider" />
+                                <div className="profile-fact">
+                                    {facts.num_locations_mapped_total}
+                                </div>
+                            </div>
+                        </div>
+                        <div className="bottom-button">
+                            <Link href="/mapping"><Button variant="primary">Map more schools<img src="/white.svg" /></Button>
+                            </Link>
+                        </div>
                     </div>
-                    <div className="mappings-list">
-                        <div className="profile-fact">
-                            You have mapped {userStats.mapped_count} schools.
-                        </div>
-                        <hr className="profile-fact-divider" />
-                        <div className="profile-fact">
-                            {facts.country_count}
-                        </div>
-                        <hr className="profile-fact-divider" />
-                        <div className="profile-fact">
-                            {facts.top_country}
-                        </div>
-                        <hr className="profile-fact-divider" />
-                        <div className="profile-fact">
-                            {facts.num_locations_mapped_total}
+                    :
+                    <div>
+                        <div className="bottom-button">
+                            <Link href="/mapping"><Button variant="primary">Start mapping schools<img src="/white.svg" /></Button>
+                            </Link>
                         </div>
                     </div>
-                </div>
-                <div className="bottom-button">
-                    <Link href="/mapping"><Button variant="primary">Map more schools<img src="/white.svg" /></Button>
-                    </Link>
-                </div>
+                }
             </div>
         </div>
     )
