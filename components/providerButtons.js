@@ -11,6 +11,8 @@ const ProviderIcon = ({ provider }) => {
             return <img src="icons/twitter-blue.svg"></img>
         case 'google':
             return <img src="icons/google-blue.svg"></img>
+        case 'github':
+            return <img src="icons/github-blue.svg"></img>
         default:
             return null
     }

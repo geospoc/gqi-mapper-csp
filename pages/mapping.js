@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useCookies } from 'react-cookie';
-import { useSession } from 'next-auth/client'
+import { useSession } from 'next-auth/client';
 import { v4 as uuidv4 } from 'uuid';
 
 import useScriptText from '../hooks/useScriptText';
