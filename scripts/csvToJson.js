@@ -28,38 +28,22 @@ csv()
 
   for (let i=0; i<jsonObj.length; i++) {
 
-      // Remove unneeded fields from spreadsheet
-      delete jsonObj[i]['game']
-      delete jsonObj[i]['field7']
-      delete jsonObj[i]['field8']
-      delete jsonObj[i]['field9']
-      delete jsonObj[i]['field10']
-      delete jsonObj[i]['field11']
-      delete jsonObj[i]['field12']
-      delete jsonObj[i]['field13']
-      delete jsonObj[i]['field14']
-      delete jsonObj[i]['field15']
-      delete jsonObj[i]['field16']
-
       // Parse floats from string coordinates
       jsonObj[i]['lat']=parseFloat(jsonObj[i]['lat']);
       jsonObj[i]['lon']=parseFloat(jsonObj[i]['lon']);
 
-      // Parse ID as integer, and delete the old field
-      jsonObj[i]['id']=parseInt(jsonObj[i]['school id ref for game']);
-      delete jsonObj[i]['school id ref for game'];
+      // // Parse ID as integer, and delete the old field
+      // jsonObj[i]['id']=parseInt(jsonObj[i]['school id ref for game']);
+      // delete jsonObj[i]['school id ref for game'];
 
       // Parse school as true/false from yes/no, and delete the old field
-      jsonObj[i]['school']=(jsonObj[i]['school pattern'] == 'yes') ? true : false;
-      delete jsonObj[i]['school pattern'];
+      jsonObj[i]['school']=(jsonObj[i]['status'] == 'yes') ? true : false;
+      delete jsonObj[i]['status'];
 
       // Parse country code from country name, and delete the old field
-      jsonObj[i]['country_code']=Object.keys(countries).find(key => countries[key] === jsonObj[i]['country']);
+      // jsonObj[i]['country_code']=Object.keys(countries).find(key => countries[key] === jsonObj[i]['country']);
+      jsonObj[i]['country_code'] = jsonObj[i]['country'];
       delete jsonObj[i]['country'];
-
-      delete jsonObj[i]['res check'];
-      delete jsonObj[i]['image notes'];
-      delete jsonObj[i]['school id notes'];
 
   }
 
