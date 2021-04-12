@@ -56,7 +56,7 @@ export default function Result(props) {
 						</p>
 						<p className="fact" style={{paddingTop: '.5em'}}>
 							<strong>
-							{props.taggedAllLocations ? <div><p style={{textAlign: 'center'}}>🏆&nbsp;&nbsp;You are a mapping champion! 🗺 </p>You have mapped all of our potential school locations. We will add more shortly, come back soon.</div> : props.fact}
+							{props.taggedAllLocations ? <div><p style={{textAlign: 'center'}}>🏆&nbsp;&nbsp;You are a mapping champion! 🗺 </p>You have mapped all of our potential school locations. We will add more shortly, so come back soon.</div> : props.fact}
 							</strong>
 						</p>
 						{props.taggedAllLocations ? <Button variant="primary" href="https://projectconnect.world" target="_blank" rel="noopener">Visit Project Connect</Button> : <div><p>Help us connect more children to opportunity by mapping more schools</p><Button variant="primary" href="/mapping">Map More Schools</Button></div>}
