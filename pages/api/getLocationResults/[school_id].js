@@ -13,7 +13,7 @@ export default async (req, res) => {
 				       count(CASE WHEN RESULT = 'maybe' THEN 1 ELSE NULL END) AS maybe_count,
 				       count(1) AS total_count
 				FROM crowdsourcing
-				WHERE school_id = ${school_id}`);
+				WHERE school_id = '${school_id}'`);
 		} catch(e) {
 			console.log(e)
 		}	

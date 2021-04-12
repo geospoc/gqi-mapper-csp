@@ -37,7 +37,7 @@ function dropDB(){
 async function createTables() {
 	await pool.query(`
 		CREATE TABLE locations(
-			school_id INTEGER,
+			school_id TEXT,
 			lat REAL,
 			lon REAL,
 			school BOOLEAN,
@@ -49,7 +49,7 @@ async function createTables() {
 		CREATE TYPE yesnomaybe AS ENUM ('yes', 'no', 'maybe');
 		CREATE TABLE crowdsourcing(
 			user_id TEXT,
-			school_id INTEGER,
+			school_id TEXT,
 			result yesnomaybe,
 			unique (user_id, school_id)
 		);

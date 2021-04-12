@@ -85,6 +85,22 @@ Setup your development environment as follows:
     npm run dev
     ```
 
+## 🗄 Data Ingestion
+
+This application expects a CSV file containing the following data about each school:
+
+* lat
+* lon
+* id
+* country
+
+Name the file `schools.csv` and copy it into the `scripts/` folder. In that folder run:
+```bash
+node csvToJson.js
+```
+
+The above script will generate a file `schools.json` that will be ingested by `db/dbOps.js`.
+
 ## :memo: License
 
 This software is licensed under the [GNU General Public License](LICENSE) as published by the Free Software Foundation, either version 3 of the License, or
