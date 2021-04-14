@@ -6,6 +6,7 @@ import Layout from '../../components/layout';
 import HeaderComponent from '../../components/headerComponent';
 import { Container, Col, Row, ProgressBar } from 'react-bootstrap';
 
+
 const campaigns = {
 	"mapbox": {
 		name: 'Mapbox',
@@ -21,20 +22,32 @@ function numberWithCommas(x) {
 
 export default function campaign() {
 
-	const router = useRouter()
-  	const { campaign } = router.query
+	const router = useRouter();
+	const [campaign, setCampaign] = useState(null);
   	const [stats, setStats] = useState({ taggings: 0, users: 0, schools: 0});
 
-  	useEffect(() => {
-  		async function fetchData() {
+	useEffect(() => {
+		if(router.query.campaign) {
+			if(router.query.campaign in campaigns) {
+				setCampaign(router.query.campaign);
+			} else {
+				router.push('/404');
+			}
+		}
+	},[router.query]);
+
+	useEffect(() => {
+		async function fetchData() {
 			const result = await fetch(`/api/getCampaignStats/${campaign}`);
 			setStats(await result.json());
 		}
 		fetchData();
 	}, []);
 
-  	if(campaign in campaigns) {
-		return(
+
+	return(
+		<>
+		{campaign ?
 		 	<Layout myClass="intro">
 				<Head>
 					<title>Project Connect</title>
@@ -51,7 +64,7 @@ export default function campaign() {
 				<Container fluid>
 					<Row>
 						<Col>
-							<h4>Total number of taggings</h4>
+							<h4>Locations Mapped</h4>
 						</Col>
 					</Row>
 					<Row>
@@ -64,27 +77,6 @@ export default function campaign() {
 									{numberWithCommas(stats.taggings)}
 								</span>
 								&nbsp;/&nbsp;{numberWithCommas(campaigns[campaign].taggings)}
-							</h4>
-						</Col>
-					</Row>
-					<Row>
-						<p>&nbsp;</p>
-					</Row>
-					<Row>
-						<Col>
-							<h4>Schools Tagged</h4>
-						</Col>
-					</Row>
-					<Row>
-						<Col xs={7} style={{paddingTop: '0.5em'}}>
-							<ProgressBar now={stats.schools/campaigns[campaign].schools*100} />
-						</Col>
-						<Col className="text-right">
-							<h4>
-								<span style={{color: '#007bff'}}>
-									{numberWithCommas(stats.schools)}
-								</span>
-								&nbsp;/&nbsp;{numberWithCommas(campaigns[campaign].schools)}
 							</h4>
 						</Col>
 					</Row>
@@ -111,8 +103,7 @@ export default function campaign() {
 					</Row>
 				</Container>
 			</Layout>
-		);
-	} else {
-		return <Error statusCode='404' />
-	}
+		: null}
+		</>
+	);
 }
