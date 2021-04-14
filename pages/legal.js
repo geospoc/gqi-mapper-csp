@@ -17,9 +17,8 @@ export default function Tips(props) {
 		<HeaderComponent inverse={false} />
 
 		<div className="tips">
-			<a name="top">
-				<h2>Legal information</h2>
-			</a>
+			<a name="top" />
+			<h2>Legal information</h2>
 
 			<p>Find legal information and policies related to Project Connect's digital communications</p>
 
@@ -36,6 +35,7 @@ export default function Tips(props) {
 
 			<p>&nbsp;</p>
 
+			<a name="terms-of-use" />
 			<h3 className="text-align-center">Terms of Use</h3>
 
 			<p>&nbsp;</p>
@@ -80,9 +80,9 @@ export default function Tips(props) {
 
 			<p>&nbsp;</p>
 
-			<a name="privacy-policy">
-				<h3 className="text-align-center">Privacy policy</h3>
-			</a>
+			<a name="privacy-policy" />
+			<h3 className="text-align-center">Privacy policy</h3>
+			
 
 			<p>&nbsp;</p>
 
@@ -149,9 +149,8 @@ export default function Tips(props) {
 
 			<p>&nbsp;</p>
 
-			<a name="cookies-policy">
-				<h3 className="text-align-center">Cookies policy</h3>
-			</a>
+			<a name="cookies-policy" />
+			<h3 className="text-align-center">Cookies policy</h3>
 
 			<p>&nbsp;</p>
 
@@ -227,9 +226,8 @@ export default function Tips(props) {
 
 			<p>&nbsp;</p>
 
-			<a name="note-on-maps">
-				<h3 className="text-align-center">Note on maps</h3>
-			</a>
+			<a name="note-on-maps" />
+			<h3 className="text-align-center">Note on maps</h3>
 
 			<p>&nbsp;</p>
 
