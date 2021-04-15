@@ -1,7 +1,7 @@
 import React from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import { signin, signout, useSession } from 'next-auth/client'
+import { signIn, signOut, useSession } from 'next-auth/client'
 import { Navbar, Nav, NavItem, Dropdown, Button } from 'react-bootstrap'
 
 import './headerComponent.module.css'
@@ -46,15 +46,6 @@ const Header = ({ hideSignIn }) => {
     const hostname = typeof window !== 'undefined' && window.location.hostname ? window.location.hostname : '';
     const callbackUrl = hostname === 'localhost' ? 'http://localhost:3000/profile' : 'https://'+hostname+'/profile';
 
-    // Redirect to landing page if on authorized-only page
-    const signOutWithRedirect = async () => {
-        signout()
-
-        if (router.asPath.startsWith('/profile')) {
-            router.push('/')
-        }
-    }
-
     return (
         <Navbar className="justify-content-between">
             <Link href="/">
@@ -62,7 +53,7 @@ const Header = ({ hideSignIn }) => {
             </Link>
             <Nav style={{ height: 100 + '%' }}>
                 {!session && !loading && !hideSignIn && (
-                    <NavItem onClick={() => signin(null, { callbackUrl: callbackUrl })}>
+                    <NavItem onClick={() => signIn(null, { callbackUrl: callbackUrl })}>
                         <button className="signin-button">Sign in</button>
                     </NavItem>
                 )}
@@ -91,7 +82,7 @@ const Header = ({ hideSignIn }) => {
                             <Dropdown.Divider />
                             <Dropdown.Item
                                 className="signout-button"
-                                onClick={() => signOutWithRedirect()}
+                                onClick={() => signOut({callbackUrl: hostname})}
                             >
                                 Sign Out
                                 <img
