@@ -5,6 +5,7 @@ import Head from 'next/head';
 import Link from 'next/link';
 import Layout from './layout';
 import HeaderComponent from './headerComponent';
+import FooterComponent from './footerComponent';
 import {Accordion, AccordionContext, Button, useAccordionToggle, Card} from 'react-bootstrap';
 
 function ContextAwareToggle({ children, eventKey, callback }) {
@@ -180,15 +181,7 @@ export default function Intro(props) {
 			</Accordion>
 		</div>
 
-		<footer className="masthead pt-3 mt-3">
-			<p style={{textAlign:"center"}}>
-				<a href="/legal">Legal</a>
-				&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-				<a href="https://github.com/unicef/projectconnect-game" target="_blank" rel="noopener">Source Code</a>
-				&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-				<a href="mailto:projectconnect@unicef.org">Contact us</a>
-			</p>
-		</footer>
+		<FooterComponent />
 	</Layout>
   )
 }

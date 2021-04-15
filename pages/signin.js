@@ -4,6 +4,7 @@ import { providers } from 'next-auth/client'
 
 import Layout from '../components/layout'
 import HeaderComponent from '../components/headerComponent'
+import FooterComponent from '../components/footerComponent'
 import ProviderButtons from '../components/providerButtons'
 
 const SignInError = ({ error }) => {
@@ -57,6 +58,8 @@ export default function SignIn({ providers }) {
                         be created on your first sign in!
                     </div>
                 </div>
+
+                <FooterComponent />
             </Layout>
         </div>
     )
