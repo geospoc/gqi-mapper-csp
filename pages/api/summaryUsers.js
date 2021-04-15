@@ -7,9 +7,23 @@ const pool = new Pool()
 export default async (req, res) => {
 	if (req.method === 'GET') {
 
+		const campaign = req.query.campaign ? req.query.campaign : null;
+		const names = req.query.names ? req.query.names : null;
+
+		let namefield = 'user_id';
+		if(names) {
+			namefield = 'name';
+		}
+		let query = `SELECT ${namefield}, count(user_id) FROM crowdsourcing
+					LEFT JOIN Users ON crowdsourcing.user_id=users.uuid`;
+		if(campaign) {
+			query += ` WHERE LOWER(team)=LOWER('${campaign}')`;
+		}
+		query += ` GROUP BY ${namefield} ORDER BY count DESC`;
+
 		let result = null;
 		try {
-			result = await pool.query('select user_id, count(user_id) from crowdsourcing GROUP BY user_id order by count DESC;');
+			result = await pool.query(query);
 		} catch(e) {
 			console.log(e);
 		}

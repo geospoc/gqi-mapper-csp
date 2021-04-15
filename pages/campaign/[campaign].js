@@ -4,7 +4,7 @@ import Head from 'next/head';
 import Error from 'next/error';
 import Layout from '../../components/layout';
 import HeaderComponent from '../../components/headerComponent';
-import { Container, Col, Row, ProgressBar } from 'react-bootstrap';
+import { Container, Col, Row, ProgressBar, Table } from 'react-bootstrap';
 
 
 const campaigns = {
@@ -15,7 +15,7 @@ const campaigns = {
 	},
 	"unicef": {
 		name: 'UNICEF',
-		users: 20,
+		users: 25,
 		taggings: 500,
 	}
 }
@@ -29,6 +29,7 @@ export default function campaign() {
 	const router = useRouter();
 	const [campaign, setCampaign] = useState(null);
   	const [stats, setStats] = useState({ taggings: 0, users: 0, schools: 0});
+    const [leaderboard, setLeaderboard] = useState([]);
 
 	useEffect(() => {
 		if(router.query.campaign) {
@@ -44,6 +45,8 @@ export default function campaign() {
 		async function fetchData() {
 			const result = await fetch(`/api/getCampaignStats/${campaign}`);
 			setStats(await result.json());
+			const leaders = await fetch(`/api/summaryUsers?campaign=${campaign}&names=1`);
+			setLeaderboard(await leaders.json());
 		}
 		fetchData();
 	}, [campaign]);
@@ -104,6 +107,36 @@ export default function campaign() {
 								&nbsp;/&nbsp;{numberWithCommas(campaigns[campaign].users)}
 							</h4>
 						</Col>
+					</Row>
+					<Row>
+						<Col className="text-center mt-5">
+							<h3>Leaderboard</h3>
+						</Col>
+					</Row>
+					<Row>
+						<Table striped>
+							<thead>
+								<tr>
+									<th>User</th>
+									<th className="text-right">Locations</th>
+								</tr>
+							</thead>
+							<tbody>
+								{ leaderboard.length ?
+									leaderboard.map((item, index) =>
+									<tr key={index}>
+										<td>{item.name ? item.name : 'Anonymous'}</td>
+										<td className="text-right">{item.count}</td>
+									</tr>)
+								:
+									<tr>
+										<td colSpan="2" className="text-center p-5">
+											No mapping activity to display yet
+										</td>
+									</tr>
+								}
+							</tbody>
+						</Table>
 					</Row>
 				</Container>
 			</Layout>
