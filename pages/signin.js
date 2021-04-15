@@ -32,7 +32,7 @@ export default function SignIn({ providers }) {
     } = useRouter()
 
     return (
-        <div>
+        <>
             <Head>
                 <title>Project Connect</title>
                 <link rel="icon" href="/favicon.ico" />
@@ -43,25 +43,26 @@ export default function SignIn({ providers }) {
             </Head>
             <Layout>
                 <HeaderComponent hideSignIn={true} />
-                <div className="container px-4">
-                    <div className="signin-title">Sign in to your account</div>
-                    {error &&
-                        <SignInError error={error} />
-                    }
-                    <ProviderButtons
-                        providers={providers}
-                        callbackUrl={callbackUrl}
-                    />
-                    <hr className="signin-divider" />
-                    <div>
-                        Don't have an account yet? No worries, an account will
-                        be created on your first sign in!
+                <main>
+                    <div className="container px-4">
+                        <div className="signin-title">Sign in to your account</div>
+                        {error &&
+                            <SignInError error={error} />
+                        }
+                        <ProviderButtons
+                            providers={providers}
+                            callbackUrl={callbackUrl}
+                        />
+                        <hr className="signin-divider" />
+                        <div>
+                            Don't have an account yet? No worries, an account will
+                            be created on your first sign in!
+                        </div>
                     </div>
-                </div>
-
+                </main>
                 <FooterComponent />
             </Layout>
-        </div>
+        </>
     )
 }
 

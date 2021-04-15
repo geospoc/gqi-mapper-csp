@@ -4,7 +4,7 @@ export default function footerComponent(props) {
 			<p style={{textAlign:"center"}}>
 				<a href="/legal#terms-of-use">Terms of Use</a>
 				&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-				<a href="/legal#terms-of-use">Privacy Policy</a>
+				<a href="/legal#privacy-policy">Privacy Policy</a>
 				&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
 				<a href="https://github.com/unicef/projectconnect-game" target="_blank" rel="noopener">Source Code</a>
 				&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;

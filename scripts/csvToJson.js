@@ -37,7 +37,7 @@ csv()
       // delete jsonObj[i]['school id ref for game'];
 
       // Parse school as true/false from yes/no, and delete the old field
-      jsonObj[i]['school']=(jsonObj[i]['status'] == 'yes') ? true : false;
+      jsonObj[i]['school']=(jsonObj[i]['status'] == 'yes') ? true : ((jsonObj[i]['status'] == 'no') ? false : null )
       delete jsonObj[i]['status'];
 
       // Parse country code from country name, and delete the old field
