@@ -80,7 +80,7 @@ const UserView = ({ user, signout }) => {
                                 onChange={handleChange.bind(this)}
                                 defaultValue={team}
                             >
-                                <option value="0">Not part of a team</option>
+                                <option value="0">None</option>
                                 <option>Mapbox</option>
                             </Form.Control>
                         </Col>
