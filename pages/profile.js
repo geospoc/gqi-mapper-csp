@@ -69,12 +69,12 @@ const UserView = ({ user, signout }) => {
                     <div className="profile-name">{user.name}</div>
                 </div>
                 <Form>
-                    <Form.Group as={Row} controlId="formPlaintextPassword">
-                        <Form.Label column xs="2">
+                    <Form.Group as={Row} noGutters={true} controlId="formPlaintextPassword">
+                        <Form.Label column xs={2}>
                           Team:
                         </Form.Label>
                         { team ?
-                        <Col xs="8">
+                        <Col xs={8}>
                             <Form.Control
                                 as="select"
                                 onChange={handleChange.bind(this)}
@@ -85,7 +85,7 @@ const UserView = ({ user, signout }) => {
                             </Form.Control>
                         </Col>
                         : null}
-                        <Col xs="1" className="pl-0">
+                        <Col xs={1} className="p-0">
                         <img
                             src="/icons/greentick.svg"
                             width="20"
