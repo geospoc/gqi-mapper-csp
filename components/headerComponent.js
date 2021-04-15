@@ -17,7 +17,7 @@ const CustomToggle = React.forwardRef(({ children, onClick }, ref) => (
     >
         <div className="dropdown-toggle-content">
             <div>{children}</div>
-            <img src="white.svg" className="dropdown-toggle-caret" />
+            <img src="/white.svg" className="dropdown-toggle-caret" />
         </div>
     </button>
 ))
@@ -83,7 +83,7 @@ const Header = ({ hideSignIn }) => {
                                 <a className="dropdown-item profile-link">
                                     View Profile
                                     <img
-                                        src="./blue.svg"
+                                        src="/blue.svg"
                                         className="dropdown-caret"
                                     ></img>
                                 </a>
@@ -95,7 +95,7 @@ const Header = ({ hideSignIn }) => {
                             >
                                 Sign Out
                                 <img
-                                    src="caret-red.svg"
+                                    src="/caret-red.svg"
                                     className="dropdown-caret"
                                 ></img>
                             </Dropdown.Item>
