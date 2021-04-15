@@ -85,7 +85,7 @@ const UserView = ({ user, signout }) => {
                             </Form.Control>
                         </Col>
                         : null}
-                        <Col xs={1} className="p-0">
+                        <Col xs={1} className="pl-2">
                         <img
                             src="/icons/greentick.svg"
                             width="20"
