@@ -89,7 +89,7 @@ async function createTables() {
 			created_at     TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP,
 			updated_at     TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP,
 			uuid           TEXT,
-			team           TEXT,
+			team           TEXT DEFAULT 0,
 			PRIMARY KEY (id)
 		);
 	`);
