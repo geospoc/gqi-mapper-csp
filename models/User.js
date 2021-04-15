@@ -56,5 +56,9 @@ export const UserSchema = {
             type: 'varchar',
             nullable: true,
         },
+        team: {
+            type: 'varchar',
+            nullable: true,
+        },
     },
 };

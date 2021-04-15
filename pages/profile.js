@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
-import { signOut, useSession } from 'next-auth/client'
-import { Image, Button } from 'react-bootstrap'
+import { signOut, useSession, getSession } from 'next-auth/client'
+import { Image, Button, Form, Row, Col } from 'react-bootstrap'
 
 import Layout from '../components/layout'
 import HeaderComponent from '../components/headerComponent'
@@ -11,10 +11,18 @@ import FooterComponent from '../components/footerComponent'
 
 
 const UserView = ({ user, signout }) => {
-    const [userStats, setUserStats] = useState({ mapped_count: 0 })
+    const [team, setTeam] = useState(null);
+    const [userStats, setUserStats] = useState({ mapped_count: 0 });
     const [facts, setFacts] = useState({});
+    const [checkVisible, setCheckVisible] = useState('iconInvisible');
 
     useEffect(() => {
+        const getUserTeam = async () => {
+            const result = await fetch(`/api/getUserTeam/${user.id}`)
+            const response = await result.json()
+            setTeam(response.team)
+        }
+
         const getUserStats = async () => {
             const result = await fetch(`/api/getUserStats/${user.id}`)
             const response = await result.json()
@@ -27,10 +35,31 @@ const UserView = ({ user, signout }) => {
             setFacts(response)
         }
 
-        getUserStats()
-        getFact()
+        getUserTeam();
+        getUserStats();
+        getFact();
 
     }, [])
+
+    async function updateTeam(uuid, team) {
+        await fetch("/api/updateUserTeam", {
+            'method': 'POST',
+            'headers': {
+                'content-type': 'application/json',
+                'accept': 'application/json'
+            },
+            'body': JSON.stringify({
+                uuid: uuid,
+                team: team,
+            })
+        })
+    }
+
+    async function handleChange(event) {
+        setCheckVisible('iconVisible')
+        await updateTeam(user.id, event.target.value);
+        setCheckVisible('iconFadeOut')
+    }
 
     return (
         <div className="user-view">
@@ -39,6 +68,34 @@ const UserView = ({ user, signout }) => {
                     <Image className="profile-picture" src={user.image} roundedCircle />
                     <div className="profile-name">{user.name}</div>
                 </div>
+                <Form>
+                    <Form.Group as={Row} controlId="formPlaintextPassword">
+                        <Form.Label column xs="2">
+                          Team:
+                        </Form.Label>
+                        { team ?
+                        <Col xs="8">
+                            <Form.Control
+                                as="select"
+                                onChange={handleChange.bind(this)}
+                                defaultValue={team}
+                            >
+                                <option value="0">Not part of a team</option>
+                                <option>Mapbox</option>
+                            </Form.Control>
+                        </Col>
+                        : null}
+                        <Col xs="1" className="pl-0">
+                        <img
+                            src="/icons/greentick.svg"
+                            width="20"
+                            style={{paddingTop: '.4em', textAlign: 'left'}}
+                            className={checkVisible}
+                        />
+                        </Col>
+                    </Form.Group>
+                </Form>
+
                 <div className="profile-signout-container">
                     <button
                         onClick={signout}

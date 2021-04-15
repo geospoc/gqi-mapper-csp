@@ -514,3 +514,14 @@ a {
   letter-spacing: 1px;
   color: #ffffff;
 }
+
+.iconVisible { opacity:1; }
+.iconInvisible { opacity:0; }
+.iconFadeOut{
+     opacity:0;
+     transition: opacity 1s 2s;
+}
+.iconFadeIn{
+     opacity:1;
+     transition: opacity 1s 2s;
+}

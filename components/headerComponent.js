@@ -43,6 +43,9 @@ const Header = ({ hideSignIn }) => {
     const [session, loading] = useSession()
     const router = useRouter()
 
+    const hostname = typeof window !== 'undefined' && window.location.hostname ? window.location.hostname : '';
+    const callbackUrl = hostname === 'localhost' ? 'http://localhost:3000/profile' : 'https://'+hostname+'/profile';
+
     // Redirect to landing page if on authorized-only page
     const signOutWithRedirect = async () => {
         signout()
@@ -59,7 +62,7 @@ const Header = ({ hideSignIn }) => {
             </Link>
             <Nav style={{ height: 100 + '%' }}>
                 {!session && !loading && !hideSignIn && (
-                    <NavItem onClick={signin}>
+                    <NavItem onClick={signin(null, { callbackUrl: callbackUrl })}>
                         <button className="signin-button">Sign in</button>
                     </NavItem>
                 )}
