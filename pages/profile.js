@@ -7,6 +7,8 @@ import { Image, Button } from 'react-bootstrap'
 
 import Layout from '../components/layout'
 import HeaderComponent from '../components/headerComponent'
+import FooterComponent from '../components/footerComponent'
+
 
 const UserView = ({ user, signout }) => {
     const [userStats, setUserStats] = useState({ mapped_count: 0 })
@@ -116,6 +118,9 @@ const ProfilePage = () => {
             <HeaderComponent inverse={false} />
 
             {!loading && session && <UserView user={session.user} signout={signOutWithRedirect} />}
+
+            <FooterComponent />
+
         </Layout>
     )
 }

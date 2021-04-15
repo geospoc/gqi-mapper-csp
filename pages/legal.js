@@ -2,6 +2,7 @@ import Head from 'next/head';
 import Link from 'next/link';
 import Layout from '../components/layout';
 import HeaderComponent from '../components/headerComponent';
+import FooterComponent from '../components/footerComponent';
 import { Accordion, AccordionContext, Button, useAccordionToggle } from 'react-bootstrap';
 
 
@@ -239,15 +240,7 @@ export default function Tips(props) {
 
 		</div>
 
-		<footer className="masthead pt-3 mt-3">
-			<p style={{textAlign:"center"}}>
-				<a href="/legal">Legal</a>
-				&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-				<a href="https://github.com/unicef/projectconnect-game" target="_blank" rel="noopener">Source Code</a>
-				&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-				<a href="mailto:projectconnect@unicef.org">Contact us</a>
-			</p>
-		</footer>
+		<FooterComponent />
 
     </Layout>
   )
