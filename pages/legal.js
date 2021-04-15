@@ -98,9 +98,7 @@ export default function Tips(props) {
 
 			<h5>Collection of personally identifiable information</h5>
 
-			<p>If you log on, you will be asked to provide personal information such as your name and e-mail address.&nbsp; This information is collected only with your knowledge and permission, and is kept in a Project Connect database.&nbsp;</p>
-
-			<p>Project Connect’s webapp uses cookies to provide statistics that help us to give you the best experience of our sites. You can find out more in our&nbsp;<a href="cookies-policy">cookies policy page</a>&nbsp;or switch them off if you prefer. However, by continuing to use our sites without changing settings, you are agreeing to our use of cookies.</p>
+			<p>If you log on, you will be asked to provide personal information such as your name, e-mail address and profile picture.&nbsp; This information is collected only with your knowledge and permission, and is kept in a Project Connect database. This information is collected through one of the authentication providers offered: Facebook, Google, Twitter and GitHub.</p>
 
 			<h4>What does Project Connect do with the information it collects?</h4>
 
@@ -112,10 +110,14 @@ export default function Tips(props) {
 
 			<p>Project Connect may use the personal information you provide to:</p>
 
-			<ul><li>Contact you – either in response to a query or suggestion, or to mail newsletters, documents, publications, etc. to you;</li>
-				<li>“Remember” your online profile and preferences;</li>
+			<ul>
+				<li>“Remember” your online profile;</li>
+				<li>Record your mapping activity on the Project Connect webapp;</li>
+				<li>Contact you – either in response to a query or suggestion, or to mail newsletters, documents, publications, etc. to you;</li>
 				<li>Undertake statistical analysis.</li>
-			</ul><p><strong>What if I don’t want to provide personal information?</strong></p>
+			</ul>
+
+			<p><strong>What if I don’t want to provide personal information?</strong></p>
 
 			<p>Providing personal information on the Project Connect webapp is optional.&nbsp; If you choose not to provide personal information, you can still browse and use the Project Connect webapp, but you will not be able to carry out certain actions such as accessing your profile with statistics about your activity on the webapp.</p>
 
