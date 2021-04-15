@@ -10,13 +10,15 @@ export default async (req, res) => {
 		
 		try {
 			taggings = await pool.query(`
-				SELECT  count(*) FROM crowdsourcing;`);
+				SELECT count(*)
+					FROM crowdsourcing
+					LEFT JOIN Users ON crowdsourcing.user_id=users.uuid
+					WHERE LOWER(team)=LOWER('${campaign}');`);
 			users = await pool.query(`
-				SELECT  count(*) FROM users;`);
+				SELECT count(*) FROM users WHERE LOWER(team)=LOWER('${campaign}');`);
 		} catch(e) {
 			console.log(e)
-		}	
-
+		}
 
 		let output = null;
 		if(taggings && users) {

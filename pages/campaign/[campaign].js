@@ -42,7 +42,7 @@ export default function campaign() {
 			setStats(await result.json());
 		}
 		fetchData();
-	}, []);
+	}, [campaign]);
 
 
 	return(
