@@ -11,8 +11,12 @@ const campaigns = {
 	"mapbox": {
 		name: 'Mapbox',
 		users: 1000,
-		schools: 1000,
 		taggings: 10000,
+	},
+	"unicef": {
+		name: 'UNICEF',
+		users: 20,
+		taggings: 500,
 	}
 }
 
