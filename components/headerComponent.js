@@ -62,7 +62,7 @@ const Header = ({ hideSignIn }) => {
             </Link>
             <Nav style={{ height: 100 + '%' }}>
                 {!session && !loading && !hideSignIn && (
-                    <NavItem onClick={signin(null, { callbackUrl: callbackUrl })}>
+                    <NavItem onClick={() => signin(null, { callbackUrl: callbackUrl })}>
                         <button className="signin-button">Sign in</button>
                     </NavItem>
                 )}

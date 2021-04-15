@@ -82,6 +82,7 @@ const UserView = ({ user, signout }) => {
                             >
                                 <option value="0">None</option>
                                 <option>Mapbox</option>
+                                <option>UNICEF</option>
                             </Form.Control>
                         </Col>
                         : null}
