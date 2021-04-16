@@ -16,7 +16,7 @@ const campaigns = {
 	"unicef": {
 		name: 'UNICEF',
 		users: 25,
-		taggings: 1000,
+		taggings: 2000,
 	}
 }
 
