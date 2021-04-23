@@ -70,14 +70,14 @@ export default function Quiz (props) {
 					</div>
 				</div>
 				<div>
-					<Row className="p-3">
-						<Col xs={4}>
+					<Row className="pt-3 pl-0">
+						<Col xs={4} className="pr-1">
 							<Button className='yes actionButton' variant={yes} disabled={next} onClick={e => handleClick(e, 'yes')}>Yes</Button>
 						</Col>
-						<Col xs={4}>
+						<Col xs={4} className="pl-2 pr-2">
 							<Button className='no actionButton' variant={no} disabled={next} onClick={e => handleClick(e, 'no')}>No</Button>
 						</Col>
-						<Col xs={4}>
+						<Col xs={4} className="pl-1">
 							<Button className='maybe actionButton' variant={maybe} disabled={next} onClick={e => handleClick(e, 'maybe')}>Unsure</Button>
 						</Col>
 					</Row>
