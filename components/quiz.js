@@ -86,7 +86,7 @@ export default function Quiz (props) {
 
 			<footer className="mt-auto next-section">
 				{next
-					? <div>
+					? <div className="pb-2">
 						<ProgressBar 
 							label="Yes" 
 							chosen={result.answer == 'yes'}
