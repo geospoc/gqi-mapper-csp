@@ -80,7 +80,24 @@ Setup your development environment as follows:
     cd proco-map-app
     npm install
     ```
-3. After having set up the proper [Configuration](#%EF%B8%8F-configuration), run the developmnet server with [fast refresh](https://nextjs.org/docs/basic-features/fast-refresh):
+3. Set up your local [Postgres Database](https://www.postgresql.org/) and configure the following environment variables in `.env.local`:
+    ```bash
+    NEXTAUTH_URL=http://localhost:3000
+    PGUSER=
+    PGHOST=
+    PGPASSWORD=
+    PGDATABASE=
+    ```
+5. Open an account with [Mapbox](https://www.mapbox.com/) to obtain an *Access Token*. Add your access token to `.env.local`:   
+    ```bash
+    NEXT_PUBLIC_ACCESS_TOKEN="YOUR_MAPBOX_ACCESS_TOKEN"
+    ```
+6. Optional: If you need to test the user authentication, you will need to set up your own credentials with either one of the OAuth providers:
+    * RECOMENDED FOR EASIER SETUP: **GitHub**: Follow these [instructions](https://docs.github.com/en/developers/apps/creating-an-oauth-app).
+        * Homepage URL: `http://localhost:3000`  
+        * Authorization Callback URL: `http://localhost:3000/api/auth/callback/github`
+7. Optional: you may get a [*jwt_auto_generated_signing_key* warning](https://github.com/nextauthjs/next-auth/issues/484) that you can resolve by following the instructions on that link, or [these instructions](https://next-auth.js.org/warnings).
+8. Run the developmnet server with [fast refresh](https://nextjs.org/docs/basic-features/fast-refresh):
     ```bash
     npm run dev
     ```
