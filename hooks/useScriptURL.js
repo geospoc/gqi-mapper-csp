@@ -1,8 +1,8 @@
-import { useEffect } from 'react';
+import {useEffect} from "react";
 
 export default function useScriptURL(url) {
   useEffect(() => {
-    const script = document.createElement('script');
+    const script = document.createElement("script");
 
     script.src = url;
     script.async = true;
@@ -11,6 +11,6 @@ export default function useScriptURL(url) {
 
     return () => {
       document.body.removeChild(script);
-    }
+    };
   }, [url]);
-};
+}
