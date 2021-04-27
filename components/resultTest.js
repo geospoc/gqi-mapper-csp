@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from "react";
 import Head from "next/head";
 import Link from "next/link";
+import HeaderComponent from "./headerComponent";
 import {Container, Col, Row, Button} from "react-bootstrap";
 
 import Layout from "./layout";
@@ -37,11 +38,7 @@ export default function StartTest(props) {
         />
       </Head>
 
-      <header className="masthead p-3 inverse">
-        <div className="inner">
-          <p className="masthead-brand inverse">PROJECT CONNECT</p>
-        </div>
-      </header>
+      <HeaderComponent inverse={false} />
 
       <div className="start-test big-button">
         <h1>

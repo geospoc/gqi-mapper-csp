@@ -70,14 +70,24 @@ export default function QuizTest(props) {
         </div>
 
         <div>
-          <Row className="p-3">
-            <Col xs={{size: 4, offset: 1}}>
-              <Button variant={yes} onClick={(e) => handleClick(e, true)} disabled={next}>
+          <Row className="pt-3 pl-1 pr-1">
+            <Col xs={{size: 4, offset: 1}} className="ml-1 pr-0">
+              <Button
+                variant={yes}
+                className="yes testButton"
+                onClick={(e) => handleClick(e, true)}
+                disabled={next}
+              >
                 Yes
               </Button>{" "}
             </Col>
-            <Col xs={{size: 4, offset: 2}}>
-              <Button variant={no} onClick={(e) => handleClick(e, false)} disabled={next}>
+            <Col xs={{size: 4, offset: 2}} className="mr-1 pl-0">
+              <Button
+                variant={no}
+                className="no testButton"
+                onClick={(e) => handleClick(e, false)}
+                disabled={next}
+              >
                 No
               </Button>{" "}
             </Col>

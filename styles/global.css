@@ -386,6 +386,36 @@ a {
 }
 
 /*
+ * Test
+ */
+
+.testButton {
+  border-radius: 18.5px;
+}
+
+.testButton.yes {
+  color: #8dd240;
+  border: 1px solid #8dd240;
+}
+
+.testButton.yes:hover:not([disabled]),
+.testButton.yes.btn-primary {
+  color: #ffffff;
+  background-color: #8dd240;
+}
+
+.testButton.no {
+  color: #fc625f;
+  border: 1px solid #fc625f;
+}
+
+.testButton.no:hover:not([disabled]),
+.testButton.no.btn-primary {
+  color: #ffffff;
+  background-color: #fc625f;
+}
+
+/*
  * Sign In page
  */
 
