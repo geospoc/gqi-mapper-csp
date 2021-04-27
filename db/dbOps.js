@@ -1,3 +1,4 @@
+/* eslint-disable */
 const {Pool} = require("pg");
 const pgtools = require("pgtools");
 

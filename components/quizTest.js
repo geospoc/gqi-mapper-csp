@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, {useState} from "react";
 import Head from "next/head";
 import dynamic from "next/dynamic";
 import {Row, Col, Button} from "react-bootstrap";
@@ -21,7 +21,6 @@ export default function QuizTest(props) {
   const [answer, setAnswer] = useState({answer: "", answerClass: "answerHidden"});
 
   function handleClick(e, value) {
-    let buttonVariant = "";
     if (value === props.question.answer) {
       if (value === true) {
         setYes("success");
@@ -52,7 +51,6 @@ export default function QuizTest(props) {
     props.onAnswerSelected(result);
   }
 
-  const latlon = [props.question.lat, props.question.lon];
   const answerClass = "answer " + answer.answerClass;
   const countryName = countryCodes[props.question.country_code];        
 

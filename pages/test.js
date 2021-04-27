@@ -2,13 +2,8 @@ import React, {useState, useEffect} from "react";
 import {useCookies} from "react-cookie";
 import {v4 as uuidv4} from "uuid";
 
-import useScriptText from "../hooks/useScriptText";
-import Intro from "../components/intro";
 import QuizTest from "../components/quizTest";
-//import quizQuestions from '../api/quizQuestions';
 import ResultTest from "../components/resultTest";
-
-const quizQuestions = [];
 
 const numQuestions = 6;
 
