@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, {useState} from "react";
 import Head from "next/head";
 import dynamic from "next/dynamic";
 import {Row, Col, Button} from "react-bootstrap";
@@ -8,17 +8,17 @@ import QuestionCount from "./questionCount";
 import Layout from "./layout";
 import CountryNameLabel from "./countryNameLabel";
 
-const countryCodes = require("../data/countries.json");
-
 const MapComponent = dynamic(import("./mapComponent"), {
   ssr: false,
 });
 
+const countryCodes = require("../data/countries.json");
+
 export default function Quiz(props) {
   const [next, setNext] = useState(false);
-  const [yes, setYes] = useState("outline-primary");
-  const [no, setNo] = useState("outline-primary");
-  const [maybe, setMaybe] = useState("outline-primary");
+  const [yes] = useState("outline-primary");
+  const [no] = useState("outline-primary");
+  const [maybe] = useState("outline-primary");
   const [result, setResult] = useState(false);
   const [answer, setAnswer] = useState({answer: "", answerClass: "answerHidden"});
 
@@ -58,7 +58,6 @@ export default function Quiz(props) {
     props.onNextSelected();
   }
 
-  const latlon = [props.question.lat, props.question.lon];
   const answerClass = "answer " + answer.answerClass;
   const countryName = countryCodes[props.question.country_code];
   return (

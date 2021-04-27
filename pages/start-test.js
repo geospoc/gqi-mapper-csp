@@ -1,13 +1,8 @@
 import React, {useState, useEffect} from "react";
-import {useCookies} from "react-cookie";
-import {v4 as uuidv4} from "uuid";
 import Head from "next/head";
 import Link from "next/link";
 import {Container, Col, Row, Button} from "react-bootstrap";
 
-import useScriptText from "../hooks/useScriptText";
-import Intro from "../components/intro";
-import QuizTest from "../components/quizTest";
 import Layout from "../components/layout";
 import HeaderComponent from "../components/headerComponent";
 
@@ -46,7 +41,7 @@ export default function StartTest() {
       <HeaderComponent inverse={true} />
 
       <div className="start-test big-button">
-        <h2>Let's start with testing your school mapping skills</h2>
+        <h2>Let&apos;s start with testing your school mapping skills</h2>
         <Container>
           <Row>
             <Col xs={3}>

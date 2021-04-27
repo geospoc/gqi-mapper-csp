@@ -38,9 +38,9 @@ function ContextAwareToggle({children, eventKey, callback}) {
   );
 }
 
-export default function Intro(props) {
+export default function Intro() {
   const [linkLocation, setLinkLocation] = useState("/tips");
-  const [cookies, setCookie] = useCookies(["uuid"]);
+  const [cookies] = useCookies(["uuid"]);
   const [session] = useSession();
 
   useEffect(() => {
@@ -172,8 +172,8 @@ export default function Intro(props) {
                 need for the same location to reach some confidence level that the
                 location contains a school, and the same to reach some confidence level
                 that the location does not contain a school. We are using a dataset that
-                has been manually validated by a trained team of "data mappers" as ground
-                truth for this initial validation and for determining the yes/no
+                has been manually validated by a trained team of &quot;data mappers&quot;
+                as ground truth for this initial validation and for determining the yes/no
                 thresholds. The more users play the game and the more answers we have, the
                 better we’ll be able to define these thresholds. On the other hand, no
                 single person will have the power to validate a school alone.
@@ -182,20 +182,20 @@ export default function Intro(props) {
                 The ratings will be used in the following ways:
                 <ol>
                   <li>
-                    for locations that are rated with a high number of "NO", this
-                    information will be sent to the government (our main source of data)
-                    and we’ll work with them to correct the geolocation tagging of the
-                    corresponding schools
+                    for locations that are rated with a high number of &quot;NO&quot;,
+                    this information will be sent to the government (our main source of
+                    data) and we’ll work with them to correct the geolocation tagging of
+                    the corresponding schools
                   </li>
                   <li>
-                    locations that are rated with high number of "NO" and "YES" will be
-                    used to train our ML algorithms.
+                    locations that are rated with high number of &quot;NO&quot; and
+                    &quot;YES&quot; will be used to train our ML algorithms.
                   </li>
                   <li>
-                    for locations that are rated with high number of "UNSURE", we will
-                    consider that satellite imagery is not sufficient to determine that
-                    the location contains a school or not and they won’t be used to train
-                    our ML algorithms.
+                    for locations that are rated with high number of &quot;UNSURE&quot;,
+                    we will consider that satellite imagery is not sufficient to determine
+                    that the location contains a school or not and they won’t be used to
+                    train our ML algorithms.
                   </li>
                 </ol>
               </Card.Body>

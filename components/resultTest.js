@@ -3,7 +3,6 @@ import Head from "next/head";
 import Link from "next/link";
 import {Container, Col, Row, Button} from "react-bootstrap";
 
-import useScriptText from "../hooks/useScriptText";
 import Layout from "./layout";
 
 export default function StartTest(props) {

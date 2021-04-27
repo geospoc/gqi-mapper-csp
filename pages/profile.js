@@ -2,7 +2,7 @@ import React, {useEffect, useState} from "react";
 import Head from "next/head";
 import {useRouter} from "next/router";
 import Link from "next/link";
-import {signOut, useSession, getSession} from "next-auth/client";
+import {signOut, useSession} from "next-auth/client";
 import {Image, Button, Form, Row, Col} from "react-bootstrap";
 
 import Layout from "../components/layout";

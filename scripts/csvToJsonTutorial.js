@@ -59,7 +59,7 @@ csv()
       function (err) {
         if (err) {
           console.log(
-            "An error occured while writing JSON Object from file: " + files[i]
+            "An error occured while writing JSON Object from file: " + jsonFilePath
           );
           return console.log(err);
         }

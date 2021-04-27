@@ -1,11 +1,9 @@
 import Head from "next/head";
-import Link from "next/link";
 import Layout from "../components/layout";
 import HeaderComponent from "../components/headerComponent";
 import FooterComponent from "../components/footerComponent";
-import {Accordion, AccordionContext, Button, useAccordionToggle} from "react-bootstrap";
 
-export default function Tips(props) {
+export default function Tips() {
   return (
     <Layout myClass="intro">
       <Head>
@@ -24,7 +22,7 @@ export default function Tips(props) {
         <h2>Legal information</h2>
 
         <p>
-          Find legal information and policies related to Project Connect's digital
+          Find legal information and policies related to Project Connect&apos; digital
           communications
         </p>
 
@@ -56,12 +54,13 @@ export default function Tips(props) {
 
         <p>
           Use of this web application, <a href="/">game.projectconnect.world</a> (the
-          "Project Connect Web Application"), constitutes acceptance of the following
-          terms and conditions. Project Connect reserves the right to seek all remedies
-          available by law for any violation of these terms of use, including any
-          violation of Project Connect's rights in the Project Connect name and emblem and
-          its rights in connection with the information, artwork, text, video, audio, or
-          pictures (together, the "Content") of the Project Connect Web Site.
+          &quot;Project Connect Web Application&quot;), constitutes acceptance of the
+          following terms and conditions. Project Connect reserves the right to seek all
+          remedies available by law for any violation of these terms of use, including any
+          violation of Project Connect&apos;s rights in the Project Connect name and
+          emblem and its rights in connection with the information, artwork, text, video,
+          audio, or pictures (together, the &quot;Content&quot;) of the Project Connect
+          Web Site.
         </p>
 
         <p>&nbsp;</p>
@@ -95,8 +94,8 @@ export default function Tips(props) {
 
         <p>
           The Content of the Project Connect Web Application is selected on the basis of
-          UNICEF's own criteria and in its own sole discretion. UNICEF reserves the right
-          at any time to change or discontinue any aspect or feature of the Project
+          UNICEF&apos;s own criteria and in its own sole discretion. UNICEF reserves the
+          right at any time to change or discontinue any aspect or feature of the Project
           Connect Web Application, including but not limited to these terms of use, hours
           of availability and equipment needed for use.
         </p>
@@ -133,12 +132,13 @@ export default function Tips(props) {
 
         <p>
           The Project Connect Web Application may be linked to other web sites that are
-          not under Project Connect's control. Project Connect provides these links merely
-          as a convenience and the inclusion of such links does not imply an endorsement
-          or approval by UNICEF of any web site, product or service. UNICEF does not
-          assume any responsibility or liability in respect of such web sites, including,
-          for example, responsibility or liability for the accuracy or reliability of any
-          information, data, opinions, advice or statements made on those web sites.
+          not under Project Connect&apos;s control. Project Connect provides these links
+          merely as a convenience and the inclusion of such links does not imply an
+          endorsement or approval by UNICEF of any web site, product or service. UNICEF
+          does not assume any responsibility or liability in respect of such web sites,
+          including, for example, responsibility or liability for the accuracy or
+          reliability of any information, data, opinions, advice or statements made on
+          those web sites.
         </p>
 
         <p>&nbsp;</p>
@@ -208,8 +208,9 @@ export default function Tips(props) {
           The information gathered during general browsing of the “projectconnect.world”
           domain is used to analyse trends and usage of the Project Connect site and to
           improve the usefulness of the site.&nbsp; It is not connected with any personal
-          information. However, if you have registered with Project Connect's webapp, the
-          information we collect about your normal web usage will be identifiable to you.
+          information. However, if you have registered with Project Connect&apos;s webapp,
+          the information we collect about your normal web usage will be identifiable to
+          you.
         </p>
 
         <p>
@@ -252,9 +253,9 @@ export default function Tips(props) {
         <p>
           We do not sell or share any personally identifiable information volunteered on
           the Project Connect site to any third party without prior consent.&nbsp; Any
-          information provided to Project Connect by users of the Project Connect's webapp
-          is held with the utmost care and security, and will not be used in ways other
-          than as set forth in this privacy policy, or in ways to which you have
+          information provided to Project Connect by users of the Project Connect&apos;s
+          webapp is held with the utmost care and security, and will not be used in ways
+          other than as set forth in this privacy policy, or in ways to which you have
           explicitly consented.&nbsp; Project Connect employs a range of techniques and
           security measures to protect the information maintained on our system from loss,
           misuse, unauthorised access or disclosure, alteration, or destruction.
@@ -266,7 +267,7 @@ export default function Tips(props) {
         </p>
 
         <p>
-          The Project Connect's webapp contains links to sites external to the
+          The Project Connect&apos;s webapp contains links to sites external to the
           projectconnect.world domain. Project Connect is not responsible for the privacy
           practices or the content of such sites.
         </p>
@@ -391,10 +392,10 @@ export default function Tips(props) {
 
         <p>
           We obtain this information by enabling Google Analytics to analyze the traffic
-          on our websites via "Google Advertising Cookies". Google Advertising Cookies are
-          a series of cookies already stored in your browser that compile data from your
-          browsing preferences. You can see the types of cookies used by Google and learn
-          more about the different categories in the&nbsp;
+          on our websites via &quot;Google Advertising Cookies&quot;. Google Advertising
+          Cookies are a series of cookies already stored in your browser that compile data
+          from your browsing preferences. You can see the types of cookies used by Google
+          and learn more about the different categories in the&nbsp;
           <a href="https://policies.google.com/technologies/types">
             Google privacy &amp; terms
           </a>

@@ -1,4 +1,4 @@
-export default function footerComponent(props) {
+export default function footerComponent() {
   return (
     <footer className="masthead pt-3 mt-3">
       <p style={{textAlign: "center"}}>

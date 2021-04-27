@@ -1,7 +1,6 @@
 import React, {useState, useEffect} from "react";
 import {useRouter} from "next/router";
 import Head from "next/head";
-import Error from "next/error";
 import Layout from "../../components/layout";
 import HeaderComponent from "../../components/headerComponent";
 import {Container, Col, Row, ProgressBar, Table} from "react-bootstrap";
