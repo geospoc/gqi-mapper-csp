@@ -9,7 +9,7 @@ const campaigns = {
   mapbox: {
     name: "Mapbox",
     users: 1000,
-    taggings: 10000,
+    taggings: 20000,
   },
   unicef: {
     name: "UNICEF",
