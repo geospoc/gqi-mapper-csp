@@ -51,8 +51,8 @@ export default function SignIn({providers}) {
             <ProviderButtons providers={providers} callbackUrl={callbackUrl} />
             <hr className="signin-divider" />
             <div>
-              Don't have an account yet? No worries, an account will be created on your
-              first sign in!
+              Don&apos;t have an account yet? No worries, an account will be created on
+              your first sign in!
             </div>
           </div>
         </main>

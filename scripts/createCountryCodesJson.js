@@ -11,6 +11,7 @@ function createCountryCodesJson() {
   var fs = require("fs");
   fs.writeFile("data/countries.json", JSON.stringify(obj), function (err, result) {
     if (err) console.log("error", err);
+    else console.log(result);
   });
 }
 

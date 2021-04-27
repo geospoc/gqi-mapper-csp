@@ -1,15 +1,5 @@
 import React, {useState, useEffect} from "react";
-import {useCookies} from "react-cookie";
-import {v4 as uuidv4} from "uuid";
-
-import {Container, Table} from "react-bootstrap";
-
-import useScriptText from "../hooks/useScriptText";
-import Intro from "../components/intro";
-import Quiz from "../components/quiz";
-import Result from "../components/result";
-
-const numQuestions = 5;
+import {Table} from "react-bootstrap";
 
 function BarSVG({data}) {
   const wy = (data.yes / (data.yes + data.no + data.maybe)) * 100;
@@ -56,7 +46,6 @@ export default function summary() {
   }, []);
 
   useEffect(() => {
-    let str = "";
     let obj = {};
 
     for (let i = 1; i < locations.length; i++) {
@@ -68,8 +57,6 @@ export default function summary() {
         obj[e["school_id"]] = {yes: 0, no: 0, maybe: 0};
       }
       obj[e["school_id"]][e["result"]] = Number(e.count);
-
-      str += e.school_id;
     });
     setSummary(obj);
     console.log(obj);

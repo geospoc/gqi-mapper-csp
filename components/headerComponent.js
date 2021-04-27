@@ -1,8 +1,7 @@
 import React from "react";
 import Link from "next/link";
-import {useRouter} from "next/router";
 import {signIn, signOut, useSession} from "next-auth/client";
-import {Navbar, Nav, NavItem, Dropdown, Button} from "react-bootstrap";
+import {Navbar, Nav, NavItem, Dropdown} from "react-bootstrap";
 
 import "./headerComponent.module.css";
 
@@ -22,6 +21,8 @@ const CustomToggle = React.forwardRef(({children, onClick}, ref) => (
   </button>
 ));
 
+CustomToggle.displayName = "CustomToggle";
+
 const CustomMenu = React.forwardRef(
   ({children, style, className, "aria-labelledby": labeledBy}, ref) => {
     return (
@@ -32,9 +33,10 @@ const CustomMenu = React.forwardRef(
   }
 );
 
+CustomMenu.displayName = "CustomMenu";
+
 const Header = ({hideSignIn}) => {
   const [session, loading] = useSession();
-  const router = useRouter();
 
   const hostname =
     typeof window !== "undefined" && window.location.hostname

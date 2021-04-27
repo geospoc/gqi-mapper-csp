@@ -12,7 +12,7 @@
 
 const fs = require("fs");
 const csv = require("csvtojson");
-const countries = require("../data/countries.json");
+// const countries = require("../data/countries.json");
 
 // Set CSV file to process
 const csvFilePath = "schools.csv";
@@ -55,7 +55,7 @@ csv()
       function (err) {
         if (err) {
           console.log(
-            "An error occured while writing JSON Object from file: " + files[i]
+            "An error occured while writing JSON Object from file: " + jsonFilePath
           );
           return console.log(err);
         }

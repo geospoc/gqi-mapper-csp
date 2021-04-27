@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from "react";
-import ReactMapboxGl, {Layer, Feature, Marker, ZoomControl} from "react-mapbox-gl";
+import ReactMapboxGl, {Marker, ZoomControl} from "react-mapbox-gl";
 
 const zoomDefault = 17;
 
