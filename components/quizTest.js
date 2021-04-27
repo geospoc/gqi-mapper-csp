@@ -54,38 +54,7 @@ export default function QuizTest(props) {
 
   const latlon = [props.question.lat, props.question.lon];
   const answerClass = "answer " + answer.answerClass;
-  const countryName = countryCodes[props.question.country_code];
-
-  return (
-    <Layout myClass="quiz">
-      <Head>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      </Head>
-      <main>
-        <QuestionCount counter={props.counter} total={props.questionTotal} />
-        <p>Does this look like a school location?</p>
-
-        <div className="row no-gutters align-items-center mapdiv">
-          <MapComponent lat={props.question.lat} lon={props.question.lon} />
-          <CountryNameLabel countryName={countryName} />
-          <div className={answerClass}>{answer["answer"]}</div>
-        </div>
-
-        <div>
-          <Row className="p-3">
-            <Col xs={{size: 4, offset: 1}}>
-              <Button variant={yes} onClick={(e) => handleClick(e, true)} disabled={next}>
-                Yes
-              </Button>{" "}
-            </Col>
-            <Col xs={{size: 4, offset: 2}}>
-              <Button variant={no} onClick={(e) => handleClick(e, false)} disabled={next}>
-                No
-              </Button>{" "}
-            </Col>
-          </Row>
-        </div>
-      </main>
+  const countryName = countryCodes[props.question.country_code];        
 
 	return (
 		<Layout myClass="quiz">
@@ -107,10 +76,10 @@ export default function QuizTest(props) {
 				<div>
 					<Row className="pt-3 pl-1 pr-1">
 						<Col xs={{size: 4, offset: 1}} className="ml-1 pr-0">
-							<Button variant={yes} className='yes testButton' onClick={e => handleClick(e, true)} disabled={next}>Yes</Button>
+							<Button variant={yes} className='yes testButton' onClick={e => handleClick(e, true)} disabled={next}>Yes</Button>{" "}
 						</Col>
 						<Col xs={{size: 4, offset: 2}} className="mr-1 pl-0">
-							<Button variant={no} className='no testButton' onClick={e => handleClick(e, false)} disabled={next}>No</Button>
+							<Button variant={no} className='no testButton' onClick={e => handleClick(e, false)} disabled={next}>No</Button>{" "}
 						</Col>
 					</Row>
 				</div>
@@ -122,7 +91,7 @@ export default function QuizTest(props) {
             NEXT
             <img className="white" src="/white.svg" />
           </span>
-        </Button>
+        </Button>{" "}
       </footer>
     </Layout>
   );
