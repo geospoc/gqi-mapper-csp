@@ -8,7 +8,7 @@ import {Container, Col, Row, ProgressBar, Table} from "react-bootstrap";
 const campaigns = {
   mapbox: {
     name: "Mapbox",
-    users: 1000,
+    users: 200,
     taggings: 20000,
   },
   unicef: {
