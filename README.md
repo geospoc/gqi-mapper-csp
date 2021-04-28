@@ -118,6 +118,8 @@ node csvToJson.js
 
 The above script will generate a file `schools.json` that will be ingested by `db/dbOps.js`.
 
+*Note: For testing purposes a sample `scripts/schools.json` is included in the code repository, which has the same data as the locations used in the [practice test](https://github.com/lacabra/proco-map-app/blob/master/pages/api/getLocationsTest.js), yet in production a different dataset will be used.*
+
 ## :memo: License
 
 This software is licensed under the [GNU General Public License](LICENSE) as published by the Free Software Foundation, either version 3 of the License, or
