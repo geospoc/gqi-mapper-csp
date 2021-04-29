@@ -2,13 +2,13 @@
  * Globals
  */
 
-@import url('https://unpkg.com/leaflet@1.6.0/dist/leaflet.css');
+@import url("https://unpkg.com/leaflet@1.6.0/dist/leaflet.css");
 
 /* Links */
 a,
 a:focus,
 a:hover {
-  color: #1BAAE2;
+  color: #1baae2;
 }
 
 /*
@@ -21,7 +21,7 @@ a:hover {
   color: #333;
   text-shadow: none; /* Prevent inheritance from `body` */
   background-color: #fff;
-  border: .05rem solid #fff;
+  border: 0.05rem solid #fff;
 }
 
 .btn-outline-primary,
@@ -64,12 +64,12 @@ a:hover {
 
 .card-header {
   background-color: white;
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
 }
 
 .card-body {
   color: #90949c;
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
 }
 
 /*
@@ -78,7 +78,7 @@ a:hover {
 
 html,
 body {
-  background-color: #FFFFFF;
+  background-color: #ffffff;
 }
 
 body {
@@ -87,13 +87,12 @@ body {
   display: -ms-flexbox;
   display: flex;
   color: black;
-  font-family: 'Cabin', sans-serif;
+  font-family: "Cabin", sans-serif;
 }
 
 .cover-container {
   max-width: 32em;
 }
-
 
 /*
  * Header
@@ -109,7 +108,7 @@ body {
 .masthead-brand:hover,
 .masthead-brand:active {
   margin-bottom: 0;
-  color: #FFF;
+  color: #fff;
   size: 1.5em;
   letter-spacing: 0.15em;
   text-transform: uppercase;
@@ -125,16 +124,16 @@ body {
 }
 
 .nav-masthead .nav-link {
-  padding: .25rem 0;
+  padding: 0.25rem 0;
   font-weight: 700;
-  color: rgba(255, 255, 255, .5);
+  color: rgba(255, 255, 255, 0.5);
   background-color: transparent;
-  border-bottom: .25rem solid transparent;
+  border-bottom: 0.25rem solid transparent;
 }
 
 .nav-masthead .nav-link:hover,
 .nav-masthead .nav-link:focus {
-  border-bottom-color: rgba(255, 255, 255, .25);
+  border-bottom-color: rgba(255, 255, 255, 0.25);
 }
 
 .nav-masthead .nav-link + .nav-link {
@@ -155,7 +154,6 @@ body {
   color: #0068ea;
 }
 
-
 @media (min-width: 48em) {
   .masthead-brand {
     float: left;
@@ -165,7 +163,6 @@ body {
   }
 }
 
-
 /*
  * Cover
  */
@@ -173,10 +170,9 @@ body {
   padding: 0 1.5rem;
 }
 .cover .btn-lg {
-  padding: .75rem 1.25rem;
+  padding: 0.75rem 1.25rem;
   font-weight: 700;
 }
-
 
 /*
  * Footer
@@ -200,15 +196,15 @@ footer a:hover {
 }
 
 .blue {
-  background-color: #1BAAE2;
-  color: #FFF;
+  background-color: #1baae2;
+  color: #fff;
 }
 
 @media (min-width: 48em) {
   .smallscreen {
-    margin-top: .7em;
-    }
+    margin-top: 0.7em;
   }
+}
 
 /* Next main div */
 #__next {
@@ -241,7 +237,8 @@ footer a:hover {
   font-weight: lighter;
 }
 
-.tips, .result {
+.tips,
+.result {
   width: 100%;
   background-color: white;
   padding: 3em 2em;
@@ -269,11 +266,12 @@ main {
 
 .mapdiv {
   width: 100%;
-  height: calc(100% - 8em);
+  height: calc(100% - 8.5em);
   position: relative;
 }
 
-a, .blueText {
+a,
+.blueText {
   color: #0068ea;
 }
 
@@ -287,7 +285,7 @@ a {
 }
 
 .tips img {
-  padding: .5em 0;
+  padding: 0.5em 0;
 }
 
 .tips h5 {
@@ -300,8 +298,8 @@ a {
   z-index: 10;
   border-radius: 5px;
   width: 60%;
-  padding: .5rem;
-  color: #FFF;
+  padding: 0.5rem;
+  color: #fff;
   text-align: center;
 }
 
@@ -311,12 +309,12 @@ a {
 
 .answerCorrect {
   visibility: visible;
-  background-color: #76C688;
+  background-color: #76c688;
 }
 
 .answerIncorrect {
   visibility: visible;
-  background-color: #E97D88;
+  background-color: #e97d88;
 }
 
 .tableResults {
@@ -335,7 +333,8 @@ a {
  */
 
 .actionButton {
-  border-radius: 15px;
+  border-radius: 18.5px;
+  line-height: 2;
 }
 
 .actionButton.yes {
@@ -343,7 +342,8 @@ a {
   border: 1px solid #8dd240;
 }
 
-.actionButton.yes:hover:not([disabled]), .actionButton.yes.btn-primary {
+.actionButton.yes:hover:not([disabled]),
+.actionButton.yes.btn-primary {
   color: #ffffff;
   background-color: #8dd240;
 }
@@ -353,7 +353,8 @@ a {
   border: 1px solid #fc625f;
 }
 
-.actionButton.no:hover:not([disabled]), .actionButton.no.btn-primary {
+.actionButton.no:hover:not([disabled]),
+.actionButton.no.btn-primary {
   color: #ffffff;
   background-color: #fc625f;
 }
@@ -363,7 +364,8 @@ a {
   border: 1px solid #fec84c;
 }
 
-.actionButton.maybe:hover:not([disabled]), .actionButton.maybe.btn-primary {
+.actionButton.maybe:hover:not([disabled]),
+.actionButton.maybe.btn-primary {
   color: #ffffff;
   background-color: #fec84c;
 }
@@ -378,9 +380,39 @@ a {
   left: 10px;
   border-radius: 3px;
   border: 1px solid rgba(0, 0, 0, 0.4);
-  font-family: 'Cabin', sans-serif;
+  font-family: "Cabin", sans-serif;
   font-size: 0.8em;
   text-transform: uppercase;
+}
+
+/*
+ * Test
+ */
+
+.testButton {
+  border-radius: 18.5px;
+}
+
+.testButton.yes {
+  color: #8dd240;
+  border: 1px solid #8dd240;
+}
+
+.testButton.yes:hover:not([disabled]),
+.testButton.yes.btn-primary {
+  color: #ffffff;
+  background-color: #8dd240;
+}
+
+.testButton.no {
+  color: #fc625f;
+  border: 1px solid #fc625f;
+}
+
+.testButton.no:hover:not([disabled]),
+.testButton.no.btn-primary {
+  color: #ffffff;
+  background-color: #fc625f;
 }
 
 /*
@@ -515,13 +547,17 @@ a {
   color: #ffffff;
 }
 
-.iconVisible { opacity:1; }
-.iconInvisible { opacity:0; }
-.iconFadeOut{
-     opacity:0;
-     transition: opacity 1s 2s;
+.iconVisible {
+  opacity: 1;
 }
-.iconFadeIn{
-     opacity:1;
-     transition: opacity 1s 2s;
+.iconInvisible {
+  opacity: 0;
+}
+.iconFadeOut {
+  opacity: 0;
+  transition: opacity 1s 2s;
+}
+.iconFadeIn {
+  opacity: 1;
+  transition: opacity 1s 2s;
 }

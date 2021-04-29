@@ -15,15 +15,15 @@ This webapp is built using [Next.js](https://nextjs.org/) as a React Framework a
     1. Landing page includes static content
     2. links to `pages/start-test.js` and `pages/tips.js`
     3. Includes FAQ as a Bootstrap accordion.
-* `pages/tips.js` is primarily static content, pulling images from `public/tips.js`
+* `pages/tips.js` is primarily static content, pulling images from `public/tips/`
 * `pages/start-test.js` is also mostly static content that directs users to `pages/test.js` or `pages/mapping.js`
 * `pages/mapping.js` contains most of the logic for the application:
-    1. Fetches dataset of schools to validate from API endpoint: `pages/api/addUser.js`
-    2. Sets cookie, and adds user to Database, if cookie is not set
+    1. Fetches dataset of schools to validate from API endpoint: `pages/api/getLocations/[uuid].js`
+    2. Sets cookie, and adds user to Database (`pages/api/addUser.js`), if cookie is not set
     3. Presents data through frontend, by calling `components/quiz.js
     4. Stores user response through API endpoint: `pages/api/validateLocation.js`
     5. Upon completion, redirects user to `components/result.js`
-* `pages/test.js` is a simplified version of `pages/mapping.js` that instead of pulling data from the database, it pulls local data from `api/quizQuestions.js` and does not store any of the user answers. It calls `components/quizTest.js`, analogous to `components/quiz.js`
+* `pages/test.js` is a simplified version of `pages/mapping.js` that instead of pulling data from the database, it pulls local data from `pages/api/quizQuestions.js` and does not store any of the user answers. It calls `components/quizTest.js`, analogous to `components/quiz.js`
 * `components/quiz.js` iterates through the dataset prompting the user to respond to each location. It calls the `component/mapComponent.js` to render the actual map using Mapbox as the provider through [react-mapbox-gl](https://www.npmjs.com/package/react-mapbox-gl) as bindings for [mapbox-gl](https://docs.mapbox.com/mapbox-gl-js/api/)
 
 ## ✏️ Configuration
@@ -80,7 +80,24 @@ Setup your development environment as follows:
     cd proco-map-app
     npm install
     ```
-3. After having set up the proper [Configuration](#%EF%B8%8F-configuration), run the developmnet server with [fast refresh](https://nextjs.org/docs/basic-features/fast-refresh):
+3. Set up your local [Postgres Database](https://www.postgresql.org/) and configure the following environment variables in `.env.local`:
+    ```bash
+    NEXTAUTH_URL=http://localhost:3000
+    PGUSER=
+    PGHOST=
+    PGPASSWORD=
+    PGDATABASE=
+    ```
+5. Open an account with [Mapbox](https://www.mapbox.com/) to obtain an *Access Token*. Add your access token to `.env.local`:   
+    ```bash
+    NEXT_PUBLIC_ACCESS_TOKEN="YOUR_MAPBOX_ACCESS_TOKEN"
+    ```
+6. Optional: If you need to test the user authentication, you will need to set up your own credentials with either one of the OAuth providers:
+    * RECOMENDED FOR EASIER SETUP: **GitHub**: Follow these [instructions](https://docs.github.com/en/developers/apps/creating-an-oauth-app).
+        * Homepage URL: `http://localhost:3000`  
+        * Authorization Callback URL: `http://localhost:3000/api/auth/callback/github`
+7. Optional: you may get a [*jwt_auto_generated_signing_key* warning](https://github.com/nextauthjs/next-auth/issues/484) that you can resolve by following the instructions on that link, or [these instructions](https://next-auth.js.org/warnings).
+8. Run the developmnet server with [fast refresh](https://nextjs.org/docs/basic-features/fast-refresh):
     ```bash
     npm run dev
     ```
@@ -100,6 +117,8 @@ node csvToJson.js
 ```
 
 The above script will generate a file `schools.json` that will be ingested by `db/dbOps.js`.
+
+*Note: For testing purposes a sample `scripts/schools.json` is included in the code repository, which has the same data as the locations used in the [practice test](https://github.com/lacabra/proco-map-app/blob/master/pages/api/getLocationsTest.js), yet in production a different dataset will be used.*
 
 ## :memo: License
 
