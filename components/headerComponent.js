@@ -52,7 +52,7 @@ const Header = ({hideSignIn}) => {
       <Link href="/">
         <a className="masthead-brand">Project Connect</a>
       </Link>
-      <Nav style={{height: 100 + "%"}}>
+      <Nav style={{height: 70}}>
         {!session && !loading && !hideSignIn && (
           <NavItem onClick={() => signIn(null, {callbackUrl: callbackUrl})}>
             <button className="signin-button">Sign in</button>
