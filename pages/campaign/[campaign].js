@@ -29,24 +29,22 @@ export default function campaign() {
   const [leaderboard, setLeaderboard] = useState([]);
 
   useEffect(() => {
+    async function fetchData(campaign) {
+      const result = await fetch(`/api/getCampaignStats/${campaign}`);
+      const leaders = await fetch(`/api/summaryUsers?campaign=${campaign}&names=1`);
+      setStats(await result.json());
+      setLeaderboard(await leaders.json());
+    }
+
     if (router.query.campaign) {
       if (router.query.campaign in campaigns) {
         setCampaign(router.query.campaign);
+        fetchData(router.query.campaign);
       } else {
         router.push("/404");
       }
     }
   }, [router.query]);
-
-  useEffect(() => {
-    async function fetchData() {
-      const result = await fetch(`/api/getCampaignStats/${campaign}`);
-      setStats(await result.json());
-      const leaders = await fetch(`/api/summaryUsers?campaign=${campaign}&names=1`);
-      setLeaderboard(await leaders.json());
-    }
-    fetchData();
-  }, [campaign]);
 
   return (
     <>
