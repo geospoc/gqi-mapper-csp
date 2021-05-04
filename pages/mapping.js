@@ -27,7 +27,7 @@ export default function mapping() {
   const [fact, setFact] = useState("");
 
   const [cookies, setCookie] = useCookies(["uuid"]);
-  const [session] = useSession();
+  const [session, loading] = useSession();
 
   const [untaggedLocationsCount, setUntaggedLocationsCount] = useState(10);
 
@@ -45,22 +45,25 @@ export default function mapping() {
       });
     }
 
-    // Initialize cookie if not present
-    const userId = uuidv4();
-    if (!session && !cookies.uuid) {
-      setCookie("uuid", userId, {path: "/", maxAge: 2592000}); // maxAge: 30 days
-      addUser(userId);
-    }
-
-    // Initialize the set of questions
-    async function fetchData() {
+    async function fetchData(userId) {
       const user_id = session ? session.user.id : cookies.uuid ? cookies.uuid : userId;
       // Get location data
       const result = await fetch(`/api/getLocations/${user_id}`);
       setQuestions(await result.json());
     }
-    fetchData();
-  }, []);
+
+    if (!loading) {
+      // Initialize cookie if not present
+      const userId = uuidv4();
+      if (!session && !cookies.uuid) {
+        setCookie("uuid", userId, {path: "/", maxAge: 2592000}); // maxAge: 30 days
+        addUser(userId);
+      }
+
+      // Initialize the set of questions
+      fetchData(userId);
+    }
+  }, [loading]);
 
   async function fetchLocationResults(school_id) {
     // Get number of untagged locations
