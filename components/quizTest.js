@@ -16,7 +16,9 @@ const MapComponent = dynamic(import("./mapComponent"), {
 export default function QuizTest(props) {
   const [next, setNext] = useState(false);
   const [yes, setYes] = useState("outline-primary");
+  const [yesClass, setYesClass] = useState("yes testButton");
   const [no, setNo] = useState("outline-primary");
+  const [noClass, setNoClass] = useState("no testButton");
   const [result, setResult] = useState(false);
   const [answer, setAnswer] = useState({answer: "", answerClass: "answerHidden"});
 
@@ -24,18 +26,22 @@ export default function QuizTest(props) {
     if (value === props.question.answer) {
       if (value === true) {
         setYes("success");
+        setYesClass("testButton btn-success");
         setAnswer({answer: "Correct answer", answerClass: "answerCorrect"});
       } else {
         setNo("success");
+        setNoClass("testButton btn-success");
         setAnswer({answer: "Correct answer", answerClass: "answerCorrect"});
       }
       setResult(true);
     } else {
       if (value === true) {
         setYes("danger");
+        setYesClass("testButton btn-danger");
         setAnswer({answer: "Incorrect answer", answerClass: "answerIncorrect"});
       } else {
         setNo("danger");
+        setNoClass("testButton btn-danger");
         setAnswer({answer: "Incorrect answer", answerClass: "answerIncorrect"});
       }
       setResult(false);
@@ -46,7 +52,9 @@ export default function QuizTest(props) {
   function handleNext() {
     setNext(false);
     setYes("outline-primary");
+    setYesClass("yes testButton");
     setNo("outline-primary");
+    setNoClass("no testButton");
     setAnswer({answer: "", answerClass: "answerHidden"});
     props.onAnswerSelected(result);
   }
@@ -74,7 +82,7 @@ export default function QuizTest(props) {
             <Col xs={{size: 4, offset: 1}} className="ml-1 pr-0">
               <Button
                 variant={yes}
-                className="yes testButton"
+                className={yesClass}
                 onClick={(e) => handleClick(e, true)}
                 disabled={next}
               >
@@ -84,7 +92,7 @@ export default function QuizTest(props) {
             <Col xs={{size: 4, offset: 2}} className="mr-1 pl-0">
               <Button
                 variant={no}
-                className="no testButton"
+                className={noClass}
                 onClick={(e) => handleClick(e, false)}
                 disabled={next}
               >
