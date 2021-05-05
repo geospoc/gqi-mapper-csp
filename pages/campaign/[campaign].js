@@ -16,6 +16,11 @@ const campaigns = {
     users: 25,
     taggings: 2000,
   },
+  arm: {
+    name: "Arm",
+    users: 200,
+    taggings: 10000,
+  },
 };
 
 function numberWithCommas(x) {
