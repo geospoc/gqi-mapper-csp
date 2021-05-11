@@ -23,11 +23,11 @@ export default function Quiz(props) {
   const [answer, setAnswer] = useState({answer: "", answerClass: "answerHidden"});
 
   React.useEffect(() => {
-    document.addEventListener('keydown', handleKeys);
+    document.addEventListener("keydown", handleKeys);
 
     // cleanup this component
     return () => {
-      document.removeEventListener('keydown', handleKeys);
+      document.removeEventListener("keydown", handleKeys);
     };
   }, []);
 
@@ -65,13 +65,13 @@ export default function Quiz(props) {
     setNext(false);
     setAnswer({answer: "", answerClass: "answerHidden"});
     props.onNextSelected();
-  } 
+  }
 
-  function handleKeys(e){ 
-    e.keyCode == '38' && document.querySelectorAll('.btn-outline-primary')[0].click();
-    e.keyCode == '40' && document.querySelectorAll('.btn-outline-primary')[1].click();
-    e.keyCode == '37' && document.querySelectorAll('.btn-outline-primary')[2].click();
-    e.keyCode == '39' && document.querySelector('#nextButton').click();
+  function handleKeys(e) {
+    e.keyCode == "38" && document.querySelectorAll(".btn-outline-primary")[0].click();
+    e.keyCode == "40" && document.querySelectorAll(".btn-outline-primary")[1].click();
+    e.keyCode == "37" && document.querySelectorAll(".btn-outline-primary")[2].click();
+    e.keyCode == "39" && document.querySelector("#nextButton").click();
   }
 
   const answerClass = "answer " + answer.answerClass;
@@ -174,5 +174,3 @@ export default function Quiz(props) {
     </Layout>
   );
 }
-
-
