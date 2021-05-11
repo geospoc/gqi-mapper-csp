@@ -4,24 +4,7 @@ import Head from "next/head";
 import Layout from "../../components/layout";
 import HeaderComponent from "../../components/headerComponent";
 import {Container, Col, Row, ProgressBar, Table} from "react-bootstrap";
-
-const campaigns = {
-  mapbox: {
-    name: "Mapbox",
-    users: 200,
-    taggings: 20000,
-  },
-  unicef: {
-    name: "UNICEF",
-    users: 25,
-    taggings: 2000,
-  },
-  arm: {
-    name: "Arm",
-    users: 200,
-    taggings: 10000,
-  },
-};
+import {CAMPAIGNS} from "../../constants";
 
 function numberWithCommas(x) {
   return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
@@ -42,7 +25,7 @@ export default function campaign() {
     }
 
     if (router.query.campaign) {
-      if (router.query.campaign in campaigns) {
+      if (router.query.campaign in CAMPAIGNS) {
         setCampaign(router.query.campaign);
         fetchData(router.query.campaign);
       } else {
@@ -67,7 +50,7 @@ export default function campaign() {
           <HeaderComponent inverse={false} />
 
           <div className="tips">
-            <h1>{campaigns[campaign].name} Campaign</h1>
+            <h1>{CAMPAIGNS[campaign].name} Campaign</h1>
           </div>
 
           <Container fluid>
@@ -79,7 +62,7 @@ export default function campaign() {
             <Row>
               <Col xs={7} style={{paddingTop: "0.5em"}}>
                 <ProgressBar
-                  now={(stats.taggings / campaigns[campaign].taggings) * 100}
+                  now={(stats.taggings / CAMPAIGNS[campaign].taggings) * 100}
                 />
               </Col>
               <Col className="text-right">
@@ -87,7 +70,7 @@ export default function campaign() {
                   <span style={{color: "#007bff"}}>
                     {numberWithCommas(stats.taggings)}
                   </span>
-                  &nbsp;/&nbsp;{numberWithCommas(campaigns[campaign].taggings)}
+                  &nbsp;/&nbsp;{numberWithCommas(CAMPAIGNS[campaign].taggings)}
                 </h4>
               </Col>
             </Row>
@@ -101,12 +84,12 @@ export default function campaign() {
             </Row>
             <Row>
               <Col xs={7} style={{paddingTop: "0.5em"}}>
-                <ProgressBar now={(stats.users / campaigns[campaign].users) * 100} />
+                <ProgressBar now={(stats.users / CAMPAIGNS[campaign].users) * 100} />
               </Col>
               <Col className="text-right">
                 <h4>
                   <span style={{color: "#007bff"}}>{numberWithCommas(stats.users)}</span>
-                  &nbsp;/&nbsp;{numberWithCommas(campaigns[campaign].users)}
+                  &nbsp;/&nbsp;{numberWithCommas(CAMPAIGNS[campaign].users)}
                 </h4>
               </Col>
             </Row>
