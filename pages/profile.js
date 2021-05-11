@@ -8,6 +8,7 @@ import {Image, Button, Form, Row, Col} from "react-bootstrap";
 import Layout from "../components/layout";
 import HeaderComponent from "../components/headerComponent";
 import FooterComponent from "../components/footerComponent";
+import {CAMPAIGNS} from "../constants";
 
 const UserView = ({user, signout}) => {
   const [team, setTeam] = useState(null);
@@ -19,7 +20,7 @@ const UserView = ({user, signout}) => {
     const getUserTeam = async () => {
       const result = await fetch(`/api/getUserTeam/${user.id}`);
       const response = await result.json();
-      setTeam(response.team);
+      setTeam(response.team ? response.team : 0);
     };
 
     const getUserStats = async () => {
@@ -71,7 +72,7 @@ const UserView = ({user, signout}) => {
             <Form.Label column xs={2}>
               Team:
             </Form.Label>
-            {team ? (
+            {team !== null ? (
               <Col xs={8}>
                 <Form.Control
                   as="select"
@@ -79,8 +80,9 @@ const UserView = ({user, signout}) => {
                   defaultValue={team}
                 >
                   <option value="0">None</option>
-                  <option>Mapbox</option>
-                  <option>UNICEF</option>
+                  {Object.keys(CAMPAIGNS).map((key, index) => (
+                    <option key={index}>{CAMPAIGNS[key].name}</option>
+                  ))}
                 </Form.Control>
               </Col>
             ) : null}
