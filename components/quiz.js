@@ -22,6 +22,15 @@ export default function Quiz(props) {
   const [result, setResult] = useState(false);
   const [answer, setAnswer] = useState({answer: "", answerClass: "answerHidden"});
 
+  React.useEffect(() => {
+    document.addEventListener('keydown', handleKeys);
+
+    // cleanup this component
+    return () => {
+      document.removeEventListener('keydown', handleKeys);
+    };
+  }, []);
+
   function getClassNameMaintainingFirstElement(e, replacement) {
     let firstClassName = e.classList[0];
     return `${firstClassName} ${replacement}`;
@@ -56,6 +65,13 @@ export default function Quiz(props) {
     setNext(false);
     setAnswer({answer: "", answerClass: "answerHidden"});
     props.onNextSelected();
+  } 
+
+  function handleKeys(e){ 
+    e.keyCode == '38' && document.querySelectorAll('.btn-outline-primary')[0].click();
+    e.keyCode == '40' && document.querySelectorAll('.btn-outline-primary')[1].click();
+    e.keyCode == '37' && document.querySelectorAll('.btn-outline-primary')[2].click();
+    e.keyCode == '39' && document.querySelector('#nextButton').click();
   }
 
   const answerClass = "answer " + answer.answerClass;
@@ -148,7 +164,7 @@ export default function Quiz(props) {
         ) : (
           ""
         )}
-        <Button variant="primary" onClick={handleNext} disabled={!next}>
+        <Button variant="primary" onClick={handleNext} disabled={!next} id="nextButton">
           <span>
             NEXT
             <img className="white" src="/white.svg" />
@@ -158,3 +174,5 @@ export default function Quiz(props) {
     </Layout>
   );
 }
+
+
