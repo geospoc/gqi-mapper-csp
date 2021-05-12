@@ -70,7 +70,7 @@ export default function Quiz(props) {
   function handleKeys(e) {
     e.keyCode == "38" && document.querySelectorAll(".btn-outline-primary")[0].click();
     e.keyCode == "40" && document.querySelectorAll(".btn-outline-primary")[1].click();
-    e.keyCode == "37" && document.querySelectorAll(".btn-outline-primary")[2].click();
+    e.keyCode == "37" && document.querySelector("#unsureButton").click();
     e.keyCode == "39" && document.querySelector("#nextButton").click();
   }
 
@@ -117,6 +117,7 @@ export default function Quiz(props) {
                 className="maybe actionButton"
                 variant={maybe}
                 disabled={next}
+                id="unsureButton"
                 onClick={(e) => handleClick(e, "maybe")}
               >
                 Unsure
