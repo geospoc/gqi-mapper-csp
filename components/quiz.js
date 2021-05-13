@@ -11,6 +11,7 @@ import ProgressBar from "./progressBar";
 import QuestionCount from "./questionCount";
 import Layout from "./layout";
 import CountryNameLabel from "./countryNameLabel";
+import { isMobile } from "react-device-detect";
 
 const MapComponent = dynamic(import("./mapComponent"), {
   ssr: false,
@@ -90,26 +91,28 @@ export default function Quiz(props) {
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </Head>
 
-      <div className="container">
-        <div className="row">
-          <div className="col-sm-12 text-right">
-            <button
-              type="button"
-              onClick={handleShow}
-              className="btn btn-warning"
-              style={{
-                color: "white",
-                fontSize: "14px",
-                backgroundColor: "#18A0FB",
-                borderWidth: 0,
-                marginTop: 3,
-              }}
-            >
-              Keyboard Shortcuts
-            </button>
+      {!isMobile && (
+        <div className="container">
+          <div className="row" style={{margin:0, padding:0}}>
+            <div className="col-sm-12 text-right" style={{margin:0}}>
+              <button
+                type="button"
+                onClick={handleShow}
+                className="btn btn-warning"
+                style={{
+                  color: "white",
+                  fontSize: "14px",
+                  backgroundColor: "#18A0FB",
+                  borderWidth: 0,
+                  marginTop: 3,
+                }}
+              >
+                Keyboard Shortcuts
+              </button>
+            </div>
           </div>
         </div>
-      </div>
+      )}      
 
       <Modal size="sm" show={show} onHide={handleClose}>
         <Modal.Header closeButton>
