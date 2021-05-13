@@ -1,8 +1,12 @@
 import React, {useState} from "react";
 import Head from "next/head";
 import dynamic from "next/dynamic";
+import ArrowUpwardRoundedIcon from '@material-ui/icons/ArrowUpward';
+import ArrowDownwardRoundedIcon from '@material-ui/icons/ArrowDownwardRounded';
+import ArrowForwardRoundedIcon from '@material-ui/icons/ArrowForwardRounded';
+import ArrowBackRoundedIcon from '@material-ui/icons/ArrowBackRounded';
+import Modal from "react-bootstrap/Modal";
 import {Row, Col, Button} from "react-bootstrap";
-
 import ProgressBar from "./progressBar";
 import QuestionCount from "./questionCount";
 import Layout from "./layout";
@@ -21,6 +25,10 @@ export default function Quiz(props) {
   const [maybe] = useState("outline-primary");
   const [result, setResult] = useState(false);
   const [answer, setAnswer] = useState({answer: "", answerClass: "answerHidden"});
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
   React.useEffect(() => {
     document.addEventListener("keydown", handleKeys);
@@ -81,8 +89,69 @@ export default function Quiz(props) {
       <Head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </Head>
+      
+
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-12 text-right">
+            <button type="button" onClick={handleShow} class="btn btn-warning" style={{color:"white", fontSize:"14px" , backgroundColor:"#18A0FB", borderWidth:0, marginTop:3}}>
+              Keyboard Shortcuts
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <Modal size="sm" show={show} onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title style={{fontSize:"16px", fontWeight:"bold"}}>Keyboard Shortcuts</Modal.Title>
+        </Modal.Header>
+        <Modal.Body style={{height:"150px", overflowY:"auto", color:"gray", padding:"22px"}}>
+          <Button
+            className="yes actionButton"
+            style={{width:"120px"}}
+            variant={yes}
+            disabled={next}
+          >
+            Yes
+          </Button>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <Button style={{width:"50px", backgroundColor:"gray", border:0}}><ArrowUpwardRoundedIcon /></Button><br /><br />
+          <Button
+            className="no actionButton"
+            style={{width:"120px"}}
+            variant={yes}
+            disabled={next}
+          >
+            No
+          </Button>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <Button style={{width:"50px", backgroundColor:"gray", border:0}}><ArrowDownwardRoundedIcon /></Button><br /><br />
+          <Button
+            className="maybe actionButton"
+            style={{width:"120px"}}
+            variant={yes}
+            disabled={next}
+          >
+            Unsure
+          </Button>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <Button style={{width:"50px", backgroundColor:"gray", border:0}}><ArrowBackRoundedIcon /></Button><br /><br />
+          <Button
+            className="actionButton"
+            style={{width:"120px"}}
+            variant={yes}
+            disabled={next}
+          >
+            Next
+          </Button>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <Button style={{width:"50px", backgroundColor:"gray", border:0}}><ArrowForwardRoundedIcon /></Button><br />
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="primary" onClick={handleClose}>
+            Okay
+          </Button>
+        </Modal.Footer>
+      </Modal>
+      
       <main>
-        <QuestionCount counter={props.counter} total={props.questionTotal} />
+        <QuestionCount counter={props.counter} total={props.questionTotal} /> 
         <p>Does this location look like a school?</p>
 
         <div className="row no-gutters align-items-center mapdiv">
