@@ -1,11 +1,6 @@
 import React, {useState} from "react";
 import Head from "next/head";
 import dynamic from "next/dynamic";
-import ArrowUpwardRoundedIcon from "@material-ui/icons/ArrowUpward";
-import ArrowDownwardRoundedIcon from "@material-ui/icons/ArrowDownwardRounded";
-import ArrowForwardRoundedIcon from "@material-ui/icons/ArrowForwardRounded";
-import ArrowBackRoundedIcon from "@material-ui/icons/ArrowBackRounded";
-import Modal from "react-bootstrap/Modal";
 import {Row, Col, Button} from "react-bootstrap";
 import ProgressBar from "./progressBar";
 import QuestionCount from "./questionCount";
@@ -25,10 +20,6 @@ export default function Quiz(props) {
   const [maybe] = useState("outline-primary");
   const [result, setResult] = useState(false);
   const [answer, setAnswer] = useState({answer: "", answerClass: "answerHidden"});
-  const [show, setShow] = useState(false);
-
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
 
   React.useEffect(() => {
     document.addEventListener("keydown", handleKeys);
@@ -90,107 +81,11 @@ export default function Quiz(props) {
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </Head>
 
-      <Modal size="sm" show={show} onHide={handleClose}>
-        <Modal.Header closeButton>
-          <Modal.Title style={{fontSize: "16px", fontWeight: "bold"}}>
-            Keyboard Shortcuts
-          </Modal.Title>
-        </Modal.Header>
-        <Modal.Body
-          style={{height: "150px", overflowY: "auto", color: "gray", padding: "22px"}}
-        >
-          <Button
-            className="yes actionButton"
-            style={{width: "120px"}}
-            variant={yes}
-            disabled={next}
-          >
-            Yes
-          </Button>
-          <Button
-            style={{
-              width: "50px",
-              backgroundColor: "gray",
-              border: 0,
-              marginLeft: "60px",
-            }}
-          >
-            <ArrowUpwardRoundedIcon />
-          </Button>
-          <br />
-          <br />
-          <Button
-            className="no actionButton"
-            style={{width: "120px"}}
-            variant={yes}
-            disabled={next}
-          >
-            No
-          </Button>
-          <Button
-            style={{
-              width: "50px",
-              backgroundColor: "gray",
-              border: 0,
-              marginLeft: "60px",
-            }}
-          >
-            <ArrowDownwardRoundedIcon />
-          </Button>
-          <br />
-          <br />
-          <Button
-            className="maybe actionButton"
-            style={{width: "120px"}}
-            variant={yes}
-            disabled={next}
-          >
-            Unsure
-          </Button>
-          <Button
-            style={{
-              width: "50px",
-              backgroundColor: "gray",
-              border: 0,
-              marginLeft: "60px",
-            }}
-          >
-            <ArrowBackRoundedIcon />
-          </Button>
-          <br />
-          <br />
-          <Button
-            className="actionButton"
-            style={{width: "120px"}}
-            variant={yes}
-            disabled={next}
-          >
-            Next
-          </Button>
-          <Button
-            style={{
-              width: "50px",
-              backgroundColor: "gray",
-              border: 0,
-              marginLeft: "60px",
-            }}
-          >
-            <ArrowForwardRoundedIcon />
-          </Button>
-          <br />
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant="primary" onClick={handleClose}>
-            Okay
-          </Button>
-        </Modal.Footer>
-      </Modal>
-
       <main>
         <QuestionCount
           counter={props.counter}
           total={props.questionTotal}
-          handleShow={handleShow}
+          display={true}
         />
         <p>Does this location look like a school?</p>
 

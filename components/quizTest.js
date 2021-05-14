@@ -83,7 +83,11 @@ export default function QuizTest(props) {
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </Head>
       <main>
-        <QuestionCount counter={props.counter} total={props.questionTotal} />
+        <QuestionCount
+          counter={props.counter}
+          total={props.questionTotal}
+          display={false}
+        />
         <p>Does this look like a school location?</p>
 
         <div className="row no-gutters align-items-center mapdiv">
