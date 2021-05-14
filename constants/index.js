@@ -2,7 +2,7 @@ export const CAMPAIGNS = {
   arm: {
     name: "Arm",
     users: 200,
-    taggings: 10000,
+    taggings: 20000,
   },
   mapbox: {
     name: "Mapbox",
