@@ -46,7 +46,11 @@ function QuestionCount(props) {
         <Modal.Body
           style={{height: "150px", overflowY: "auto", color: "gray", padding: "22px"}}
         >
-          <Button className="yes actionButton" style={{width: "120px"}}>
+          <Button
+            className="yes actionButton"
+            variant="outline-primary"
+            style={{width: "120px"}}
+          >
             Yes
           </Button>
           <Button
@@ -61,7 +65,11 @@ function QuestionCount(props) {
           </Button>
           <br />
           <br />
-          <Button className="no actionButton" style={{width: "120px"}}>
+          <Button
+            className="no actionButton"
+            variant="outline-primary"
+            style={{width: "120px"}}
+          >
             No
           </Button>
           <Button
@@ -78,7 +86,11 @@ function QuestionCount(props) {
           <br />
           {displayUnsure && (
             <>
-              <Button className="maybe actionButton" style={{width: "120px"}}>
+              <Button
+                className="maybe actionButton"
+                variant="outline-primary"
+                style={{width: "120px"}}
+              >
                 Unsure
               </Button>
               <Button
@@ -95,7 +107,11 @@ function QuestionCount(props) {
               <br />
             </>
           )}
-          <Button className="actionButton" style={{width: "120px"}}>
+          <Button
+            className="actionButton"
+            variant="outline-primary"
+            style={{width: "120px"}}
+          >
             Next
           </Button>
           <Button
@@ -111,7 +127,7 @@ function QuestionCount(props) {
           <br />
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="primary" onClick={handleClose}>
+          <Button variant="primary" onClick={handleClose} style={{margin: 0, padding: 8}}>
             Okay
           </Button>
         </Modal.Footer>
