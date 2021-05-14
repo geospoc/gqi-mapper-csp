@@ -11,7 +11,6 @@ import ProgressBar from "./progressBar";
 import QuestionCount from "./questionCount";
 import Layout from "./layout";
 import CountryNameLabel from "./countryNameLabel";
-import {isMobile} from "react-device-detect";
 
 const MapComponent = dynamic(import("./mapComponent"), {
   ssr: false,
@@ -91,29 +90,6 @@ export default function Quiz(props) {
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </Head>
 
-      {!isMobile && (
-        <div className="container">
-          <div className="row" style={{margin: 0, padding: 0}}>
-            <div className="col-sm-12 text-right" style={{margin: 0}}>
-              <button
-                type="button"
-                onClick={handleShow}
-                className="btn btn-warning"
-                style={{
-                  color: "white",
-                  fontSize: "14px",
-                  backgroundColor: "#18A0FB",
-                  borderWidth: 0,
-                  marginTop: 3,
-                }}
-              >
-                Keyboard Shortcuts
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
-
       <Modal size="sm" show={show} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title style={{fontSize: "16px", fontWeight: "bold"}}>
@@ -131,8 +107,14 @@ export default function Quiz(props) {
           >
             Yes
           </Button>
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{" "}
-          <Button style={{width: "50px", backgroundColor: "gray", border: 0}}>
+          <Button
+            style={{
+              width: "50px",
+              backgroundColor: "gray",
+              border: 0,
+              marginLeft: "60px",
+            }}
+          >
             <ArrowUpwardRoundedIcon />
           </Button>
           <br />
@@ -145,8 +127,14 @@ export default function Quiz(props) {
           >
             No
           </Button>
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{" "}
-          <Button style={{width: "50px", backgroundColor: "gray", border: 0}}>
+          <Button
+            style={{
+              width: "50px",
+              backgroundColor: "gray",
+              border: 0,
+              marginLeft: "60px",
+            }}
+          >
             <ArrowDownwardRoundedIcon />
           </Button>
           <br />
@@ -159,8 +147,14 @@ export default function Quiz(props) {
           >
             Unsure
           </Button>
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{" "}
-          <Button style={{width: "50px", backgroundColor: "gray", border: 0}}>
+          <Button
+            style={{
+              width: "50px",
+              backgroundColor: "gray",
+              border: 0,
+              marginLeft: "60px",
+            }}
+          >
             <ArrowBackRoundedIcon />
           </Button>
           <br />
@@ -173,8 +167,14 @@ export default function Quiz(props) {
           >
             Next
           </Button>
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{" "}
-          <Button style={{width: "50px", backgroundColor: "gray", border: 0}}>
+          <Button
+            style={{
+              width: "50px",
+              backgroundColor: "gray",
+              border: 0,
+              marginLeft: "60px",
+            }}
+          >
             <ArrowForwardRoundedIcon />
           </Button>
           <br />
@@ -187,7 +187,11 @@ export default function Quiz(props) {
       </Modal>
 
       <main>
-        <QuestionCount counter={props.counter} total={props.questionTotal} />
+        <QuestionCount
+          counter={props.counter}
+          total={props.questionTotal}
+          handleShow={handleShow}
+        />
         <p>Does this location look like a school?</p>
 
         <div className="row no-gutters align-items-center mapdiv">
