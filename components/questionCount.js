@@ -19,19 +19,19 @@ function QuestionCount(props) {
     <h2 className="questionCount">
       <span>{props.counter + 1}</span>/<span>{props.total}</span>
       {!isMobile && (
-          <button
-            type="button"
-            onClick={handleShow}
-            className="btn btn-warning float-right"
-            style={{
-              color: "white",
-              fontSize: "14px",
-              backgroundColor: "#18A0FB",
-              borderWidth: 0,
-            }}
-          >
-            Keyboard Shortcuts
-          </button>  
+        <button
+          type="button"
+          onClick={handleShow}
+          className="btn btn-warning float-right"
+          style={{
+            color: "white",
+            fontSize: "14px",
+            backgroundColor: "#18A0FB",
+            borderWidth: 0,
+          }}
+        >
+          Keyboard Shortcuts
+        </button>
       )}
       <Modal size="sm" show={show} onHide={handleClose}>
         <Modal.Header closeButton>
@@ -39,9 +39,7 @@ function QuestionCount(props) {
             Keyboard Shortcuts
           </Modal.Title>
         </Modal.Header>
-        <Modal.Body
-          style={{color: "gray", padding: "22px"}}
-        >
+        <Modal.Body style={{color: "gray", padding: "22px"}}>
           <Button
             className="yes actionButton"
             variant="outline-primary"
