@@ -40,7 +40,7 @@ function QuestionCount(props) {
           </Modal.Title>
         </Modal.Header>
         <Modal.Body
-          style={{height: "150px", overflowY: "auto", color: "gray", padding: "22px"}}
+          style={{color: "gray", padding: "22px"}}
         >
           <Button
             className="yes actionButton"
