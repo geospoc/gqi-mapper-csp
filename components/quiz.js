@@ -2,7 +2,6 @@ import React, {useState} from "react";
 import Head from "next/head";
 import dynamic from "next/dynamic";
 import {Row, Col, Button} from "react-bootstrap";
-
 import ProgressBar from "./progressBar";
 import QuestionCount from "./questionCount";
 import Layout from "./layout";
@@ -21,6 +20,15 @@ export default function Quiz(props) {
   const [maybe] = useState("outline-primary");
   const [result, setResult] = useState(false);
   const [answer, setAnswer] = useState({answer: "", answerClass: "answerHidden"});
+
+  React.useEffect(() => {
+    document.addEventListener("keydown", handleKeys);
+
+    // cleanup this component
+    return () => {
+      document.removeEventListener("keydown", handleKeys);
+    };
+  }, []);
 
   function getClassNameMaintainingFirstElement(e, replacement) {
     let firstClassName = e.classList[0];
@@ -58,6 +66,13 @@ export default function Quiz(props) {
     props.onNextSelected();
   }
 
+  function handleKeys(e) {
+    e.keyCode == "38" && document.querySelector("#yesButton").click();
+    e.keyCode == "40" && document.querySelector("#noButton").click();
+    e.keyCode == "37" && document.querySelector("#unsureButton").click();
+    e.keyCode == "39" && document.querySelector("#nextButton").click();
+  }
+
   const answerClass = "answer " + answer.answerClass;
   const countryName = countryCodes[props.question.country_code];
   return (
@@ -65,8 +80,13 @@ export default function Quiz(props) {
       <Head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </Head>
+
       <main>
-        <QuestionCount counter={props.counter} total={props.questionTotal} />
+        <QuestionCount
+          counter={props.counter}
+          total={props.questionTotal}
+          display={true}
+        />
         <p>Does this location look like a school?</p>
 
         <div className="row no-gutters align-items-center mapdiv">
@@ -81,6 +101,7 @@ export default function Quiz(props) {
                 className="yes actionButton"
                 variant={yes}
                 disabled={next}
+                id="yesButton"
                 onClick={(e) => handleClick(e, "yes")}
               >
                 Yes
@@ -91,6 +112,7 @@ export default function Quiz(props) {
                 className="no actionButton"
                 variant={no}
                 disabled={next}
+                id="noButton"
                 onClick={(e) => handleClick(e, "no")}
               >
                 No
@@ -101,6 +123,7 @@ export default function Quiz(props) {
                 className="maybe actionButton"
                 variant={maybe}
                 disabled={next}
+                id="unsureButton"
                 onClick={(e) => handleClick(e, "maybe")}
               >
                 Unsure
@@ -148,7 +171,7 @@ export default function Quiz(props) {
         ) : (
           ""
         )}
-        <Button variant="primary" onClick={handleNext} disabled={!next}>
+        <Button variant="primary" onClick={handleNext} disabled={!next} id="nextButton">
           <span>
             NEXT
             <img className="white" src="/white.svg" />

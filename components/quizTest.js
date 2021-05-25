@@ -22,6 +22,15 @@ export default function QuizTest(props) {
   const [result, setResult] = useState(false);
   const [answer, setAnswer] = useState({answer: "", answerClass: "answerHidden"});
 
+  React.useEffect(() => {
+    document.addEventListener("keydown", handleKeys);
+
+    // cleanup this component
+    return () => {
+      document.removeEventListener("keydown", handleKeys);
+    };
+  }, []);
+
   function handleClick(e, value) {
     if (value === props.question.answer) {
       if (value === true) {
@@ -59,6 +68,12 @@ export default function QuizTest(props) {
     props.onAnswerSelected(result);
   }
 
+  function handleKeys(e) {
+    e.keyCode == "38" && document.querySelector("#yesButton").click();
+    e.keyCode == "40" && document.querySelector("#noButton").click();
+    e.keyCode == "39" && document.querySelector("#nextButton").click();
+  }
+
   const answerClass = "answer " + answer.answerClass;
   const countryName = countryCodes[props.question.country_code];
 
@@ -68,7 +83,11 @@ export default function QuizTest(props) {
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </Head>
       <main>
-        <QuestionCount counter={props.counter} total={props.questionTotal} />
+        <QuestionCount
+          counter={props.counter}
+          total={props.questionTotal}
+          display={false}
+        />
         <p>Does this look like a school location?</p>
 
         <div className="row no-gutters align-items-center mapdiv">
@@ -83,6 +102,7 @@ export default function QuizTest(props) {
               <Button
                 variant={yes}
                 className={yesClass}
+                id="yesButton"
                 onClick={(e) => handleClick(e, true)}
                 disabled={next}
               >
@@ -93,6 +113,7 @@ export default function QuizTest(props) {
               <Button
                 variant={no}
                 className={noClass}
+                id="noButton"
                 onClick={(e) => handleClick(e, false)}
                 disabled={next}
               >
@@ -104,7 +125,7 @@ export default function QuizTest(props) {
       </main>
 
       <footer className="mt-auto next-section">
-        <Button variant="primary" onClick={handleNext} disabled={!next}>
+        <Button variant="primary" onClick={handleNext} disabled={!next} id="nextButton">
           <span>
             NEXT
             <img className="white" src="/white.svg" />
