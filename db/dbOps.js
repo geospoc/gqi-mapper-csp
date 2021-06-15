@@ -1,6 +1,8 @@
 /* eslint-disable */
+const { SchoolRounded } = require("@material-ui/icons");
 const {Pool} = require("pg");
 const pgtools = require("pgtools");
+const uuidv4 = require("uuid").v4;
 
 const schools = require("../scripts/schools.json");
 
@@ -15,13 +17,15 @@ const config = {
 
 const pool = new Pool();
 
-function createDB() {
-  pgtools.createdb(config, process.env.PGDATABASE, function (err, res) {
+ function createDB() {
+  pgtools.createdb(config, process.env.PGDATABASE, async function (err, res) {
     if (err) {
       console.error(err);
       process.exit(-1);
     }
+	await pool.query(`CREATE EXTENSION "uuid-ossp"`);
   });
+ 
 }
 
 function dropDB() {
@@ -37,21 +41,18 @@ function dropDB() {
 async function createTables() {
   await pool.query(`
 		CREATE TABLE locations(
-			school_id TEXT,
-			lat REAL,
-			lon REAL,
-			school BOOLEAN,
-			country_code TEXT,
-			unique (school_id)
+			id uuid,
+			geom GEOMETRY,
+			meta_data JSONB
 		);
 	`);
   await pool.query(`
 		CREATE TYPE yesnomaybe AS ENUM ('yes', 'no', 'maybe');
 		CREATE TABLE crowdsourcing(
 			user_id TEXT,
-			school_id TEXT,
+			location_id uuid,
 			result yesnomaybe,
-			unique (user_id, school_id)
+			unique (user_id, location_id)
 		);
 	`);
   await pool.query(`
@@ -98,17 +99,16 @@ async function createTables() {
 }
 
 async function loadTables() {
-  for (let i = 0; i < schools.length; i++) {
-    console.log(schools[i]);
+  for (let i = 0; i < schools.features.length; i++) {
+	const { geometry, properties } = schools.features[i] 
+	let id = uuidv4();
     const res = await pool.query(
       `
-			INSERT INTO locations(school_id, lat, lon, school, country_code) VALUES($1, $2, $3, $4, $5) RETURNING *;`,
+			INSERT INTO locations(id, meta_data, geom) VALUES($1, $2, st_geomfromgeojson($3)) RETURNING *;`,
       [
-        schools[i].id,
-        schools[i].lat,
-        schools[i].lon,
-        schools[i].school,
-        schools[i].country_code,
+        id,
+        properties,
+		geometry
       ]
     );
     console.log(res);
@@ -125,8 +125,8 @@ async function dropTables() {
 
 // Uncoment any of the lines below, one at a time, to execute each of the needed self-explanatory functions
 
-//createDB();
-//createTables();
-//loadTables();
+// createDB();
+// createTables();
+loadTables();
 //dropTables();
-//dropDB();
+// dropDB();
