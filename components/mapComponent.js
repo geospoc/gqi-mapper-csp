@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from "react";
-import ReactMapboxGl, {Marker, ZoomControl} from "react-mapbox-gl";
+import ReactMapboxGl, {Feature, Layer, ZoomControl} from "react-mapbox-gl";
 
 const zoomDefault = 17;
 
@@ -11,30 +11,46 @@ const Map = ReactMapboxGl({
 
 export default function mapComponent(props) {
   const [zoom, setZoom] = useState(zoomDefault);
-  const [lonLat, setLonLat] = useState([props.lon, props.lat]);
-  const [lonLatMarker, setLonLatMarker] = useState([props.lon, props.lat]);
+  const [lonLat, setLonLat] = useState(props.centerCoordinate);
+  const [featurePolygon, setFeaturePolygon] = useState(props.featurePolygon);
+  const [metaData, setMetadata] = useState(props.metaData);
 
   useEffect(() => {
     setZoom(zoomDefault);
-    setLonLat([props.lon, props.lat]);
-    setLonLatMarker([props.lon, props.lat]);
-  }, [props.lon, props.lat]);
+    setLonLat(props.centerCoordinate);
+  }, props.centerCoordinate);
+
+  useEffect(() => {
+    setFeaturePolygon(props.featurePolygon);
+  }, props.featurePolygon);
+
+  useEffect(() => {
+    setMetadata(props.metaData);
+  }, props.metaData);
 
   return (
     <Map
       style="mapbox://styles/mapbox/satellite-v9"
-      center={lonLat}
+      center={lonLat.coordinates}
       zoom={[zoom]}
       containerStyle={{width: "100%", height: "100%"}}
       movingMethod="jumpTo"
       onMoveEnd={(map) => {
         setZoom(map.getZoom());
-        setLonLat([map.getCenter().lng, map.getCenter().lat]);
+        setLonLat({coordinates: [map.getCenter().lng, map.getCenter().lat]});
       }}
     >
-      <Marker coordinates={lonLatMarker} anchor="bottom">
-        <img src="/marker.svg" />
-      </Marker>
+      <Layer
+        type="fill"
+        id="polygon"
+        paint={{
+          "fill-color": metaData.fill,
+          "fill-opacity": 0.3,
+          "fill-outline-color": metaData.stroke,
+        }}
+      >
+        <Feature coordinates={featurePolygon.coordinates} />
+      </Layer>
       <ZoomControl />
     </Map>
   );

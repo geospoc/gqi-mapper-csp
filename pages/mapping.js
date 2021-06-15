@@ -9,11 +9,17 @@ import Result from "../components/result";
 export default function mapping() {
   const [counter, setCounter] = useState(0);
   const [question, setQuestion] = useState({
-    id: 0,
-    lat: 0,
-    lon: 0,
-    country_code: "",
-    answer: "",
+    center: {coordinates: [0, 0]},
+    geom: {
+      coordinates: [
+        [0, 0],
+        [0, 0],
+        [0, 0],
+        [0, 0],
+        [0, 0],
+      ],
+    },
+    metaData: {},
   });
   const [questions, setQuestions] = useState([question]);
   const [locationResults, setLocationResults] = useState({
@@ -74,13 +80,17 @@ export default function mapping() {
 
   useEffect(() => {
     if (questions) {
-      setQuestion(questions[counter]);
+      const question = questions[counter];
+      question.featurePolygon = question.geom;
+      setQuestion(question);
     }
   }, [questions]);
 
   useEffect(() => {
     if (questions) {
-      setQuestion(questions[counter]);
+      const question = questions[counter];
+      question.featurePolygon = question.geom;
+      setQuestion(question);
     }
   }, [counter]);
 
