@@ -47,7 +47,7 @@ export default function Quiz(props) {
       e.target,
       "actionButton btn btn-primary"
     );
-    let resultValue = {school_id: props.question.school_id, answer: value};
+    let resultValue = {id: props.question.id, answer: value};
     props.onAnswerSelected(resultValue);
     setResult(resultValue);
     setNext(true);

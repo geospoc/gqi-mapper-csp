@@ -19,7 +19,7 @@ export default function mapping() {
         [0, 0],
       ],
     },
-    metaData: {},
+    metaData: {color: "#FFF", stroke: "#FFF"},
   });
   const [questions, setQuestions] = useState([question]);
   const [locationResults, setLocationResults] = useState({
@@ -71,9 +71,9 @@ export default function mapping() {
     }
   }, [loading]);
 
-  async function fetchLocationResults(school_id) {
+  async function fetchLocationResults(id) {
     // Get number of untagged locations
-    const result = await fetch(`/api/getLocationResults/${school_id}`);
+    const result = await fetch(`/api/getLocationResults/${id}`);
     const response = await result.json();
     setLocationResults(response);
   }
@@ -87,7 +87,7 @@ export default function mapping() {
   }, [questions]);
 
   useEffect(() => {
-    if (questions) {
+    if (questions && counter < questions.length) {
       const question = questions[counter];
       question.featurePolygon = question.geom;
       setQuestion(question);
@@ -95,8 +95,8 @@ export default function mapping() {
   }, [counter]);
 
   function handleAnswerSelected(result) {
-    if (result.school_id) {
-      fetchLocationResults(result.school_id);
+    if (result.id) {
+      fetchLocationResults(result.id);
     }
 
     const user_id = session ? session.user.id : cookies.uuid;
@@ -109,7 +109,7 @@ export default function mapping() {
       },
       body: JSON.stringify({
         user_id: user_id,
-        school_id: result.school_id,
+        location_id: result.id,
         result: result.answer,
       }),
     });

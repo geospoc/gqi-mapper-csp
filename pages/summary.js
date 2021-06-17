@@ -49,14 +49,14 @@ export default function summary() {
     let obj = {};
 
     for (let i = 1; i < locations.length; i++) {
-      obj[locations[i].school_id] = {yes: 0, no: 0, maybe: 0};
+      obj[locations[i].id] = {yes: 0, no: 0, maybe: 0};
     }
 
     results.forEach((e) => {
-      if (!obj[e.school_id]) {
-        obj[e["school_id"]] = {yes: 0, no: 0, maybe: 0};
+      if (!obj[e.id]) {
+        obj[e["id"]] = {yes: 0, no: 0, maybe: 0};
       }
-      obj[e["school_id"]][e["result"]] = Number(e.count);
+      obj[e["id"]][e["result"]] = Number(e.count);
     });
     setSummary(obj);
     console.log(obj);

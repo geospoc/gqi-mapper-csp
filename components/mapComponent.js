@@ -18,15 +18,15 @@ export default function mapComponent(props) {
   useEffect(() => {
     setZoom(zoomDefault);
     setLonLat(props.centerCoordinate);
-  }, props.centerCoordinate);
+  }, [props.centerCoordinate]);
 
   useEffect(() => {
     setFeaturePolygon(props.featurePolygon);
-  }, props.featurePolygon);
+  }, [props.featurePolygon]);
 
   useEffect(() => {
     setMetadata(props.metaData);
-  }, props.metaData);
+  }, [props.metaData]);
 
   return (
     <Map

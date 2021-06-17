@@ -22,9 +22,9 @@ export default async (req, res) => {
                         WHERE user_id=($1)
                         RETURNING *;`;
 
-  const insertQuery = `INSERT INTO crowdsourcing (user_id, school_id, result)
+  const insertQuery = `INSERT INTO crowdsourcing (user_id, location_id, result)
                         VALUES ($1, $2, $3)
-                        ON CONFLICT (user_id, school_id)
+                        ON CONFLICT (user_id, location_id)
                         DO NOTHING
                         RETURNING *;`;
 
@@ -35,7 +35,7 @@ export default async (req, res) => {
     deletedRes.rows.forEach(async (row) => {
       const insertedRes = await pool.query(insertQuery, [
         to_uuid,
-        row.school_id,
+        row.location_id,
         row.result,
       ]);
       insertedRows.push(insertedRes.rows[0]);

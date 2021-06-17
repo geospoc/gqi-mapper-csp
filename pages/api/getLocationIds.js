@@ -6,7 +6,7 @@ export default async (req, res) => {
   if (req.method === "GET") {
     let result = null;
     try {
-      result = await pool.query("SELECT school_id FROM locations ORDER BY school_id;");
+      result = await pool.query("SELECT id FROM locations ORDER BY id;");
     } catch (e) {
       console.log(e);
     }

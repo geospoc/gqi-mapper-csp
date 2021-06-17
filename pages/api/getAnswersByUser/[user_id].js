@@ -7,7 +7,7 @@ export default async (req, res) => {
     try {
       const user_id = req.query.user_id;
       const result = await pool.query(
-        `SELECT user_id, school_id, result FROM crowdsourcing WHERE user_id ='${user_id}';`
+        `SELECT user_id, location_id, result FROM crowdsourcing WHERE user_id ='${user_id}';`
       );
       if (result) {
         res.statusCode = 200;
