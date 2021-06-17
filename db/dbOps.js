@@ -1,5 +1,5 @@
 /* eslint-disable */
-const { SchoolRounded } = require("@material-ui/icons");
+const {SchoolRounded} = require("@material-ui/icons");
 const {Pool} = require("pg");
 const pgtools = require("pgtools");
 const uuidv4 = require("uuid").v4;
@@ -17,15 +17,14 @@ const config = {
 
 const pool = new Pool();
 
- function createDB() {
+function createDB() {
   pgtools.createdb(config, process.env.PGDATABASE, async function (err, res) {
     if (err) {
       console.error(err);
       process.exit(-1);
     }
-	await pool.query(`CREATE EXTENSION "uuid-ossp"`);
+    await pool.query(`CREATE EXTENSION "uuid-ossp"`);
   });
- 
 }
 
 function dropDB() {
@@ -100,16 +99,12 @@ async function createTables() {
 
 async function loadTables() {
   for (let i = 0; i < schools.features.length; i++) {
-	const { geometry, properties } = schools.features[i] 
-	let id = uuidv4();
+    const {geometry, properties} = schools.features[i];
+    let id = uuidv4();
     const res = await pool.query(
       `
 			INSERT INTO locations(id, meta_data, geom) VALUES($1, $2, st_geomfromgeojson($3)) RETURNING *;`,
-      [
-        id,
-        properties,
-		geometry
-      ]
+      [id, properties, geometry]
     );
     console.log(res);
   }

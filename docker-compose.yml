@@ -1,4 +1,4 @@
-version: '3.5'
+version: "3.5"
 
 services:
   postgres:
@@ -10,10 +10,10 @@ services:
       POSTGRES_DB: ${PGDATABASE}
       PGDATA: /data/postgres
     volumes:
-       - unc-data:/data/postgres
+      - unc-data:/data/postgres
     ports:
       - "5432:5432"
     restart: unless-stopped
 
 volumes:
-    unc-data:
+  unc-data:
