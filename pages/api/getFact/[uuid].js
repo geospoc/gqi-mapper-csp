@@ -4,8 +4,6 @@ const {Pool} = require("pg");
 
 const pool = new Pool();
 
-const countryCodes = require("../../../data/countries.json");
-
 /* Facts must have three components:
  * 1. A key identifier, e.g. top_country, the code to identify the fact. Key identifiers are stored
  * in an array 'factTypes'.
@@ -24,56 +22,29 @@ export default async (req, res) => {
     const user_id = req.query.uuid;
     if (uuidValidate(user_id)) {
       // Fact keys
-      const factTypes = [
-        "country_count",
-        "top_country",
-        "num_countries_mapped_total",
-        "num_locations_mapped_total",
-      ];
+      const factTypes = ["num_locations_mapped_total"];
       // SQL queries which fetch facts
       const queries = [
-        `SELECT count(1) as country_count
-				FROM
-				  (SELECT locations.country_code,
-				          count(1) AS COUNT
-				   FROM
-				     (SELECT school_id
-				      FROM crowdsourcing
-				      WHERE user_id = '${user_id}') AS tagged
-				   LEFT JOIN locations ON locations.school_id = tagged.school_id
-				   GROUP BY locations.country_code) AS country_counts;`,
-        `SELECT max(country_counts.country_code) AS top_country
-				FROM
-				  (SELECT locations.country_code,
-				          count(1) AS count
-				   FROM
-				     (SELECT school_id
-				      FROM crowdsourcing
-				      WHERE user_id = '${user_id}') AS tagged
-				   LEFT JOIN locations ON locations.school_id = tagged.school_id
-				   GROUP BY locations.country_code) AS country_counts;`,
-        `SELECT count(DISTINCT locations.country_code) AS num_countries_mapped_total
-					FROM crowdsourcing
-					LEFT JOIN locations ON locations.school_id = crowdsourcing.school_id;`,
-        `SELECT COUNT(DISTINCT school_id) as num_locations_mapped_total FROM crowdsourcing;`,
+        `SELECT COUNT(DISTINCT location_id) as num_locations_mapped_total FROM crowdsourcing;`,
       ];
 
       // Fact messages for each fact type
       const getMessage = (factType, answer) => {
-        switch (factType) {
-          case "country_count":
-            return `You have mapped locations in ${answer} countr${
-              answer == 1 ? "y" : "ies"
-            }.`;
-          case "top_country":
-            return `Your top country is ${countryCodes[answer]}.`;
-          case "num_countries_mapped_total":
-            return `You are part of a global movement! Together, players have mapped locations in ${answer} countr${
-              answer == 1 ? "y" : "ies"
-            }.`;
-          case "num_locations_mapped_total":
-            return `You are part of a global movement! Together, players have mapped ${answer} locations.`;
-        }
+        return `You are part of a global movement! Together, players have mapped ${answer} locations.`;
+        // switch (factType) {
+        //   case "country_count":
+        //     return `You have mapped locations in ${answer} countr${
+        //       answer == 1 ? "y" : "ies"
+        //     }.`;
+        //   case "top_country":
+        //     return `Your top country is ${countryCodes[answer]}.`;
+        //   case "num_countries_mapped_total":
+        //     return `You are part of a global movement! Together, players have mapped locations in ${answer} countr${
+        //       answer == 1 ? "y" : "ies"
+        //     }.`;
+        //   case "num_locations_mapped_total":
+        //     return `You are part of a global movement! Together, players have mapped ${answer} locations.`;
+        // }
       };
 
       // Return random fact for the result page

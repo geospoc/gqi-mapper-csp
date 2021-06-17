@@ -11,14 +11,14 @@ export default async (req, res) => {
     if (uuidValidate(user_id)) {
       try {
         result = await pool.query(`
-					SELECT COUNT(locations.school_id)
+					SELECT COUNT(locations.id)
 					FROM locations
 					LEFT JOIN
-						(SELECT school_id
+						(SELECT location_id
 						 FROM crowdsourcing
 						 WHERE user_id = '${user_id}') AS tagged 
-							ON locations.school_id = tagged.school_id
-					WHERE tagged.school_id IS NULL;`);
+							ON locations.id = tagged.location_id
+					WHERE tagged.location_id IS NULL;`);
       } catch (e) {
         console.log(e);
       }
