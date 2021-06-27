@@ -4,6 +4,7 @@ services:
   postgres:
     container_name: postgres_container
     image: mdillon/postgis
+    hostname: postgres
     environment:
       POSTGRES_USER: ${PGUSER}
       POSTGRES_PASSWORD: ${PGPASSWORD}
@@ -13,7 +14,25 @@ services:
       - unc-data:/data/postgres
     ports:
       - "5432:5432"
+    networks:
+      - unc
     restart: unless-stopped
-
+  martin:
+    image: urbica/martin
+    hostname: martin
+    depends_on:
+      - postgres
+    ports:
+      - "4000:3000"
+    restart: unless-stopped
+    environment: 
+      WATCH_MODE: "true"
+      DATABASE_URL: "postgres://${PGUSER}:${PGPASSWORD}@postgres/${PGDATABASE}"
+    networks:
+      - unc
 volumes:
   unc-data:
+
+networks:
+  unc:
+    driver: 'bridge'
