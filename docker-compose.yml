@@ -1,6 +1,22 @@
 version: "3.5"
-
 services:
+  proxy:
+    image: nginx:latest
+    container_name: proxy-nginx
+    links:
+      - backend
+      - martin
+    ports:
+      - "8080:80"
+      - "443:443"
+    depends_on:
+      - backend
+    volumes:
+      - ./nginx/default.conf/default.conf:/etc/nginx/conf.d/default.conf
+      - ./nginx/h5bp:/etc/nginx/h5bp/
+    networks:
+      - unc
+    restart: unless-stopped
   postgres:
     container_name: postgres_container
     image: mdillon/postgis
@@ -19,20 +35,37 @@ services:
     restart: unless-stopped
   martin:
     image: urbica/martin
+    container_name: martin
     hostname: martin
     depends_on:
       - postgres
     ports:
-      - "4000:3000"
+      - "3000:3000"
     restart: unless-stopped
-    environment: 
+    environment:
       WATCH_MODE: "true"
       DATABASE_URL: "postgres://${PGUSER}:${PGPASSWORD}@postgres/${PGDATABASE}"
     networks:
       - unc
+  backend:
+    build:
+      context: ./
+    container_name: backend
+    hostname: app
+    depends_on:
+      - postgres
+    volumes:
+      - .:/app
+      - node_modules:/app/node_modules/
+    ports:
+      - 8000:8000
+    networks:
+      - unc
+    env_file: .env
+    restart: unless-stopped
 volumes:
   unc-data:
-
+  node_modules:
 networks:
   unc:
-    driver: 'bridge'
+    driver: bridge
