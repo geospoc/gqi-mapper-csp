@@ -27,7 +27,7 @@ services:
       POSTGRES_DB: ${PGDATABASE}
       PGDATA: /data/postgres
     volumes:
-      - unc-data:/data/postgres
+      - unc-data-v1:/data/postgres
     ports:
       - "5432:5432"
     networks:
@@ -51,7 +51,7 @@ services:
     build:
       context: ./
     container_name: backend
-    hostname: app
+    hostname: backend
     depends_on:
       - postgres
     volumes:
@@ -64,7 +64,7 @@ services:
     env_file: .env
     restart: unless-stopped
 volumes:
-  unc-data:
+  unc-data-v1:
   node_modules:
 networks:
   unc:
