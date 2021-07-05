@@ -6,6 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
+    "start:container": "next build && next start",
     "lint": "eslint .",
     "lint:fix": "eslint --fix .",
     "format": "prettier --check \"**/*.+(js|jsx|json|yml|yaml|css|vue)\"",
