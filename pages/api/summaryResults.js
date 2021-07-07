@@ -7,7 +7,7 @@ export default async (req, res) => {
     let result = null;
     try {
       result = await pool.query(
-        "select school_id, result, count(result) from crowdsourcing GROUP BY school_id, result order by school_id;"
+        "select location_id, result, count(result) from crowdsourcing GROUP BY location_id, result order by location_id;"
       );
     } catch (e) {
       console.log(e);

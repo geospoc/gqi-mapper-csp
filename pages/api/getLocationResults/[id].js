@@ -5,7 +5,7 @@ const pool = new Pool();
 export default async (req, res) => {
   if (req.method === "GET") {
     let result = null;
-    const school_id = req.query.school_id;
+    const location_id = req.query.id;
     try {
       result = await pool.query(`
 				SELECT count(CASE WHEN RESULT = 'yes' THEN 1 ELSE NULL END) AS yes_count,
@@ -13,7 +13,7 @@ export default async (req, res) => {
 				       count(CASE WHEN RESULT = 'maybe' THEN 1 ELSE NULL END) AS maybe_count,
 				       count(1) AS total_count
 				FROM crowdsourcing
-				WHERE school_id = '${school_id}'`);
+				WHERE location_id = '${location_id}'`);
     } catch (e) {
       console.log(e);
     }

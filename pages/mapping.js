@@ -9,11 +9,17 @@ import Result from "../components/result";
 export default function mapping() {
   const [counter, setCounter] = useState(0);
   const [question, setQuestion] = useState({
-    id: 0,
-    lat: 0,
-    lon: 0,
-    country_code: "",
-    answer: "",
+    center: {coordinates: [0, 0]},
+    geom: {
+      coordinates: [
+        [0, 0],
+        [0, 0],
+        [0, 0],
+        [0, 0],
+        [0, 0],
+      ],
+    },
+    metaData: {color: "#FFF", stroke: "#FFF"},
   });
   const [questions, setQuestions] = useState([question]);
   const [locationResults, setLocationResults] = useState({
@@ -65,28 +71,32 @@ export default function mapping() {
     }
   }, [loading]);
 
-  async function fetchLocationResults(school_id) {
+  async function fetchLocationResults(id) {
     // Get number of untagged locations
-    const result = await fetch(`/api/getLocationResults/${school_id}`);
+    const result = await fetch(`/api/getLocationResults/${id}`);
     const response = await result.json();
     setLocationResults(response);
   }
 
   useEffect(() => {
     if (questions) {
-      setQuestion(questions[counter]);
+      const question = questions[counter];
+      question.featurePolygon = question.geom;
+      setQuestion(question);
     }
   }, [questions]);
 
   useEffect(() => {
-    if (questions) {
-      setQuestion(questions[counter]);
+    if (questions && counter < questions.length) {
+      const question = questions[counter];
+      question.featurePolygon = question.geom;
+      setQuestion(question);
     }
   }, [counter]);
 
   function handleAnswerSelected(result) {
-    if (result.school_id) {
-      fetchLocationResults(result.school_id);
+    if (result.id) {
+      fetchLocationResults(result.id);
     }
 
     const user_id = session ? session.user.id : cookies.uuid;
@@ -99,7 +109,7 @@ export default function mapping() {
       },
       body: JSON.stringify({
         user_id: user_id,
-        school_id: result.school_id,
+        location_id: result.id,
         result: result.answer,
       }),
     });

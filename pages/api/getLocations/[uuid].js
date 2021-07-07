@@ -11,17 +11,17 @@ export default async (req, res) => {
     if (uuidValidate(user_id)) {
       try {
         result = await pool.query(`
-					SELECT  locations.school_id,
-							locations.lat,
-							locations.lon,
-							locations.country_code
+					SELECT  locations.id,
+              st_asgeojson((ST_Dump(locations.geom::geometry)).geom) AS geom,
+              st_asgeojson(ST_centroid(locations.geom)) as center,
+              locations.meta_data
 					FROM locations
 					LEFT JOIN
-						(SELECT school_id
+						(SELECT location_id
 						 FROM crowdsourcing
 						 WHERE user_id = '${user_id}') AS tagged 
-							ON locations.school_id = tagged.school_id
-					WHERE tagged.school_id IS NULL
+							ON locations.id = tagged.location_id
+					WHERE tagged.location_id IS NULL
 					ORDER BY random() LIMIT 10;`);
       } catch (e) {
         console.log(e);
@@ -32,7 +32,15 @@ export default async (req, res) => {
     if (result) {
       res.statusCode = 200;
       res.setHeader("Content-Type", "application/json");
-      output = JSON.stringify(result.rows);
+      output = JSON.stringify(
+        result.rows.map((row) => {
+          row.geom = JSON.parse(row.geom);
+          row.center = JSON.parse(row.center);
+          row.metaData = row.meta_data;
+          delete row.meta_data;
+          return row;
+        })
+      );
     } else {
       res.statusCode = 500;
     }

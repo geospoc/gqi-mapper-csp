@@ -10,16 +10,16 @@ export default async (req, res) => {
     if (
       req.body.user_id &&
       uuidValidate(req.body.user_id) &&
-      req.body.school_id &&
-      typeof req.body.school_id == "string" &&
+      req.body.location_id &&
+      typeof req.body.location_id == "string" &&
       req.body.result &&
       typeof req.body.result == "string" &&
       ["yes", "no", "maybe"].indexOf(req.body.result) >= 0
     ) {
       // only then store this data into the database
       pool.query(
-        "INSERT INTO crowdsourcing(user_id, school_id, result) VALUES($1, $2, $3) RETURNING *",
-        [req.body.user_id, req.body.school_id, req.body.result],
+        "INSERT INTO crowdsourcing(user_id, location_id, result) VALUES($1, $2, $3) RETURNING *",
+        [req.body.user_id, req.body.location_id, req.body.result],
         (err, res) => {
           console.log(err ? err.stack : res.rows[0]);
         }

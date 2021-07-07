@@ -47,7 +47,7 @@ export default function Quiz(props) {
       e.target,
       "actionButton btn btn-primary"
     );
-    let resultValue = {school_id: props.question.school_id, answer: value};
+    let resultValue = {id: props.question.id, answer: value};
     props.onAnswerSelected(resultValue);
     setResult(resultValue);
     setNext(true);
@@ -74,7 +74,7 @@ export default function Quiz(props) {
   }
 
   const answerClass = "answer " + answer.answerClass;
-  const countryName = countryCodes[props.question.country_code];
+  const countryName = countryCodes["IN"];
   return (
     <Layout myClass="quiz">
       <Head>
@@ -90,7 +90,11 @@ export default function Quiz(props) {
         <p>Does this location look like a school?</p>
 
         <div className="row no-gutters align-items-center mapdiv">
-          <MapComponent lat={props.question.lat} lon={props.question.lon} />
+          <MapComponent
+            featurePolygon={props.question.geom}
+            centerCoordinate={props.question.center}
+            metaData={props.question.metaData}
+          />
           <CountryNameLabel countryName={countryName} />
           <div className={answerClass}>{answer["answer"]}</div>
         </div>
