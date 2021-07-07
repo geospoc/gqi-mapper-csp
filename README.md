@@ -82,11 +82,11 @@ Setup your development environment as follows:
 1. Clone this repo:
    - SSL:
    ```bash
-   git clone git@github.com:lacabra/proco-map-app.git
+   git clone git@github.com:geospoc/unc-sch-csp.git
    ```
    - HTTPS:
    ```bash
-   git clone https://github.com/lacabra/proco-map-app.git
+   git clone https://github.com/geospoc/unc-sch-csp.git
    ```
 2. Install project dependencies:
    ```bash
@@ -132,7 +132,7 @@ node csvToJson.js
 
 The above script will generate a file `schools.json` that will be ingested by `db/dbOps.js`.
 
-_Note: For testing purposes a sample `scripts/schools.json` is included in the code repository, which has the same data as the locations used in the [practice test](https://github.com/lacabra/proco-map-app/blob/master/pages/api/getLocationsTest.js), yet in production a different dataset will be used._
+_Note: For testing purposes a sample `scripts/schools.json` is included in the code repository, which has the same data as the locations used in the [practice test](https://github.com/geospoc/unc-sch-csp/blob/master/pages/api/getLocationsTest.js), yet in production a different dataset will be used._
 
 ## :memo: License
 
