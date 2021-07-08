@@ -5,7 +5,7 @@ WORKDIR app/
 COPY ["package.json", "package-lock.json*", "./"]
 
 RUN npm install -g npm@7.19.1
-RUN npm install
+RUN npm ci --no-audit
 
 COPY . .
 EXPOSE 8000
