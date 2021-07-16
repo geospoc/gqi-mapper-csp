@@ -8,6 +8,8 @@ RUN npm install -g npm@7.19.1
 RUN npm ci --no-audit
 
 COPY . .
-EXPOSE 8000
+RUN npm run build
 
-CMD [ "npm", "run", "start:container" ]
+EXPOSE 8000
+ENV PORT=8000
+CMD [ "npm", "run", "start" ]
