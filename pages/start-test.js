@@ -97,7 +97,7 @@ export default function StartTest() {
         <div>
           <div className="blueText" style={{paddingTop: "1em"}}>
             Have you done this before?{" "}
-            <Link href="/mapping">
+            <Link href="/mapping/schools">
               <a>Skip the test</a>
             </Link>
           </div>

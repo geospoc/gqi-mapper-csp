@@ -49,6 +49,7 @@ async function createTables() {
 		CREATE TYPE yesnomaybe AS ENUM ('yes', 'no', 'maybe');
 		CREATE TABLE crowdsourcing(
 			user_id TEXT,
+			location_type TEXT,
 			location_id uuid,
 			result yesnomaybe,
 			unique (user_id, location_id)
@@ -121,7 +122,7 @@ async function dropTables() {
 // Uncoment any of the lines below, one at a time, to execute each of the needed self-explanatory functions
 
 // createDB();
-// createTables();
+createTables();
 loadTables();
 //dropTables();
 // dropDB();

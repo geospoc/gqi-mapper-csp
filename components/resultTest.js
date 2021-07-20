@@ -102,7 +102,7 @@ export default function StartTest(props) {
           </Row>
         </Container>
 
-        <Link href="/mapping" passHref>
+        <Link href="/mapping/schools" passHref>
           <Button variant="primary">Start Tagging</Button>
         </Link>
         <div>

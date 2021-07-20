@@ -8,6 +8,7 @@ export default async (req, res) => {
   if (req.method === "GET") {
     let result = null;
     const user_id = req.query.uuid;
+    const type = req.query.type;
     if (uuidValidate(user_id)) {
       try {
         result = await pool.query(`
@@ -22,7 +23,8 @@ export default async (req, res) => {
 						 WHERE user_id = '${user_id}') AS tagged 
 							ON locations.id = tagged.location_id
 					WHERE tagged.location_id IS NULL
-					ORDER BY random() LIMIT 10;`);
+          AND locations.meta_data->>'title' ilike '${type}'
+					ORDER BY random() LIMIT 2;`);
       } catch (e) {
         console.log(e);
       }

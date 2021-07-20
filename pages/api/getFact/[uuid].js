@@ -20,17 +20,18 @@ export default async (req, res) => {
     let result = null;
     var fact = null;
     const user_id = req.query.uuid;
+    const type = req.query.type;
     if (uuidValidate(user_id)) {
       // Fact keys
       const factTypes = ["num_locations_mapped_total"];
       // SQL queries which fetch facts
       const queries = [
-        `SELECT COUNT(DISTINCT location_id) as num_locations_mapped_total FROM crowdsourcing;`,
+        `SELECT COUNT(DISTINCT location_id) as num_locations_mapped_total FROM crowdsourcing WHERE location_type ilike '${type}';`,
       ];
 
       // Fact messages for each fact type
       const getMessage = (factType, answer) => {
-        return `You are part of a global movement! Together, players have mapped ${answer} locations.`;
+        return `You are part of a global movement! Together, players have mapped ${answer} ${type}.`;
         // switch (factType) {
         //   case "country_count":
         //     return `You have mapped locations in ${answer} countr${

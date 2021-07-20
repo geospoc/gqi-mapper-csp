@@ -44,13 +44,16 @@ export default function Result(props) {
 
         <div className="result big-button">
           <div className="outerMessage">
-            <img src="Congratulations.svg" alt="Congratulations" />
+            <img src="/Congratulations.svg" alt="Congratulations" />
             <h2>Congratulations!</h2>
-            <p>You just mapped {props.gameStats.mapped_count} schools</p>
+            <p>
+              You just mapped {props.gameStats.mapped_count} {props.locationType}
+            </p>
           </div>
           <div className="innerMessage">
             <p className="fact" style={{paddingTop: ".5em"}}>
-              You have mapped {props.userStats.mapped_count} locations in total.
+              You have mapped {props.userStats.mapped_count} {props.locationType} in
+              total.
             </p>
             <p className="fact">
               <hr />
@@ -62,8 +65,8 @@ export default function Result(props) {
                     <p style={{textAlign: "center"}}>
                       🏆&nbsp;&nbsp;You are a mapping champion! 🗺{" "}
                     </p>
-                    You have mapped all of our potential school locations. We will add
-                    more shortly, so come back soon.
+                    You have mapped all of our potential {props.locationType}{" "}
+                    {props.locationType}. We will add more shortly, so come back soon.
                   </div>
                 ) : (
                   props.fact
@@ -82,10 +85,11 @@ export default function Result(props) {
             ) : (
               <div>
                 <p>
-                  Help us connect more children to opportunity by mapping more schools
+                  Help us connect more children to opportunity by mapping more{" "}
+                  {props.locationType}
                 </p>
-                <Button variant="primary" href="/mapping">
-                  Map More Schools
+                <Button variant="primary" href={`/mapping/${props.locationType}`}>
+                  Map More {props.locationType}
                 </Button>
               </div>
             )}
