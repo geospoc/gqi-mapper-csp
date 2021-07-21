@@ -39,8 +39,8 @@ function ContextAwareToggle({children, eventKey, callback}) {
 }
 
 export default function Intro() {
-  const [linkLocationSchools, setLinkLocationSchools] = useState("/tips");
-  const [linkLocationHospitals, setLinkLocationHospitals] = useState("/tips");
+  const [linkLocationSchools, setLinkLocationSchools] = useState("/tips/schools");
+  const [linkLocationHospitals, setLinkLocationHospitals] = useState("/tips/hospitals");
   const [cookies] = useCookies(["uuid"]);
   const [session] = useSession();
 
