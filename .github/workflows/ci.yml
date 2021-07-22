@@ -34,8 +34,8 @@ jobs:
         uses: actions/setup-node@v2.2.0
         with:
           node-version: ${{ matrix.node }}
-          scope: '@geospoc'
-          cache: 'npm'
+          scope: "@geospoc"
+          cache: "npm"
 
       - name: Upgrade npm ✨
         run: npm i -g npm@latest

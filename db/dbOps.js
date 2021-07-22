@@ -47,7 +47,7 @@ async function createTables() {
 			meta_data JSONB
 		);
 	`);
-	await pool.query(`
+  await pool.query(`
 		CREATE TABLE locationsTest(
 			id uuid,
 			geom GEOMETRY,
@@ -121,7 +121,7 @@ async function loadTables() {
   for (let i = 0; i < schoolsTest.features.length; i++) {
     const {geometry, properties} = schoolsTest.features[i];
     let id = uuidv4();
-	console.log(properties);
+    console.log(properties);
     const res = await pool.query(
       `
 			INSERT INTO locationsTest(id, meta_data, geom) VALUES($1, $2, st_geomfromgeojson($3)) RETURNING *;`,
@@ -132,7 +132,7 @@ async function loadTables() {
   for (let i = 0; i < hospitalsTest.features.length; i++) {
     const {geometry, properties} = hospitalsTest.features[i];
     let id = uuidv4();
-	console.log(properties);
+    console.log(properties);
     const res = await pool.query(
       `
 			INSERT INTO locationsTest(id, meta_data, geom) VALUES($1, $2, st_geomfromgeojson($3)) RETURNING *;`,
