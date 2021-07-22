@@ -1,10 +1,10 @@
 import Head from "next/head";
 import Link from "next/link";
-import Layout from "../components/layout";
-import HeaderComponent from "../components/headerComponent";
+import Layout from "../../components/layout";
+import HeaderComponent from "../../components/headerComponent";
 import {Button} from "react-bootstrap";
 
-export default function Tips() {
+export default function Schools() {
   return (
     <Layout myClass="intro">
       <Head>
@@ -27,8 +27,8 @@ export default function Tips() {
 
         <p style={{paddingTop: "1em"}}>
           Despite their varied structures, many schools have features that can help you
-          identify a building as a school. When looking at an image, keep an eye out for
-          these common school patterns.
+          identify a building as a schools. When looking at an image, keep an eye out for
+          these common schools patterns.
         </p>
 
         <h5 className="blueText">Pattern 1: Buildings with U-shape</h5>
@@ -65,10 +65,10 @@ export default function Tips() {
       </div>
 
       <div className="next-section">
-        <Link href="/start-test" passHref>
+        <Link href="/start-test/schools" passHref>
           <Button variant="primary">
             <span>
-              Start Mapping Schools <img className="white" src="/white.svg" />
+              Start Mapping schools <img className="white" src="/white.svg" />
             </span>
           </Button>
         </Link>

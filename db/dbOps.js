@@ -5,6 +5,8 @@ const pgtools = require("pgtools");
 const uuidv4 = require("uuid").v4;
 
 const schools = require("../scripts/schools.json");
+const schoolsTest = require("../scripts/schoolsTest.json");
+const hospitalsTest = require("../scripts/hospitalsTest.json");
 
 require("dotenv").config();
 
@@ -46,9 +48,17 @@ async function createTables() {
 		);
 	`);
   await pool.query(`
+		CREATE TABLE locationsTest(
+			id uuid,
+			geom GEOMETRY,
+			meta_data JSONB
+		);
+	`);
+  await pool.query(`
 		CREATE TYPE yesnomaybe AS ENUM ('yes', 'no', 'maybe');
 		CREATE TABLE crowdsourcing(
 			user_id TEXT,
+			location_type TEXT,
 			location_id uuid,
 			result yesnomaybe,
 			unique (user_id, location_id)
@@ -104,6 +114,28 @@ async function loadTables() {
     const res = await pool.query(
       `
 			INSERT INTO locations(id, meta_data, geom) VALUES($1, $2, st_geomfromgeojson($3)) RETURNING *;`,
+      [id, properties, geometry]
+    );
+    console.log(res);
+  }
+  for (let i = 0; i < schoolsTest.features.length; i++) {
+    const {geometry, properties} = schoolsTest.features[i];
+    let id = uuidv4();
+    console.log(properties);
+    const res = await pool.query(
+      `
+			INSERT INTO locationsTest(id, meta_data, geom) VALUES($1, $2, st_geomfromgeojson($3)) RETURNING *;`,
+      [id, properties, geometry]
+    );
+    console.log(res);
+  }
+  for (let i = 0; i < hospitalsTest.features.length; i++) {
+    const {geometry, properties} = hospitalsTest.features[i];
+    let id = uuidv4();
+    console.log(properties);
+    const res = await pool.query(
+      `
+			INSERT INTO locationsTest(id, meta_data, geom) VALUES($1, $2, st_geomfromgeojson($3)) RETURNING *;`,
       [id, properties, geometry]
     );
     console.log(res);

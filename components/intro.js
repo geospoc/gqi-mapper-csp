@@ -39,7 +39,8 @@ function ContextAwareToggle({children, eventKey, callback}) {
 }
 
 export default function Intro() {
-  const [linkLocation, setLinkLocation] = useState("/tips");
+  const [linkLocationSchools, setLinkLocationSchools] = useState("/tips/schools");
+  const [linkLocationHospitals, setLinkLocationHospitals] = useState("/tips/hospitals");
   const [cookies] = useCookies(["uuid"]);
   const [session] = useSession();
 
@@ -48,7 +49,8 @@ export default function Intro() {
       const result = await fetch(`/api/getUserStats/${user_id}`);
       const response = await result.json();
       if (response) {
-        setLinkLocation("/mapping");
+        setLinkLocationSchools("/mapping/schools");
+        setLinkLocationHospitals("/mapping/hospitals");
       }
     };
 
@@ -77,10 +79,20 @@ export default function Intro() {
       </div>
 
       <div className="next-section">
-        <Link href={linkLocation} passHref>
+        <Link href={linkLocationSchools} passHref>
           <Button variant="primary">
             <span>
               Start Mapping Schools
+              <img className="white" src="/white.svg" />
+            </span>
+          </Button>
+        </Link>
+      </div>
+      <div className="next-section">
+        <Link href={linkLocationHospitals} passHref>
+          <Button variant="primary">
+            <span>
+              Start Mapping Hospitals
               <img className="white" src="/white.svg" />
             </span>
           </Button>
