@@ -92,25 +92,25 @@ export default function StartTest(props) {
               </Row>
               <Row>&nbsp;</Row>
               <Row>
-                <p>Tag schools</p>
+                <p>Tag {props.locationType}</p>
                 <p style={{fontSize: "1.1em"}}>
-                  Identify 10 schools for Project Connect and contribute to our data set
-                  of school locations around the world.
+                  Identify 10 {props.locationType} for Project Connect and contribute to
+                  our data set of school locations around the world.
                 </p>
               </Row>
             </Col>
           </Row>
         </Container>
 
-        <Link href="/mapping/schools" passHref>
+        <Link href={`/mapping/${props.locationType}`} passHref>
           <Button variant="primary">Start Tagging</Button>
         </Link>
         <div>
           <div style={{paddingTop: "1em"}}>
             Want to improve your mapping skills?
             <br />
-            <Link href="/tips">
-              <a>View school mapping tips</a>
+            <Link href={`/tips/${props.locationType}`}>
+              <a>View {props.locationType} mapping tips</a>
             </Link>
           </div>
         </div>

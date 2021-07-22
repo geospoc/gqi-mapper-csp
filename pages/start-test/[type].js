@@ -3,10 +3,12 @@ import Head from "next/head";
 import Link from "next/link";
 import {Container, Col, Row, Button} from "react-bootstrap";
 
-import Layout from "../components/layout";
-import HeaderComponent from "../components/headerComponent";
+import Layout from "../../components/layout";
+import HeaderComponent from "../../components/headerComponent";
+import {useRouter} from "next/router";
 
 export default function StartTest() {
+  const router = useRouter();
   const [height, setHeight] = useState(165);
 
   function calculateHeight() {
@@ -41,7 +43,7 @@ export default function StartTest() {
       <HeaderComponent inverse={true} />
 
       <div className="start-test big-button">
-        <h2>Let&apos;s start with testing your school mapping skills</h2>
+        <h2>Let&apos;s start with testing your {router.query.type} mapping skills</h2>
         <Container>
           <Row>
             <Col xs={3}>
@@ -77,27 +79,27 @@ export default function StartTest() {
               <Row>
                 <p id="testskills">Test map skills</p>
                 <p style={{fontSize: "1.2em", paddingTop: 0}}>
-                  Play a short game to understand how schools look on a map and how to
-                  differentiate them from other buildings.
+                  Play a short game to understand how {router.query.type} look on a map
+                  and how to differentiate them from other buildings.
                 </p>
               </Row>
               <Row>&nbsp;</Row>
               <Row>
-                <p id="tagschools">Tag schools</p>
+                <p id="tagschools">Tag {router.query.type}</p>
               </Row>
             </Col>
           </Row>
         </Container>
 
-        <Link href="/test" passHref>
-          <Button variant="primary" href="/test">
+        <Link href={`/test/${router.query.type}`} passHref>
+          <Button variant="primary" href={`/test/${router.query.type}`}>
             Start
           </Button>
         </Link>
         <div>
           <div className="blueText" style={{paddingTop: "1em"}}>
             Have you done this before?{" "}
-            <Link href="/mapping/schools">
+            <Link href={`/mapping/${router.query.type}`}>
               <a>Skip the test</a>
             </Link>
           </div>

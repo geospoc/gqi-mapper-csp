@@ -65,7 +65,7 @@ export default function Schools() {
       </div>
 
       <div className="next-section">
-        <Link href="/start-test" passHref>
+        <Link href="/start-test/schools" passHref>
           <Button variant="primary">
             <span>
               Start Mapping schools <img className="white" src="/white.svg" />
