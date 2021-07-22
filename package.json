@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "NODE_OPTIONS='--inspect' next start",
+    "start": "next start -p 8000",
     "start:container": "next build && next start",
     "lint": "eslint .",
     "lint:fix": "eslint --fix .",
