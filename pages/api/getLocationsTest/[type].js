@@ -10,8 +10,7 @@ export default async (req, res) => {
 					SELECT  locationsTest.id,
               st_asgeojson((ST_Dump(locationsTest.geom::geometry)).geom) AS geom,
               st_asgeojson(ST_centroid(locationsTest.geom)) as center,
-              locationsTest.meta_data,
-              locationsTest.answer
+              locationsTest.meta_data
 					FROM locationsTest
       WHERE  locationsTest.meta_data->>'title' ilike '${type}'`);
     } catch (e) {

@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start",
+    "start": "next start -p 8000",
+    "start:container": "next build && next start",
     "lint": "eslint .",
     "lint:fix": "eslint --fix .",
     "format": "prettier --check \"**/*.+(js|jsx|json|yml|yaml|css|vue)\"",
@@ -22,7 +23,7 @@
     "dotenv": "^8.2.0",
     "mapbox-gl": "^1.13.1",
     "next": "^9.5.5",
-    "next-auth": "^3.1.0",
+    "next-auth": "3.27.3",
     "pg": "^8.6.0",
     "pgtools": "^0.3.2",
     "react": "^16.14.0",
@@ -102,7 +103,7 @@
     ]
   },
   "engines": {
-    "node": ">=15",
-    "npm": ">=7.19.1"
+    "node": ">=14",
+    "npm": ">=6"
   }
 }
