@@ -50,10 +50,10 @@ export default function Intro() {
       const resultHospitals = await fetch(`/api/getUserStats/${user_id}?type=hospitals`);
       const responseSchools = await resultSchools.json();
       const responseHospitals = await resultHospitals.json();
-      if (responseSchools) {
+      if (responseSchools && responseSchools.mapped_count > 0) {
         setLinkLocationSchools("/mapping/schools");
       }
-      if (responseHospitals) {
+      if (responseHospitals && responseHospitals.mapped_count > 0) {
         setLinkLocationHospitals("/mapping/hospitals");
       }
     };
