@@ -46,10 +46,14 @@ export default function Intro() {
 
   useEffect(() => {
     const getUserStats = async () => {
-      const result = await fetch(`/api/getUserStats/${user_id}`);
-      const response = await result.json();
-      if (response) {
+      const resultSchools = await fetch(`/api/getUserStats/${user_id}?type=schools`);
+      const resultHospitals = await fetch(`/api/getUserStats/${user_id}?type=hospitals`);
+      const responseSchools = await resultSchools.json();
+      const responseHospitals = await resultHospitals.json();
+      if (responseSchools) {
         setLinkLocationSchools("/mapping/schools");
+      }
+      if (responseHospitals) {
         setLinkLocationHospitals("/mapping/hospitals");
       }
     };

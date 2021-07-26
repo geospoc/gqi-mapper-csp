@@ -151,7 +151,7 @@ export default function mapping() {
   async function fetchUserStats() {
     const user_id = session ? session.user.id : cookies.uuid;
 
-    const result = await fetch(`/api/getUserStats/${user_id}`);
+    const result = await fetch(`/api/getUserStats/${user_id}?type=${router.query.type}`);
     const response = await result.json();
     setUserStats(await response);
   }

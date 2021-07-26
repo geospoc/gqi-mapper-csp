@@ -8,13 +8,16 @@ export default async (req, res) => {
   if (req.method === "GET") {
     let result = null;
     const user_id = req.query.uuid;
+    const type = req.query.type;
+    let subQuery = `SELECT location_id FROM crowdsourcing WHERE user_id = '${user_id}'`;
+    if (type) {
+      subQuery = subQuery + ` AND location_type ilike '${type}'`;
+    }
     if (uuidValidate(user_id)) {
       try {
         result = await pool.query(`
 					SELECT  count(tagged.location_id) as mapped_count
-					FROM (SELECT location_id
-						 FROM crowdsourcing
-						 WHERE user_id = '${user_id}') AS tagged;`);
+					FROM (${subQuery}) AS tagged;`);
       } catch (e) {
         console.log(e);
       }
