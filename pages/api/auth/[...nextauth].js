@@ -10,7 +10,6 @@ const DATABASE_URL = `postgres://${process.env.PGUSER}:${process.env.PGPASSWORD}
 
 export default (req, res) => {
   const cookies = new Cookies(req, res);
-  console.log(Adapters);
   // For more information on each option (and a full list of options) go to
   // https://next-auth.js.org/configuration/options
   return NextAuth(req, res, {

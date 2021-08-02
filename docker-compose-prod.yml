@@ -29,6 +29,17 @@ services:
       DATABASE_URL: "postgres://${PGUSER}:${PGPASSWORD}@${PGHOST}/${PGDATABASE}"
     networks:
       - unc
+  backend:
+    build:
+      context: ./
+    container_name: backend
+    hostname: backend
+    ports:
+      - 8000:8000
+    networks:
+      - unc
+    env_file: .env
+    restart: unless-stopped
 volumes:
   unc-data-v1:
   node_modules:
