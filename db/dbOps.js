@@ -72,7 +72,7 @@ async function createExtensions() {
         ST_AsMVTGeom(ST_Transform(geom::geometry, 3857), TileBBox(z, x, y, 3857), 4096, 64, true) AS geom,
         meta_data as properties
       FROM public.locations
-      WHERE geom && TileBBox(z, x, y, 4326)
+      WHERE geom && TileBBox(z, x, y, 4326) AND meta_data->>'title' ilike query_params->>'type'
     ) as tile WHERE geom IS NOT NULL;
   
     RETURN mvt;
