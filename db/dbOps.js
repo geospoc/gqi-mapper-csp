@@ -59,6 +59,50 @@ function createDB() {
   });
 }
 
+async function createExtensions() {
+  await pool.query(`CREATE EXTENSION "uuid-ossp"`);
+  await pool.query(`CREATE EXTENSION "postgis"`);
+  await pool.query(`CREATE EXTENSION "postgis_topology"`);
+  await pool.query(`CREATE OR REPLACE FUNCTION public.mvt_tile(z integer, x integer, y integer, query_params json) RETURNS bytea AS $$
+  DECLARE
+    mvt bytea;
+  BEGIN
+    SELECT INTO mvt ST_AsMVT(tile, 'public.mvt_tile', 4096, 'geom') FROM (
+      SELECT
+        ST_AsMVTGeom(ST_Transform(geom::geometry, 3857), TileBBox(z, x, y, 3857), 4096, 64, true) AS geom
+      FROM public.locations
+      WHERE geom && TileBBox(z, x, y, 4326)
+    ) as tile WHERE geom IS NOT NULL;
+  
+    RETURN mvt;
+  END
+  $$ LANGUAGE plpgsql IMMUTABLE STRICT PARALLEL SAFE;`);
+  await pool.query(`create or replace function TileBBox (z int, x int, y int, srid int = 3857)
+  returns geometry
+  language plpgsql immutable as
+$func$
+declare
+  max numeric := 20037508.34;
+  res numeric := (max*2)/(2^z);
+  bbox geometry;
+begin
+  bbox := ST_MakeEnvelope(
+      -max + (x * res),
+      max - (y * res),
+      -max + (x * res) + res,
+      max - (y * res) - res,
+      3857
+  );
+  if srid = 3857 then
+      return bbox;
+  else
+      return ST_Transform(bbox, srid);
+  end if;
+end;
+$func$;`);
+  await pool.end();
+}
+
 function dropDB() {
   pgtools.dropdb(config, process.env.PGDATABASE, function (err, res) {
     if (err) {
@@ -260,6 +304,7 @@ async function moveFile(sourceFolder, file, destinationFolder) {
 // Uncoment any of the lines below, one at a time, to execute each of the needed self-explanatory functions
 
 // createDB();
+// createExtensions();
 // createTables();
 // loadTestTables();
 getUnprocessedS3files();
