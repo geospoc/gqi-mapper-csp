@@ -13,24 +13,6 @@ services:
       - backend
     volumes:
       - ./nginx/default.conf/default.conf:/etc/nginx/conf.d/default.conf
-      - ./nginx/h5bp:/etc/nginx/h5bp/
-      - frontend:/app
-    networks:
-      - unc
-    restart: unless-stopped
-  postgres:
-    container_name: postgres_container
-    image: mdillon/postgis
-    hostname: postgres
-    environment:
-      POSTGRES_USER: ${PGUSER}
-      POSTGRES_PASSWORD: ${PGPASSWORD}
-      POSTGRES_DB: ${PGDATABASE}
-      PGDATA: /data/postgres
-    volumes:
-      - unc-data-v1:/data/postgres
-    ports:
-      - "5432:5432"
     networks:
       - unc
     restart: unless-stopped
@@ -38,13 +20,12 @@ services:
     image: urbica/martin
     container_name: martin
     hostname: martin
-    depends_on:
-      - postgres
     ports:
       - "3000:3000"
     restart: unless-stopped
     environment:
       WATCH_MODE: "true"
+      DANGER_ACCEPT_INVALID_CERTS: "true"
       DATABASE_URL: "postgres://${PGUSER}:${PGPASSWORD}@${PGHOST}/${PGDATABASE}"
     networks:
       - unc
@@ -53,10 +34,6 @@ services:
       context: ./
     container_name: backend
     hostname: backend
-    depends_on:
-      - postgres
-    # volumes:
-      # - frontend:/app
     ports:
       - 8000:8000
     networks:

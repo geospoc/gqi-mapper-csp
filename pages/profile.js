@@ -126,7 +126,7 @@ const UserView = ({user, signout}) => {
               </div>
             </div>
             <div className="bottom-button">
-              <Link href="/mapping">
+              <Link href="/mapping/schools">
                 <Button variant="primary">
                   Map more schools
                   <img src="/white.svg" />
@@ -137,7 +137,7 @@ const UserView = ({user, signout}) => {
         ) : (
           <div>
             <div className="bottom-button">
-              <Link href="/mapping">
+              <Link href="/mapping/schools">
                 <Button variant="primary">
                   Start mapping schools
                   <img src="/white.svg" />

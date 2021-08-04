@@ -32,7 +32,7 @@ export default function QuizTest(props) {
   }, []);
 
   function handleClick(e, value) {
-    if (value === props.question.answer) {
+    if (value === props.question.metaData.answer) {
       if (value === true) {
         setYes("success");
         setYesClass("testButton btn-success");
@@ -75,7 +75,7 @@ export default function QuizTest(props) {
   }
 
   const answerClass = "answer " + answer.answerClass;
-  const countryName = countryCodes[props.question.country_code];
+  const countryName = countryCodes["IN"];
 
   return (
     <Layout myClass="quiz">
@@ -91,7 +91,11 @@ export default function QuizTest(props) {
         <p>Does this look like a school location?</p>
 
         <div className="row no-gutters align-items-center mapdiv">
-          <MapComponent lat={props.question.lat} lon={props.question.lon} />
+          <MapComponent
+            featurePolygon={props.question.geom}
+            centerCoordinate={props.question.center}
+            metaData={props.question.metaData}
+          />
           <CountryNameLabel countryName={countryName} />
           <div className={answerClass}>{answer["answer"]}</div>
         </div>

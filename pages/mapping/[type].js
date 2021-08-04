@@ -3,10 +3,12 @@ import {useCookies} from "react-cookie";
 import {useSession} from "next-auth/client";
 import {v4 as uuidv4} from "uuid";
 
-import Quiz from "../components/quiz";
-import Result from "../components/result";
+import Quiz from "../../components/quiz";
+import Result from "../../components/result";
+import {useRouter} from "next/router";
 
 export default function mapping() {
+  const router = useRouter();
   const [counter, setCounter] = useState(0);
   const [question, setQuestion] = useState({
     center: {coordinates: [0, 0]},
@@ -36,6 +38,7 @@ export default function mapping() {
   const [session, loading] = useSession();
 
   const [untaggedLocationsCount, setUntaggedLocationsCount] = useState(10);
+  const [locationType, setLocationType] = useState("");
 
   useEffect(() => {
     async function addUser(uuid) {
@@ -54,7 +57,9 @@ export default function mapping() {
     async function fetchData(userId) {
       const user_id = session ? session.user.id : cookies.uuid ? cookies.uuid : userId;
       // Get location data
-      const result = await fetch(`/api/getLocations/${user_id}`);
+      const result = await fetch(
+        `/api/getLocations/${user_id}?type=${router.query.type}`
+      );
       setQuestions(await result.json());
     }
 
@@ -111,6 +116,7 @@ export default function mapping() {
         user_id: user_id,
         location_id: result.id,
         result: result.answer,
+        location_type: result.location_type,
       }),
     });
   }
@@ -135,7 +141,9 @@ export default function mapping() {
     const user_id = session ? session.user.id : cookies.uuid;
 
     // Get number of untagged locations
-    const result = await fetch(`/api/getUntaggedLocationsCount/${user_id}`);
+    const result = await fetch(
+      `/api/getUntaggedLocationsCount/${user_id}?type=${router.query.type}`
+    );
     const response = await result.json();
     setUntaggedLocationsCount(await response.count);
   }
@@ -143,16 +151,19 @@ export default function mapping() {
   async function fetchUserStats() {
     const user_id = session ? session.user.id : cookies.uuid;
 
-    const result = await fetch(`/api/getUserStats/${user_id}`);
+    const result = await fetch(`/api/getUserStats/${user_id}?type=${router.query.type}`);
     const response = await result.json();
     setUserStats(await response);
   }
 
   async function fetchFact() {
     const user_id = session ? session.user.id : cookies.uuid;
-    const result = await fetch(`/api/getFact/${user_id}?page=result`);
+    const result = await fetch(
+      `/api/getFact/${user_id}?page=result&type=${router.query.type}`
+    );
     const response = await result.json();
     setFact(await response["message"]);
+    setLocationType(router.query.type);
   }
 
   if (counter < questions.length) {
@@ -179,6 +190,7 @@ export default function mapping() {
         fact={fact}
         userStats={userStats}
         gameStats={gameStats}
+        locationType={locationType}
       />
     );
   }

@@ -2,17 +2,29 @@ import React, {useState, useEffect} from "react";
 import {useCookies} from "react-cookie";
 import {v4 as uuidv4} from "uuid";
 
-import QuizTest from "../components/quizTest";
-import ResultTest from "../components/resultTest";
-
+import QuizTest from "../../components/quizTest";
+import ResultTest from "../../components/resultTest";
+import {useRouter} from "next/router";
 const numQuestions = 6;
 
 export default function mapping() {
+  const router = useRouter();
   const [answerCount, setAnswerCount] = useState(0);
-  const [questions, setQuestions] = useState(null);
   const [counter, setCounter] = useState(0);
-  const [question, setQuestion] = useState({id: 0, lat: 0, lon: 0, answer: ""});
-
+  const [question, setQuestion] = useState({
+    center: {coordinates: [0, 0]},
+    geom: {
+      coordinates: [
+        [0, 0],
+        [0, 0],
+        [0, 0],
+        [0, 0],
+        [0, 0],
+      ],
+    },
+    metaData: {color: "#FFF", stroke: "#FFF"},
+  });
+  const [questions, setQuestions] = useState([question]);
   const [cookies, setCookie] = useCookies(["uuid"]);
 
   /**
@@ -36,7 +48,8 @@ export default function mapping() {
     // Initialize the set of questions
     async function fetchData() {
       // Get location data
-      const result = await fetch(`/api/getLocationsTest`);
+      console.log(router);
+      const result = await fetch(`/api/getLocationsTest/${router.query.type}`);
       setQuestions(shuffle(await result.json()));
     }
     fetchData();
@@ -73,6 +86,12 @@ export default function mapping() {
       />
     );
   } else {
-    return <ResultTest correctAnswers={answerCount} totalQuestions={numQuestions} />;
+    return (
+      <ResultTest
+        correctAnswers={answerCount}
+        totalQuestions={numQuestions}
+        locationType={router.query.type}
+      />
+    );
   }
 }

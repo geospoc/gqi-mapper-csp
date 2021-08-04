@@ -39,16 +39,22 @@ function ContextAwareToggle({children, eventKey, callback}) {
 }
 
 export default function Intro() {
-  const [linkLocation, setLinkLocation] = useState("/tips");
+  const [linkLocationSchools, setLinkLocationSchools] = useState("/tips/schools");
+  const [linkLocationHospitals, setLinkLocationHospitals] = useState("/tips/hospitals");
   const [cookies] = useCookies(["uuid"]);
   const [session] = useSession();
 
   useEffect(() => {
     const getUserStats = async () => {
-      const result = await fetch(`/api/getUserStats/${user_id}`);
-      const response = await result.json();
-      if (response) {
-        setLinkLocation("/mapping");
+      const resultSchools = await fetch(`/api/getUserStats/${user_id}?type=schools`);
+      const resultHospitals = await fetch(`/api/getUserStats/${user_id}?type=hospitals`);
+      const responseSchools = await resultSchools.json();
+      const responseHospitals = await resultHospitals.json();
+      if (responseSchools && responseSchools.mapped_count > 0) {
+        setLinkLocationSchools("/mapping/schools");
+      }
+      if (responseHospitals && responseHospitals.mapped_count > 0) {
+        setLinkLocationHospitals("/mapping/hospitals");
       }
     };
 
@@ -77,10 +83,20 @@ export default function Intro() {
       </div>
 
       <div className="next-section">
-        <Link href={linkLocation} passHref>
+        <Link href={linkLocationSchools} passHref>
           <Button variant="primary">
             <span>
               Start Mapping Schools
+              <img className="white" src="/white.svg" />
+            </span>
+          </Button>
+        </Link>
+      </div>
+      <div className="next-section">
+        <Link href={linkLocationHospitals} passHref>
+          <Button variant="primary">
+            <span>
+              Start Mapping Hospitals
               <img className="white" src="/white.svg" />
             </span>
           </Button>

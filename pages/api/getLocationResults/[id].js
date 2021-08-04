@@ -11,7 +11,8 @@ export default async (req, res) => {
 				SELECT count(CASE WHEN RESULT = 'yes' THEN 1 ELSE NULL END) AS yes_count,
 				       count(CASE WHEN RESULT = 'no' THEN 1 ELSE NULL END) AS no_count,
 				       count(CASE WHEN RESULT = 'maybe' THEN 1 ELSE NULL END) AS maybe_count,
-				       count(1) AS total_count
+				       count(1) AS total_count,
+               (array_agg(location_type))[1] as location_type
 				FROM crowdsourcing
 				WHERE location_id = '${location_id}'`);
     } catch (e) {
