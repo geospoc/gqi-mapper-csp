@@ -2,7 +2,7 @@
 const {Pool} = require("pg");
 const pgtools = require("pgtools");
 const uuidv4 = require("uuid").v4;
-const aws = require('aws-sdk');
+const aws = require("aws-sdk");
 const schoolsTest = require("../scripts/schoolsTest.json");
 const hospitalsTest = require("../scripts/hospitalsTest.json");
 
@@ -14,29 +14,36 @@ const config = {
   password: process.env.PGPASSWORD,
   port: 5432,
 };
-const s3 = new aws.S3({ accessKeyId: process.env.AWS_ACCESS_KEY_ID, secretAccessKey: process.env.AWS_SECRET_KEY_ACCESS });
+const s3 = new aws.S3({
+  accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+  secretAccessKey: process.env.AWS_SECRET_KEY_ACCESS,
+});
 
 async function getAllFileNamesFromS3Folder(folderName) {
   return new Promise((resolve, reject) => {
     const s3params = {
       Bucket: process.env.AWS_BUCKET_NAME,
       MaxKeys: 20,
-      Delimiter: '/',
-      Prefix: `${folderName}/`
+      Delimiter: "/",
+      Prefix: `${folderName}/`,
     };
     s3.listObjectsV2(s3params, (err, data) => {
       if (err) {
         reject(err);
       }
-      resolve(data.Contents.filter(({ Key }) => Key !== `${folderName}/`).map(({ Key }) => Key.replace(`${folderName}/`, '')));
+      resolve(
+        data.Contents.filter(({Key}) => Key !== `${folderName}/`).map(({Key}) =>
+          Key.replace(`${folderName}/`, "")
+        )
+      );
     });
   });
 }
 async function getFileFromS3(folderName, file) {
   const getParams = {
     Bucket: process.env.AWS_BUCKET_NAME,
-    Key: `${folderName}/${file}`
-  }
+    Key: `${folderName}/${file}`,
+  };
   return await s3.getObject(getParams).promise();
 }
 const pool = new Pool();
@@ -162,34 +169,36 @@ async function loadLocations(folderName, file) {
     const data = JSON.parse(locations.Body.toString());
     const bulkData = [];
     for (let i = 0; i < data.features.length; i++) {
-      const { geometry, properties } = data.features[i];
+      const {geometry, properties} = data.features[i];
       let id = uuidv4();
 
       bulkData.push({
         id,
         meta_data: properties,
-        geom: geometry
+        geom: geometry,
       });
     }
-    let allRows = bulkData.map((row) => `('${row.id}', '${JSON.stringify(row.meta_data)}', st_geomfromgeojson('${JSON.stringify(row.geom)}'))`)
+    let allRows = bulkData.map(
+      (row) =>
+        `('${row.id}', '${JSON.stringify(
+          row.meta_data
+        )}', st_geomfromgeojson('${JSON.stringify(row.geom)}'))`
+    );
     const res = await pool.query(
       `
-      INSERT INTO locations(id, meta_data, geom) VALUES ${allRows.join(',')} RETURNING *;`,
+      INSERT INTO locations(id, meta_data, geom) VALUES ${allRows.join(",")} RETURNING *;`
     );
     return {
       file,
-      success: true
-    }
-  }
-
-  catch (error) {
+      success: true,
+    };
+  } catch (error) {
     return {
       file,
       success: false,
-      error
-    }
+      error,
+    };
   }
-
 }
 
 async function dropTables() {
@@ -199,41 +208,51 @@ async function dropTables() {
   await pool.end();
 }
 
-
 async function getUnprocessedS3files() {
   try {
-    const folderName = 'unprocessed_data'
-    const files = await getAllFileNamesFromS3Folder(folderName)
-    let results = files.map(async (file) => await moveFile(folderName, file, 'processing'));
+    const folderName = "unprocessed_data";
+    const files = await getAllFileNamesFromS3Folder(folderName);
+    let results = files.map(
+      async (file) => await moveFile(folderName, file, "processing")
+    );
     results = await Promise.all(results);
-    results = results.map(async (file) => await loadLocations(folderName, file))
+    results = results.map(async (file) => await loadLocations(folderName, file));
     results = await Promise.all(results);
-    const successresults = results.filter(obj => obj.success === true)
-    const errorresults = results.filter(obj => obj.success === false)
-    successresults.forEach(async (resultObject) => await moveFile('processing', resultObject.file, 'processed_data'))
-    errorresults.forEach(async (resultObject) => await moveFile('processing', resultObject.file, 'failed_records'))
+    const successresults = results.filter((obj) => obj.success === true);
+    const errorresults = results.filter((obj) => obj.success === false);
+    successresults.forEach(
+      async (resultObject) =>
+        await moveFile("processing", resultObject.file, "processed_data")
+    );
+    errorresults.forEach(
+      async (resultObject) =>
+        await moveFile("processing", resultObject.file, "failed_records")
+    );
     await pool.end();
   } catch (error) {
     console.log(error);
   }
-
-
 }
 async function moveFile(sourceFolder, file, destinationFolder) {
   const copyParams = {
     Bucket: process.env.AWS_BUCKET_NAME,
     CopySource: `${process.env.AWS_BUCKET_NAME}/${sourceFolder}/${file}`,
-    Key: `${destinationFolder}/${file}`
+    Key: `${destinationFolder}/${file}`,
   };
-  const deleteParams = { Bucket: process.env.AWS_BUCKET_NAME, Key: `${sourceFolder}/${file}` }
+  const deleteParams = {
+    Bucket: process.env.AWS_BUCKET_NAME,
+    Key: `${sourceFolder}/${file}`,
+  };
   s3.copyObject(copyParams, function (err, data) {
-    if (err) console.log(err, err.stack); // an error occurred
+    if (err) console.log(err, err.stack);
+    // an error occurred
     else {
       s3.deleteObject(deleteParams, function (err, data) {
-        if (err) console.log(err, err.stack);  // error
-        else console.log();                 // deleted
+        if (err) console.log(err, err.stack);
+        // error
+        else console.log(); // deleted
       });
-    }       // successful response
+    } // successful response
   });
   return file;
 }
