@@ -69,7 +69,8 @@ async function createExtensions() {
   BEGIN
     SELECT INTO mvt ST_AsMVT(tile, 'public.mvt_tile', 4096, 'geom') FROM (
       SELECT
-        ST_AsMVTGeom(ST_Transform(geom::geometry, 3857), TileBBox(z, x, y, 3857), 4096, 64, true) AS geom
+        ST_AsMVTGeom(ST_Transform(geom::geometry, 3857), TileBBox(z, x, y, 3857), 4096, 64, true) AS geom,
+        meta_data as properties
       FROM public.locations
       WHERE geom && TileBBox(z, x, y, 4326)
     ) as tile WHERE geom IS NOT NULL;
