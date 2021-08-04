@@ -211,7 +211,7 @@ async function getUnprocessedS3files() {
     const successresults = results.filter(obj => obj.success === true)
     const errorresults = results.filter(obj => obj.success === false)
     successresults.forEach(async (resultObject) => await moveFile('processing', resultObject.file, 'processed_data'))
-    errorresults.forEach(async (resultObject) => await moveFile('processing', resultObject.file, 'unprocessed_data'))
+    errorresults.forEach(async (resultObject) => await moveFile('processing', resultObject.file, 'failed_records'))
     await pool.end();
   } catch (error) {
     console.log(error);
