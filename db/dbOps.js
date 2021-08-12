@@ -5,6 +5,7 @@ const uuidv4 = require("uuid").v4;
 const aws = require("aws-sdk");
 const schoolsTest = require("../scripts/schoolsTest.json");
 const hospitalsTest = require("../scripts/hospitalsTest.json");
+const _ = require("lodash")
 
 require("dotenv").config();
 
@@ -223,16 +224,20 @@ async function loadLocations(folderName, file) {
         geom: geometry,
       });
     }
-    let allRows = bulkData.map(
+    let allRows = bulkData.filter((dataRow)=> dataRow.geom !== null).map(
       (row) =>
         `('${row.id}', '${JSON.stringify(
           row.meta_data
         )}', st_geomfromgeojson('${JSON.stringify(row.geom)}'))`
     );
-    const res = await pool.query(
-      `
-      INSERT INTO locations(id, meta_data, geom) VALUES ${allRows.join(",")} RETURNING *;`
-    );
+    allRows = _.chunk(allRows,2000);
+    const resultArray = allRows.map(async (rowItem)=>{
+      return await pool.query(
+        `
+        INSERT INTO locations(id, meta_data, geom) VALUES ${rowItem.join(",")} RETURNING *;`
+      );
+    }) 
+    const result = await Promise.all(resultArray)
     return {
       file,
       success: true,
