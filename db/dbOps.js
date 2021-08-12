@@ -5,7 +5,7 @@ const uuidv4 = require("uuid").v4;
 const aws = require("aws-sdk");
 const schoolsTest = require("../scripts/schoolsTest.json");
 const hospitalsTest = require("../scripts/hospitalsTest.json");
-const _ = require("lodash")
+const _ = require("lodash");
 
 require("dotenv").config();
 
@@ -55,9 +55,14 @@ function createDB() {
       console.error(err);
       process.exit(-1);
     }
-    await pool.query(`CREATE EXTENSION "uuid-ossp"`);
     await pool.end();
   });
+}
+
+async function createIndex() {
+  await pool.query(`CREATE INDEX location_geom_idx
+  ON locations
+  USING GIST (geom);`);
 }
 
 async function createExtensions() {
@@ -224,20 +229,24 @@ async function loadLocations(folderName, file) {
         geom: geometry,
       });
     }
-    let allRows = bulkData.filter((dataRow)=> dataRow.geom !== null).map(
-      (row) =>
-        `('${row.id}', '${JSON.stringify(
-          row.meta_data
-        )}', st_geomfromgeojson('${JSON.stringify(row.geom)}'))`
-    );
-    allRows = _.chunk(allRows,2000);
-    const resultArray = allRows.map(async (rowItem)=>{
+    let allRows = bulkData
+      .filter((dataRow) => dataRow.geom !== null)
+      .map(
+        (row) =>
+          `('${row.id}', '${JSON.stringify(
+            row.meta_data
+          )}', st_geomfromgeojson('${JSON.stringify(row.geom)}'))`
+      );
+    allRows = _.chunk(allRows, 2000);
+    const resultArray = allRows.map(async (rowItem) => {
       return await pool.query(
         `
-        INSERT INTO locations(id, meta_data, geom) VALUES ${rowItem.join(",")} RETURNING *;`
+        INSERT INTO locations(id, meta_data, geom) VALUES ${rowItem.join(
+          ","
+        )} RETURNING *;`
       );
-    }) 
-    const result = await Promise.all(resultArray)
+    });
+    const result = await Promise.all(resultArray);
     return {
       file,
       success: true,
@@ -317,3 +326,4 @@ getUnprocessedS3files();
 //dropTables();
 // dropDB();
 // getData();
+// createIndex();
