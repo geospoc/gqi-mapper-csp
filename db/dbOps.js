@@ -5,6 +5,7 @@ const uuidv4 = require("uuid").v4;
 const aws = require("aws-sdk");
 const schoolsTest = require("../scripts/schoolsTest.json");
 const hospitalsTest = require("../scripts/hospitalsTest.json");
+const _ = require("lodash");
 
 require("dotenv").config();
 
@@ -54,9 +55,14 @@ function createDB() {
       console.error(err);
       process.exit(-1);
     }
-    await pool.query(`CREATE EXTENSION "uuid-ossp"`);
     await pool.end();
   });
+}
+
+async function createIndex() {
+  await pool.query(`CREATE INDEX location_geom_idx
+  ON locations
+  USING GIST (geom);`);
 }
 
 async function createExtensions() {
@@ -69,9 +75,10 @@ async function createExtensions() {
   BEGIN
     SELECT INTO mvt ST_AsMVT(tile, 'public.mvt_tile', 4096, 'geom') FROM (
       SELECT
-        ST_AsMVTGeom(ST_Transform(geom::geometry, 3857), TileBBox(z, x, y, 3857), 4096, 64, true) AS geom
+        ST_AsMVTGeom(ST_Transform(geom::geometry, 3857), TileBBox(z, x, y, 3857), 4096, 64, true) AS geom,
+        meta_data as properties
       FROM public.locations
-      WHERE geom && TileBBox(z, x, y, 4326)
+      WHERE geom && TileBBox(z, x, y, 4326) AND meta_data->>'title' ilike query_params->>'type'
     ) as tile WHERE geom IS NOT NULL;
   
     RETURN mvt;
@@ -222,16 +229,24 @@ async function loadLocations(folderName, file) {
         geom: geometry,
       });
     }
-    let allRows = bulkData.map(
-      (row) =>
-        `('${row.id}', '${JSON.stringify(
-          row.meta_data
-        )}', st_geomfromgeojson('${JSON.stringify(row.geom)}'))`
-    );
-    const res = await pool.query(
-      `
-      INSERT INTO locations(id, meta_data, geom) VALUES ${allRows.join(",")} RETURNING *;`
-    );
+    let allRows = bulkData
+      .filter((dataRow) => dataRow.geom !== null)
+      .map(
+        (row) =>
+          `('${row.id}', '${JSON.stringify(
+            row.meta_data
+          )}', st_geomfromgeojson('${JSON.stringify(row.geom)}'))`
+      );
+    allRows = _.chunk(allRows, 2000);
+    const resultArray = allRows.map(async (rowItem) => {
+      return await pool.query(
+        `
+        INSERT INTO locations(id, meta_data, geom) VALUES ${rowItem.join(
+          ","
+        )} RETURNING *;`
+      );
+    });
+    const result = await Promise.all(resultArray);
     return {
       file,
       success: true,
@@ -311,3 +326,4 @@ getUnprocessedS3files();
 //dropTables();
 // dropDB();
 // getData();
+// createIndex();
