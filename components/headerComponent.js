@@ -1,6 +1,6 @@
 import React from "react";
 import Link from "next/link";
-import {signIn, signOut, useSession} from "next-auth/client";
+import {signOut, useSession} from "next-auth/client";
 import {Navbar, Nav, NavItem, Dropdown} from "react-bootstrap";
 
 import "./headerComponent.module.css";
@@ -35,17 +35,17 @@ const CustomMenu = React.forwardRef(
 
 CustomMenu.displayName = "CustomMenu";
 
-const Header = ({hideSignIn}) => {
+const Header = () => {
   const [session, loading] = useSession();
 
   const hostname =
     typeof window !== "undefined" && window.location.hostname
       ? window.location.hostname
       : "";
-  const callbackUrl =
-    hostname === "localhost"
-      ? "http://localhost:3000/profile"
-      : "https://" + hostname + "/profile";
+  // const callbackUrl =
+  //   hostname === "localhost"
+  //     ? "http://localhost:3000/profile"
+  //     : "https://" + hostname + "/profile";
 
   return (
     <Navbar className="justify-content-between">
@@ -53,11 +53,6 @@ const Header = ({hideSignIn}) => {
         <a className="masthead-brand">Project Connect</a>
       </Link>
       <Nav style={{height: 70}}>
-        {!session && !loading && !hideSignIn && (
-          <NavItem onClick={() => signIn(null, {callbackUrl: callbackUrl})}>
-            <button className="signin-button">Sign in</button>
-          </NavItem>
-        )}
         {session && !loading && (
           <Dropdown as={NavItem}>
             <Dropdown.Toggle as={CustomToggle} id="custom-dropdown-toggle">
