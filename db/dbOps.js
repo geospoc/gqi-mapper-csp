@@ -274,7 +274,7 @@ async function getUnprocessedS3files() {
     let results = files.map(
       async (file) => await moveFile(folderName, file, "processing")
     );
-    console.log("Processing Files:", results)
+    console.log("Processing Files:", results);
     results = await Promise.all(results);
     results = results.map(async (file) => await loadLocations(folderName, file));
     results = await Promise.all(results);
@@ -284,12 +284,12 @@ async function getUnprocessedS3files() {
       async (resultObject) =>
         await moveFile("processing", resultObject.file, "processed_data")
     );
-    console.log("Successfully Processed Files:", successresults)
+    console.log("Successfully Processed Files:", successresults);
     errorresults.forEach(
       async (resultObject) =>
         await moveFile("processing", resultObject.file, "failed_records")
     );
-    console.log("Failed Files:", errorresults)
+    console.log("Failed Files:", errorresults);
     await pool.end();
   } catch (error) {
     console.log(error);
