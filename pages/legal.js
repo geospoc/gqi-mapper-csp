@@ -149,6 +149,12 @@ export default function Tips() {
         </p>
 
         <p>
+          DISCLAIMER: Geospoc has only embedded the Project connect game on their
+          dashboard to validate schools and hospitals dataset. Geospoc does not take any
+          responsibility for the accuracy and performance of the project connect tool
+        </p>
+
+        <p>
           <br />
           <a href="#top">&gt; Back to top</a>
         </p>
@@ -192,61 +198,7 @@ export default function Tips() {
 
         <h5>Collection of personally identifiable information</h5>
 
-        <p>
-          If you log on, you will be asked to provide personal information such as your
-          name, e-mail address and profile picture.&nbsp; This information is collected
-          only with your knowledge and permission, and is kept in a Project Connect
-          database. This information is collected through one of the authentication
-          providers offered: Facebook, Google, Twitter and GitHub.
-        </p>
-
-        <h4>What does Project Connect do with the information it collects?</h4>
-
-        <h5>Normal web usage</h5>
-
-        <p>
-          The information gathered during general browsing of the “projectconnect.world”
-          domain is used to analyse trends and usage of the Project Connect site and to
-          improve the usefulness of the site.&nbsp; It is not connected with any personal
-          information. However, if you have registered with Project Connect&apos;s webapp,
-          the information we collect about your normal web usage will be identifiable to
-          you.
-        </p>
-
-        <p>
-          <strong>Personally identifiable information</strong>
-        </p>
-
-        <p>Project Connect may use the personal information you provide to:</p>
-
-        <ul>
-          <li>“Remember” your online profile;</li>
-          <li>Record your mapping activity on the Project Connect webapp;</li>
-          <li>
-            Contact you – either in response to a query or suggestion, or to mail
-            newsletters, documents, publications, etc. to you;
-          </li>
-          <li>Undertake statistical analysis.</li>
-        </ul>
-
-        <p>
-          <strong>What if I don’t want to provide personal information?</strong>
-        </p>
-
-        <p>
-          Providing personal information on the Project Connect webapp is optional.&nbsp;
-          If you choose not to provide personal information, you can still browse and use
-          the Project Connect webapp, but you will not be able to carry out certain
-          actions such as accessing your profile with statistics about your activity on
-          the webapp.
-        </p>
-
-        <h5>Opting out and changing your information</h5>
-
-        <p>
-          At any time, you can cancel or modify your information by &nbsp;
-          <a href="mailto:projectconnect@unicef.org">contacting us</a>.
-        </p>
+        <p>We are not collecting any personal data.</p>
 
         <h5>Security</h5>
 
@@ -277,6 +229,21 @@ export default function Tips() {
         <p>Changes to this privacy policy will be posted here.</p>
 
         <p>&nbsp;</p>
+
+        <h4>DISCLAIMER</h4>
+
+        <p>
+          Geospoc has used Project Connect validation tool and has loaded its own dataset
+          to validate schools and hospital information. The tool identifies data with its
+          algorithm. Geospoc is not liable for the accuracy of the predications of the
+          schools or hospitals identified.
+        </p>
+
+        <p>
+          Geospoc Datasets will only be visible if the user is redirected to the project
+          connect tool from the Geospoc Dashboard. As this information is validated via
+          crowd source Geopsoc is not liable for the accuracy of this information.
+        </p>
 
         <h4>Contact</h4>
 
