@@ -434,7 +434,9 @@ export default function Tips() {
           We do not sell or share any data from your cookies to any third party without
           prior consent.
         </p>
+        <h4>DISCLAIMER</h4>
 
+        <p>Geospoc is not using any cookies information for any kind of analysis.</p>
         <p>
           <br />
           <a href="#top">&gt; Back to top</a>
