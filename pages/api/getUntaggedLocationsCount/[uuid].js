@@ -20,7 +20,7 @@ export default async (req, res) => {
 						 WHERE user_id = '${user_id}') AS tagged 
 							ON locations.id = tagged.location_id
 					WHERE tagged.location_id IS NULL
-          AND locations.meta_data->>'title' ilike '${type}';`);
+          AND locations.meta_data->>'title' ilike '%${type}%' AND st_geometrytype(locations.geom)= 'ST_Polygon' ;`);
       } catch (e) {
         console.log(e);
       }

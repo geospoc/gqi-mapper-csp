@@ -11,7 +11,7 @@ export default async (req, res) => {
     const type = req.query.type;
     let subQuery = `SELECT location_id FROM crowdsourcing WHERE user_id = '${user_id}'`;
     if (type) {
-      subQuery = subQuery + ` AND location_type ilike '${type}'`;
+      subQuery = subQuery + ` AND location_type ilike '%${type}%'`;
     }
     if (uuidValidate(user_id)) {
       try {

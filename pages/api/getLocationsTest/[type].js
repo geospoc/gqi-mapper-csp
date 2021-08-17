@@ -12,7 +12,7 @@ export default async (req, res) => {
               st_asgeojson(ST_centroid(locationsTest.geom)) as center,
               locationsTest.meta_data
 					FROM locationsTest
-      WHERE  locationsTest.meta_data->>'title' ilike '${type}'`);
+      WHERE  locationsTest.meta_data->>'title' ilike '%${type}%'`);
     } catch (e) {
       console.log(e);
     }

@@ -44,7 +44,11 @@ export default function mapComponent(props) {
         type="fill"
         id="polygon"
         paint={{
-          "fill-color": metaData.fill,
+          "fill-color": metaData.fill
+            ? metaData.fill
+            : metaData.title === "Schools"
+            ? "#f3ff33"
+            : "#ff33f3",
           "fill-opacity": 0.3,
           "fill-outline-color": metaData.stroke,
         }}

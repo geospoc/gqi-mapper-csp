@@ -26,7 +26,7 @@ export default async (req, res) => {
       const factTypes = ["num_locations_mapped_total"];
       // SQL queries which fetch facts
       const queries = [
-        `SELECT COUNT(DISTINCT location_id) as num_locations_mapped_total FROM crowdsourcing WHERE location_type ilike '${type}';`,
+        `SELECT COUNT(DISTINCT location_id) as num_locations_mapped_total FROM crowdsourcing WHERE location_type ilike '%${type}%';`,
       ];
 
       // Fact messages for each fact type
