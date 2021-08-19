@@ -1,19 +1,72 @@
 version: "3.5"
-
 services:
+  proxy:
+    image: nginx:latest
+    container_name: proxy-nginx
+    links:
+      - backend
+      - martin
+    ports:
+      - "8080:80"
+      - "443:443"
+    depends_on:
+      - backend
+    volumes:
+      - ./nginx/default.conf/default.conf:/etc/nginx/conf.d/default.conf
+      - ./nginx/h5bp:/etc/nginx/h5bp/
+      - frontend:/app
+    networks:
+      - unc
+    restart: unless-stopped
   postgres:
     container_name: postgres_container
     image: mdillon/postgis
+    hostname: postgres
     environment:
       POSTGRES_USER: ${PGUSER}
       POSTGRES_PASSWORD: ${PGPASSWORD}
       POSTGRES_DB: ${PGDATABASE}
       PGDATA: /data/postgres
     volumes:
-      - unc-data:/data/postgres
+      - unc-data-v1:/data/postgres
     ports:
       - "5432:5432"
+    networks:
+      - unc
     restart: unless-stopped
-
+  martin:
+    image: urbica/martin
+    container_name: martin
+    hostname: martin
+    depends_on:
+      - postgres
+    ports:
+      - "3000:3000"
+    restart: unless-stopped
+    environment:
+      WATCH_MODE: "true"
+      DATABASE_URL: "postgres://${PGUSER}:${PGPASSWORD}@${PGHOST}/${PGDATABASE}"
+    networks:
+      - unc
+  backend:
+    build:
+      context: ./
+    container_name: backend
+    hostname: backend
+    depends_on:
+      - postgres
+    # volumes:
+      # - frontend:/app
+    ports:
+      - 8000:8000
+    networks:
+      - unc
+    env_file: .env
+    restart: unless-stopped
 volumes:
-  unc-data:
+  unc-data-v1:
+  node_modules:
+  frontend:
+networks:
+  unc:
+    driver: bridge

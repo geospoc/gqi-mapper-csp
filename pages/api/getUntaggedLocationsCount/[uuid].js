@@ -8,6 +8,7 @@ export default async (req, res) => {
   if (req.method === "GET") {
     let result = null;
     const user_id = req.query.uuid;
+    const type = req.query.type;
     if (uuidValidate(user_id)) {
       try {
         result = await pool.query(`
@@ -18,7 +19,8 @@ export default async (req, res) => {
 						 FROM crowdsourcing
 						 WHERE user_id = '${user_id}') AS tagged 
 							ON locations.id = tagged.location_id
-					WHERE tagged.location_id IS NULL;`);
+					WHERE tagged.location_id IS NULL
+          AND locations.meta_data->>'title' ilike '%${type}%' AND st_geometrytype(locations.geom)= 'ST_Polygon' ;`);
       } catch (e) {
         console.log(e);
       }

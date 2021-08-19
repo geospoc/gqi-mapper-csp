@@ -22,8 +22,8 @@ export default async (req, res) => {
                         WHERE user_id=($1)
                         RETURNING *;`;
 
-  const insertQuery = `INSERT INTO crowdsourcing (user_id, location_id, result)
-                        VALUES ($1, $2, $3)
+  const insertQuery = `INSERT INTO crowdsourcing (user_id, location_id, result,location_type)
+                        VALUES ($1, $2, $3, $4)
                         ON CONFLICT (user_id, location_id)
                         DO NOTHING
                         RETURNING *;`;
@@ -37,6 +37,7 @@ export default async (req, res) => {
         to_uuid,
         row.location_id,
         row.result,
+        row.location_type,
       ]);
       insertedRows.push(insertedRes.rows[0]);
     });
