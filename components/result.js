@@ -84,10 +84,17 @@ export default function Result(props) {
               </Button>
             ) : (
               <div>
-                <p>
-                  Help us connect more children to opportunity by mapping more{" "}
-                  {props.locationType}
-                </p>
+                {props.locationType === "hospitals" ? (
+                  <p>
+                    Help us connect people to hospitals that need care by mapping more{" "}
+                    {props.locationType}
+                  </p>
+                ) : (
+                  <p>
+                    Help us connect more children to opportunity by mapping more{" "}
+                    {props.locationType}
+                  </p>
+                )}
                 <Button variant="primary" href={`/mapping/${props.locationType}`}>
                   Map More {props.locationType}
                 </Button>
