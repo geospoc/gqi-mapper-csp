@@ -242,7 +242,7 @@ export default function Tips() {
         <p>
           Geospoc Datasets will only be visible if the user is redirected to the project
           connect tool from the Geospoc Dashboard. As this information is validated via
-          crowd source Geopsoc is not liable for the accuracy of this information.
+          crowd source GeoSpoc is not liable for the accuracy of this information.
         </p>
 
         <h4>Contact</h4>
