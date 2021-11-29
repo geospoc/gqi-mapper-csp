@@ -31,7 +31,7 @@ jobs:
           github-token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Setup node env 📦
-        uses: actions/setup-node@v2.2.0
+        uses: actions/setup-node@v2.5.0
         with:
           node-version: ${{ matrix.node }}
           scope: "@geospoc"
