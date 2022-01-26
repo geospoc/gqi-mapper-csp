@@ -21,7 +21,7 @@
     "bootstrap": "^4.5.2",
     "cookies": "^0.8.0",
     "csvtojson": "^2.0.10",
-    "dotenv": "^8.2.0",
+    "dotenv": "^14.3.2",
     "lodash": "^4.17.21",
     "mapbox-gl": "^1.13.1",
     "next": "^9.5.5",
